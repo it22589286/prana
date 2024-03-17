@@ -1,0 +1,69 @@
+
+import './App.css';
+import Home from './components/Home';
+
+import Navbar1 from './components/Navbar/Navbar1';
+import {BrowserRouter,  Route, Routes } from 'react-router-dom'
+import Packages from './components/Packages';
+import Store from './components/Store';
+import Footer from './components/Footer/Footer';
+import ContactUs from './components/Footer/Footer pages/ContactUs';
+import Conditions from './components/Footer/Footer pages/Conditions';
+import Feedback from './components/Footer/Footer pages/Feedback';
+import Location from './components/Footer/Footer pages/Location';
+import Policy from './components/Footer/Footer pages/Policy';
+import Story from './components/Footer/Footer pages/Story';
+import Aims from './components/Footer/Footer pages/Aims';
+import SignIn from './components/Signin/SignIn';
+import SignUp from './components/Signup/SignUp';
+function App() {
+  return (
+
+    
+    <div className='page-container'>
+      <BrowserRouter>
+     <div className='content-wrap' >
+      
+      
+  
+      <Navbar1/>
+     
+      <Routes>
+
+        
+        <Route path="/signin" element={<SignIn/>}/>
+        <Route path="/store" element={<Store/>}/>
+        <Route path="/packages" element={<Packages/>}/>
+        <Route path="/" element={<Home/>}/>
+        <Route path="/contactus" element={<ContactUs/>}/>
+       <Route path="/aims" element={<Aims/>}/>
+       <Route path="/conditions" element={<Conditions/>}/>
+       <Route path="/feedback" element={<Feedback/>}/>
+       <Route path="/location" element={<Location/>}/>
+       <Route path="/policy" element={<Policy/>}/>
+       <Route path="/story" element={<Story/>}/>
+       <Route path="/signup" element={<SignUp/>}/>
+       
+       </Routes>
+       
+       </div>
+       
+
+       
+       
+      
+     
+
+      
+      <Footer/>
+      
+      
+      </BrowserRouter>
+     
+    </div>
+    
+   
+  );
+}
+
+export default App;
