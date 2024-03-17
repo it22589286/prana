@@ -8,3 +8,22 @@
     
     
 }
+.nav1{
+
+    height: 100px;
+    background-color: #386FA2;
+    
+
+}
+
+.nav-link{
+    color: white;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+.navbar-brand{
+    color: white;
+}
+.me-auto{
+    margin-left: 100px;
+}
