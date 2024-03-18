@@ -32,8 +32,8 @@ const SignIn = () => {
     <div className='container'>
       
         <div className='form'>
-     <Card className='shadow-lg'>
-       <Card.Header className='mb-3'><h4>Sign In</h4></Card.Header>
+     <Card className='shadow-lg'style={{width:'600px'}}>
+       <Card.Header className='mb-3'style={{backgroundColor:'orange',height:'60px'}}><h4 className='s'>Sign In</h4></Card.Header>
         <Card.Body>
       <Form onSubmit={handleSubmit}>
       <Form.Group as={Row} className="mb-3">
@@ -58,7 +58,7 @@ const SignIn = () => {
 
       <Form.Group as={Row} className="mb-3">
         <Col sm={{ span: 10, offset: 2 }}>
-          <Button type="submit" onClick={handleSubmit}>Sign in</Button>
+          <Button type="submit" onClick={handleSubmit} className='btn'>Sign in</Button>
         </Col>
       </Form.Group>
       <br/>

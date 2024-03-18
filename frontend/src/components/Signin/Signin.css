@@ -3,3 +3,11 @@
     height: 100vh;
     background-size: cover;
 }
+.s{
+    font-size: x-large;
+    color: white;
+    margin-left: 200px;
+}
+.btn{
+    margin-left: 150px;
+}
