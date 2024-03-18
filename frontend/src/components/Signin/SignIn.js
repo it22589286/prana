@@ -7,7 +7,8 @@ import Row from 'react-bootstrap/Row';
 import Card from 'react-bootstrap/Card';
 import Image from '../imagefiles/signin.jpg'
 import './Signin.css'
-
+import axios from 'axios'
+ 
 
 const SignIn = () => {
 
@@ -15,6 +16,7 @@ const SignIn = () => {
   const handleSubmit = (event) =>{
     console.log(signIn)
     event.preventDefault();
+    axios.get('/')
     
   }
 

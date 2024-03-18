@@ -16,6 +16,12 @@ import Story from './components/Footer/Footer pages/Story';
 import Aims from './components/Footer/Footer pages/Aims';
 import SignIn from './components/Signin/SignIn';
 import SignUp from './components/Signup/SignUp';
+import axios from 'axios'
+import {Toaster} from 'react-hot-toast'
+
+axios.defaults.baseURL ='http://localhost:8000'
+axios.defaults.withCredentials = true
+
 function App() {
   return (
 
@@ -27,6 +33,7 @@ function App() {
       
   
       <Navbar1/>
+      <Toaster position='bottom-right' toastOptions={{duration:2000}}/>
      
       <Routes>
 

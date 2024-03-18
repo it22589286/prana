@@ -7,13 +7,41 @@ import Card from 'react-bootstrap/Card';
 import './Signup.css';
 import { Link } from 'react-router-dom';
 import Image from '../imagefiles/register.jpg'
+import axios from 'axios';
+import { toast } from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
+
 const SignUp = () => {
+  const navigate =useNavigate()
 
-  const [user,setUser] =useState();
+  const [user,setUser] =useState({
+    email:'',
+    nic:'',
+    name:'',
+    password:'',
+    address:'',
+    number:''
+  });
 
-  const handleSubmit = (event) =>{
+  const handleSubmit = async(event) =>{
     console.log(user)
     event.preventDefault();
+    const {email,nic,name,password,address,number} =user
+    try{
+      const {user} =await axios.post('/register',{email,nic,name,password,address,number})
+      if(user.error){
+        toast.error(user.error)
+      }
+      else{
+        setUser({})
+        toast.success('login ok')
+        navigate('/')
+
+      }
+    }catch (error){
+      console.log(error)
+
+    }
     
   }
 
@@ -39,7 +67,7 @@ const SignUp = () => {
           <Form.Control type="email" placeholder="Enter email" name="email" onChange={handlechange}/>
         </Form.Group>
 
-        <Form.Group className="mb-3">
+   <Form.Group className="mb-3">
         
           <Form.Control type="text" placeholder="Enter nic" name="nic" onChange={handlechange}/>
         </Form.Group>
@@ -64,34 +92,14 @@ const SignUp = () => {
        <Form.Control type="number" placeholder="Enter Contact Number" name="number" onChange={handlechange}/>
      </Form.Group>
 
-     <Row className="mb-3" >
-        <Form.Group as={Col} controlId="formGridCity">
-        <Form.Select defaultValue="Choose...">
-            <option name="customer"  onChange={handlechange}>customer</option>
-            <option name="Instructor"  onChange={handlechange}>Instructor</option>
-            <option name="Supplier"  onChange={handlechange}>Supplier</option>
-          </Form.Select>
-        
-       </Form.Group>
-
-        <Form.Group as={Col} controlId="formGridState">
-          
-          <Form.Select defaultValue="Choose...">
-            <option >Gender</option>
-            <option name="male"  onChange={handlechange}>Male</option>
-            <option name="female"  onChange={handlechange}>Female</option>
-          </Form.Select>
-        </Form.Group>
-
-        
-      </Row>
+    
 
      
     
 
       
 <div className='btn'>
-      <Button variant="primary" type="submit" onClick={handleSubmit}>
+      <Button variant="primary" type="submit" >
         Register
       </Button>
       </div>
