@@ -14,26 +14,27 @@ import { useNavigate } from 'react-router-dom';
 const SignUp = () => {
   const navigate =useNavigate()
 
-  const [user,setUser] =useState({
+  const [data,setData] =useState({
     email:'',
     nic:'',
     name:'',
     password:'',
-    address:'',
-    number:''
+    number:'',
+    role:'',
+    gender:''
   });
 
   const handleSubmit = async(event) =>{
-    console.log(user)
+    console.log(data)
     event.preventDefault();
-    const {email,nic,name,password,address,number} =user
+    const {email,nic,name,password,number,role,gender} =data
     try{
-      const {user} =await axios.post('/register',{email,nic,name,password,address,number})
-      if(user.error){
-        toast.error(user.error)
+      const {data} =await axios.post('/register',{email,nic,name,password,number,role,gender})
+      if(data.error){
+        toast.error(data.error)
       }
       else{
-        setUser({})
+        setData({})
         toast.success('login ok')
         navigate('/')
 
@@ -47,8 +48,8 @@ const SignUp = () => {
 
   const handlechange =(event) =>{
    // console.log(event.target.name,event.target.value);
-    setUser({
-      ...user,
+    setData({
+      ...data,
       [event.target.name]:event.target.value
       
     })
@@ -82,15 +83,35 @@ const SignUp = () => {
        
         <Form.Control type="password" placeholder="Enter password" name="password" onChange={handlechange}/>
       </Form.Group>
-      <Form.Group className="mb-3" >
-       
-       <Form.Control type="text" placeholder="Enter Address" name="address"onChange={handlechange}/>
-     </Form.Group>
+     
 
      <Form.Group className="mb-3" >
        
        <Form.Control type="number" placeholder="Enter Contact Number" name="number" onChange={handlechange}/>
      </Form.Group>
+
+     <Row className="mb-3" >
+        <Form.Group as={Col} controlId="formGridCity">
+        <Form.Select defaultValue="Choose..." name="role" onChange={handlechange} value={data.role} >
+            <option >Role</option>
+            <option value="customer" >customer</option>
+            <option value="Instructor">Instructor</option>
+            <option value="Supplier">Supplier</option>
+          </Form.Select>
+        
+       </Form.Group>
+
+        <Form.Group as={Col} controlId="formGridState">
+          
+          <Form.Select defaultValue="Choose..." name="gender" onChange={handlechange} value={data.gender}>
+            
+            <option value="male" >Male</option>
+            <option value="female" >Female</option>
+          </Form.Select>
+        </Form.Group>
+
+        
+      </Row>
 
     
 

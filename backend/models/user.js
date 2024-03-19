@@ -20,15 +20,21 @@ const userSchema = new Schema(
         },
         password:{
             type:String,
-            required:true
+          
 
         },
-        address:{
+       
+        number:{
             type:String,
             required:true
 
         },
-        number:{
+        role:{
+            type:String,
+            required:true
+
+        },
+        gender:{
             type:String,
             required:true
 
@@ -36,5 +42,5 @@ const userSchema = new Schema(
     }
 )
 
-const userModel =mongoose.model('user',userSchema)
+const userModel =mongoose.model('User',userSchema)
 module.exports = userModel;
