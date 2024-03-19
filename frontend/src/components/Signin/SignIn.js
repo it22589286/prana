@@ -7,21 +7,46 @@ import Row from 'react-bootstrap/Row';
 import Card from 'react-bootstrap/Card';
 import Image from '../imagefiles/signin.jpg'
 import './Signin.css'
-
+import axios from 'axios'
+import {toast} from 'react-hot-toast'
+import { useNavigate } from 'react-router-dom';
+ 
 
 const SignIn = () => {
 
-  const [signIn,setSignIn] =useState();
-  const handleSubmit = (event) =>{
-    console.log(signIn)
+  const navigate =useNavigate()
+  const [data,setData] =useState({
+    email:'',
+    password:''
+  });
+  const handleSubmit =  async(event) =>{
+    console.log(data)
     event.preventDefault();
+    const {email,password} =data
+    try{
+      const {data} = await axios.post('/login',{
+        email,
+        password
+      });
+      if(data.error){
+        toast.error(data.error)
+      }else{
+        setData({});
+        navigate('/')
+
+      }
+    }
+    catch(error){
+
+    }
+    
     
   }
 
   const handlechange =(event) =>{
     // console.log(event.target.name,event.target.value);
-    setSignIn({
-       ...signIn,
+    setData({
+       ...data,
        [event.target.name]:event.target.value
        
      })
@@ -58,7 +83,7 @@ const SignIn = () => {
 
       <Form.Group as={Row} className="mb-3">
         <Col sm={{ span: 10, offset: 2 }}>
-          <Button type="submit" onClick={handleSubmit} className='btn'>Sign in</Button>
+          <Button type="submit"  className='btn'>Sign in</Button>
         </Col>
       </Form.Group>
       <br/>

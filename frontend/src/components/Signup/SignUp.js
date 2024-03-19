@@ -7,20 +7,49 @@ import Card from 'react-bootstrap/Card';
 import './Signup.css';
 import { Link } from 'react-router-dom';
 import Image from '../imagefiles/register.jpg'
+import axios from 'axios';
+import { toast } from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
+
 const SignUp = () => {
+  const navigate =useNavigate()
 
-  const [user,setUser] =useState();
+  const [data,setData] =useState({
+    email:'',
+    nic:'',
+    name:'',
+    password:'',
+    number:'',
+    role:'',
+    gender:''
+  });
 
-  const handleSubmit = (event) =>{
-    console.log(user)
+  const handleSubmit = async(event) =>{
+    console.log(data)
     event.preventDefault();
+    const {email,nic,name,password,number,role,gender} =data
+    try{
+      const {data} =await axios.post('/register',{email,nic,name,password,number,role,gender})
+      if(data.error){
+        toast.error(data.error)
+      }
+      else{
+        setData({})
+        toast.success('login ok')
+        navigate('/')
+
+      }
+    }catch (error){
+      console.log(error)
+
+    }
     
   }
 
   const handlechange =(event) =>{
    // console.log(event.target.name,event.target.value);
-    setUser({
-      ...user,
+    setData({
+      ...data,
       [event.target.name]:event.target.value
       
     })
@@ -39,7 +68,7 @@ const SignUp = () => {
           <Form.Control type="email" placeholder="Enter email" name="email" onChange={handlechange}/>
         </Form.Group>
 
-        <Form.Group className="mb-3">
+   <Form.Group className="mb-3">
         
           <Form.Control type="text" placeholder="Enter nic" name="nic" onChange={handlechange}/>
         </Form.Group>
@@ -54,10 +83,7 @@ const SignUp = () => {
        
         <Form.Control type="password" placeholder="Enter password" name="password" onChange={handlechange}/>
       </Form.Group>
-      <Form.Group className="mb-3" >
-       
-       <Form.Control type="text" placeholder="Enter Address" name="address"onChange={handlechange}/>
-     </Form.Group>
+     
 
      <Form.Group className="mb-3" >
        
@@ -66,32 +92,35 @@ const SignUp = () => {
 
      <Row className="mb-3" >
         <Form.Group as={Col} controlId="formGridCity">
-        <Form.Select defaultValue="Choose...">
-            <option name="customer"  onChange={handlechange}>customer</option>
-            <option name="Instructor"  onChange={handlechange}>Instructor</option>
-            <option name="Supplier"  onChange={handlechange}>Supplier</option>
+        <Form.Select defaultValue="Choose..." name="role" onChange={handlechange} value={data.role} >
+            <option >Role</option>
+            <option value="customer" >customer</option>
+            <option value="Instructor">Instructor</option>
+            <option value="Supplier">Supplier</option>
           </Form.Select>
         
        </Form.Group>
 
         <Form.Group as={Col} controlId="formGridState">
           
-          <Form.Select defaultValue="Choose...">
-            <option >Gender</option>
-            <option name="male"  onChange={handlechange}>Male</option>
-            <option name="female"  onChange={handlechange}>Female</option>
+          <Form.Select defaultValue="Choose..." name="gender" onChange={handlechange} value={data.gender}>
+            
+            <option value="male" >Male</option>
+            <option value="female" >Female</option>
           </Form.Select>
         </Form.Group>
 
         
       </Row>
 
+    
+
      
     
 
       
 <div className='btn'>
-      <Button variant="primary" type="submit" onClick={handleSubmit}>
+      <Button variant="primary" type="submit" >
         Register
       </Button>
       </div>
