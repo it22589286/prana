@@ -1,6 +1,6 @@
 const User= require('../models/user')
 const {hashPassword,comparePassword} =require('../helpers/auth')
-
+const jwt = require("jsonwebtoken")
 
 
 const test = (req,res) =>{
@@ -66,13 +66,15 @@ const loginUser = async(req,res) =>{
         //check if password match
 
         const match = await comparePassword(password,user.password)
-        if(!match){
-             res.json('password matched')
-
+        if(match){
+             
+          res.json('passwrod match')
         }
-
-
-
+        if(!match){
+            res.json({
+                error:"passwords do not match"
+            })
+        }
 
     }
     catch(error){
@@ -83,8 +85,81 @@ const loginUser = async(req,res) =>{
 
 }
 
+//update user endpoint
+
+const updateUser =async(req,res,next)=>{
+    const id =req.params.id;
+    const {nic,name,password,number,role,gender} =req.body;
+    let user;
+    try{
+
+       
+      
+
+        user = await User.findByIdAndUpdate(id,{
+            email,
+            nic,
+            name,
+            password,
+            number,
+            role,
+            gender
+           
+        });
+        user= await user.save()
+    }catch(err){
+        console.log(err);
+    }
+    
+    if(!user){
+        return res.status(404).json({message:'unable to update'})
+    }
+    return res.status(200).json({user})
+};
+
+//delete user
+ const delterUser = async(req,res,next)=>{
+    const id = req.params.id;
+    let user;
+
+    try{
+        user =await User.findByIdAndDelete(id);
+
+    }catch(err){
+        console.log(err);
+    }
+    if(!user){
+        return res.status(404).json({meassage:'unable to delete'})
+    }
+    return res.status(200).json({user})
+ };
+
+ //get user by id
+
+ const getbyId = async (req,res,next) =>{
+
+    const id = req.params.id;
+    let user;
+    try{
+        user = await User.findById(id);
+    }
+    catch(err){
+        console.log(err);
+    }
+    if(!user){
+        return res.status(404).json({message:'user not found'})
+    }
+    return res.status(200).json({user});
+ };
+
+
+
 module.exports ={
     test,
     registeruser,
-    loginUser
+    loginUser,
+    updateUser,
+    delterUser,
+    getbyId
+  
 }

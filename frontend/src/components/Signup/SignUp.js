@@ -36,7 +36,7 @@ const SignUp = () => {
       else{
         setData({})
         toast.success('login ok')
-        navigate('/')
+        navigate('/signin')
 
       }
     }catch (error){

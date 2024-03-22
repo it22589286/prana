@@ -20,7 +20,7 @@ const SignIn = () => {
     password:''
   });
   const handleSubmit =  async(event) =>{
-    console.log(data)
+   
     event.preventDefault();
     const {email,password} =data
     try{
@@ -32,7 +32,7 @@ const SignIn = () => {
         toast.error(data.error)
       }else{
         setData({});
-        navigate('/')
+        navigate('/dashboard')
 
       }
     }

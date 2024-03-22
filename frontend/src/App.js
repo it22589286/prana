@@ -19,13 +19,16 @@ import SignUp from './components/Signup/SignUp';
 import axios from 'axios'
 import {Toaster} from 'react-hot-toast'
 
+import Dashboard from './components/Dashboard';
+import Admin from './components/Admin';
+
 axios.defaults.baseURL ='http://localhost:8000'
 axios.defaults.withCredentials = true
 
 function App() {
   return (
 
-    
+   
     <div className='page-container'>
       <BrowserRouter>
      <div className='content-wrap' >
@@ -50,6 +53,8 @@ function App() {
        <Route path="/policy" element={<Policy/>}/>
        <Route path="/story" element={<Story/>}/>
        <Route path="/signup" element={<SignUp/>}/>
+       <Route path="/dashboard" element={<Dashboard/>}/>
+       <Route path="/admin" element={<Admin/>}/>
        
        </Routes>
        
@@ -68,7 +73,7 @@ function App() {
       </BrowserRouter>
      
     </div>
-    
+   
    
   );
 }
