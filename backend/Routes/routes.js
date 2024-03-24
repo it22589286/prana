@@ -1,7 +1,7 @@
 const express = require("express")
 const router = express.Router();
 const cors = require('cors');
-const {test,registeruser,loginUser,updateUser,delterUser,getbyId} =require('../controllers/usercontrollers')
+const {test,registeruser,loginUser,updateUser,delterUser,getbyId,getAllUsers} =require('../controllers/usercontrollers')
 
 //middleware
 router.use(
@@ -12,12 +12,13 @@ router.use(
     })
 )
 
-router.get('/',test)
+router.get('/',getAllUsers)
 router.post('/register',registeruser)
 router.post('/login',loginUser)
 router.put('/update/:id',updateUser)
 router.delete('/:id',delterUser)
 router.get('/getUser/:id',getbyId)
+
 
 
 module.exports =router

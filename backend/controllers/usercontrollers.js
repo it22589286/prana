@@ -152,6 +152,23 @@ const updateUser =async(req,res,next)=>{
     return res.status(200).json({user});
  };
 
+ //get all the users at once
+
+ const getAllUsers = async(req,res,next)=>{
+    let user;
+    try{
+        user = await User.find();
+
+    }
+    catch(err){
+        console.log(err);
+    }
+    if(!user){
+        return res.status(404).json({message:'No users'})
+    }
+    return res.status(200).json({user})
+ };
+
 
 
 module.exports ={
@@ -160,6 +177,7 @@ module.exports ={
     loginUser,
     updateUser,
     delterUser,
-    getbyId
+    getbyId,
+    getAllUsers
   
 }
