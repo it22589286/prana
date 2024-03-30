@@ -1,10 +1,7 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 
-
-
-const Dashboard = () => {
-
+const Supplier = () => {
   const [message,setMessage] =useState()
   useEffect(()=>{
     axios.get('/dashboard')
@@ -17,16 +14,12 @@ const Dashboard = () => {
     })
     .catch(err => console.log(err))
   })
-
-   
   return (
     <div>
-      
-   <h2>dashboard.{message}</h2>
-
+        supplier{message}
       
     </div>
   )
 }
 
-export default Dashboard
+export default Supplier

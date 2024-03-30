@@ -1,12 +1,20 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import NavDropdown from 'react-bootstrap/NavDropdown';
 import './navbar.css';
+import { LoaderIcon } from 'react-hot-toast';
 
 
 const Navbar1 = () => {
+  const navigate = useNavigate(); 
+  const auth = localStorage.getItem('user');
+  const logout =()=>{
+    localStorage.clear()
+    navigate('/signup')
+  }
    
   return (
    
@@ -24,9 +32,17 @@ const Navbar1 = () => {
         
       </Nav>
       <Nav className='box'>
-      <Nav.Link as={Link} to="/signin">Sign In</Nav.Link>
+
+     {
+      auth ?<Nav.Link as={Link} to="/signup" onClick={logout}>LogOut</Nav.Link>
+      :<>
       <Nav.Link as={Link} to="/signup">Sign Up</Nav.Link>
+      <Nav.Link as={Link} to="/signin">Sign In</Nav.Link>
+      </>
+     }
       </Nav>
+
+    
     </Container>
   </Navbar>
     

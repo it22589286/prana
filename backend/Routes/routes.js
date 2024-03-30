@@ -1,7 +1,7 @@
 const express = require("express")
 const router = express.Router();
 const cors = require('cors');
-const {test,registeruser,loginUser,updateUser,delterUser,getbyId,getAllUsers} =require('../controllers/usercontrollers')
+const {test,registeruser,loginUser,updateUser,delterUser,getbyId,getAllUsers,auth} =require('../controllers/usercontrollers')
 
 //middleware
 router.use(
@@ -18,6 +18,9 @@ router.post('/login',loginUser)
 router.put('/update/:id',updateUser)
 router.delete('/:id',delterUser)
 router.get('/getUser/:id',getbyId)
+router.get('/dashboard',auth)
+router.get('/instructor',auth)
+router.get('/supplier',auth)
 
 
 

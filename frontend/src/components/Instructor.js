@@ -1,9 +1,7 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 
-
-
-const Dashboard = () => {
+const Instructor = () => {
 
   const [message,setMessage] =useState()
   useEffect(()=>{
@@ -17,16 +15,12 @@ const Dashboard = () => {
     })
     .catch(err => console.log(err))
   })
-
-   
   return (
     <div>
-      
-   <h2>dashboard.{message}</h2>
-
+        hi{message}
       
     </div>
   )
 }
 
-export default Dashboard
+export default Instructor
