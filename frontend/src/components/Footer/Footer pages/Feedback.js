@@ -1,8 +1,9 @@
 import React from 'react'
+import Image from "../../imagefiles/hompage.jpg"
 
 const Feedback = () => {
   return (
-    <div>
+    <div className='hero' style={{backgroundImage:`url(${Image})`}}>
       fedd
       
     </div>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
@@ -12,7 +12,9 @@ import { toast } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 
 const SignUp = () => {
+  
   const navigate =useNavigate()
+ 
 
   const [data,setData] =useState({
     email:'',
@@ -36,7 +38,8 @@ const SignUp = () => {
       else{
         setData({})
         toast.success('login ok')
-        navigate('/')
+        navigate('/signin')
+        
 
       }
     }catch (error){

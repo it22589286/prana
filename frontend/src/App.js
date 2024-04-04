@@ -19,13 +19,24 @@ import SignUp from './components/Signup/SignUp';
 import axios from 'axios'
 import {Toaster} from 'react-hot-toast'
 
+import Dashboard from './components/Dashboard';
+import Admin from './components/Admin';
+import Instructor from './components/Instructor';
+import Supplier from './components/Supplier';
+import UserProfile from './components/UserProfile';
+import UserManager from './components/user Manager/UserManager';
+import CustomerData from './components/user Manager/CustomerData';
+import SupplierData from './components/user Manager/SupplierData';
+import InstructorData from './components/user Manager/InstructorData';
+
+
 axios.defaults.baseURL ='http://localhost:8000'
 axios.defaults.withCredentials = true
 
 function App() {
   return (
 
-    
+   
     <div className='page-container'>
       <BrowserRouter>
      <div className='content-wrap' >
@@ -50,6 +61,18 @@ function App() {
        <Route path="/policy" element={<Policy/>}/>
        <Route path="/story" element={<Story/>}/>
        <Route path="/signup" element={<SignUp/>}/>
+       <Route path="/dashboard" element={<Dashboard/>}/>
+       <Route path="/admin" element={<Admin/>}/>
+       <Route path="/instructor" element={<Instructor/>}/>
+       <Route path="/supplier" element={<Supplier/>}/>
+      
+       <Route path="/user/:id" element={<UserProfile />} />
+       <Route path="/usermanager" element={<UserManager/>}/>
+       <Route path="/customerData" element={<CustomerData/>}/>
+       <Route path="/instructorData" element={<InstructorData/>}/>
+       <Route path="/supplierData" element={<SupplierData/>}/>
+       
+       
        
        </Routes>
        
@@ -68,7 +91,7 @@ function App() {
       </BrowserRouter>
      
     </div>
-    
+   
    
   );
 }

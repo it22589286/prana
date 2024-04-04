@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
@@ -14,27 +14,37 @@ import { useNavigate } from 'react-router-dom';
 
 const SignIn = () => {
 
+  useEffect (()=>{
+    const auth = localStorage.getItem('user');
+    if(auth){
+     
+    }
+  })
+
   const navigate =useNavigate()
   const [data,setData] =useState({
     email:'',
     password:''
   });
   const handleSubmit =  async(event) =>{
-    console.log(data)
+   
     event.preventDefault();
     const {email,password} =data
     try{
       const {data} = await axios.post('/login',{
         email,
         password
-      });
-      if(data.error){
-        toast.error(data.error)
-      }else{
-        setData({});
-        navigate('/')
-
-      }
+      }).then((response)=>{
+        console.log(response);
+        if(response.data.role ==="customer"){
+          navigate('/dashboard')
+        }else if(response.data.role ==="Instructor"){
+          navigate('/instructor')
+        }else if(response.data.role ==="Supplier"){
+          navigate('/supplier')
+        }
+        localStorage.setItem("user",JSON.stringify(response.data))
+      })
     }
     catch(error){
 
