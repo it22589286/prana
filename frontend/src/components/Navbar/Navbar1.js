@@ -34,10 +34,10 @@ const Navbar1 = () => {
       <Nav className='box'>
 
      {
-      auth ?<Nav.Link as={Link} to="/signup" onClick={logout}>LogOut</Nav.Link>
+      auth ?<Nav.Link as={Link} to="/signup" onClick={logout} style={{ backgroundColor: '#E54545', borderRadius: '20px', color: 'white' }}>LogOut</Nav.Link>
       :<>
-      <Nav.Link as={Link} to="/signup">Sign Up</Nav.Link>
-      <Nav.Link as={Link} to="/signin">Sign In</Nav.Link>
+      <Nav.Link as={Link} to="/signup" style={{ backgroundColor: '#E54545', borderRadius: '10px', color: 'white' ,marginRight: '10px'}}>Sign Up</Nav.Link>
+      <Nav.Link as={Link} to="/signin" style={{ backgroundColor: '#E54545', borderRadius: '10px', color: 'white' }}>Sign In</Nav.Link>
       </>
      }
       </Nav>
