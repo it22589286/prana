@@ -67,8 +67,8 @@ const SignIn = () => {
     <div className='container'>
       
         <div className='form'>
-     <Card className='shadow-lg'style={{width:'600px'}}>
-       <Card.Header className='mb-3'style={{backgroundColor:'orange',height:'60px'}}><h4 className='s'>Sign In</h4></Card.Header>
+     <Card className='shadow-lg'style={{width:'600px',backgroundColor: 'rgba(255, 255, 255, 0.7)'}}>
+       <Card.Header className='mb-3'style={{backgroundColor:'orange',height:'60px',textAlign:"center"}}><h4 >Sign In</h4></Card.Header>
         <Card.Body>
       <Form onSubmit={handleSubmit}>
       <Form.Group as={Row} className="mb-3">

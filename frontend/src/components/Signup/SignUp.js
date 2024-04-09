@@ -61,8 +61,8 @@ const SignUp = () => {
     <div className='hero' style={{backgroundImage:`url(${Image})`}}>
     <div className='container'  >
         <div className='form'>
-    <Card className='shadow-lg'>
-       <Card.Header className='mb-3'style={{backgroundColor:'orange',height:'60px'}}><h4>Register</h4></Card.Header>
+    <Card className='shadow-lg'style={{backgroundColor: 'rgba(255, 255, 255, 0.7)'}}>
+       <Card.Header className='mb-3'style={{backgroundColor:'orange',height:'60px', textAlign:"center"}}><h4>Register</h4></Card.Header>
        <Card.Body>
     <Form onSubmit={handleSubmit}>
       
@@ -107,7 +107,7 @@ const SignUp = () => {
         <Form.Group as={Col} controlId="formGridState">
           
           <Form.Select defaultValue="Choose..." name="gender" onChange={handlechange} value={data.gender}>
-            
+          <option >Gender</option>
             <option value="male" >Male</option>
             <option value="female" >Female</option>
           </Form.Select>
@@ -123,7 +123,7 @@ const SignUp = () => {
 
       
 <div className='btn'>
-      <Button variant="primary" type="submit" >
+      <Button variant="primary" type="submit" style={{marginRight:"300px"}}>
         Register
       </Button>
       </div>

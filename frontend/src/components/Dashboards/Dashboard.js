@@ -3,10 +3,10 @@ import React, { useEffect, useState } from 'react'
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import{Container,Row,Col} from 'react-bootstrap'
-import Image4 from './imagefiles/dashboard.jpg'
-import Image1 from './imagefiles/feedback.png'
-import Image2 from './imagefiles/user.png'
-import Image3 from './imagefiles/payment.png'
+import Image4 from '../imagefiles/dashboard.jpg'
+import Image1 from '../imagefiles/feedback.png'
+import Image2 from '../imagefiles/user.png'
+import Image3 from '../imagefiles/payment.png'
 import { useNavigate } from 'react-router-dom';
 
 
@@ -48,7 +48,7 @@ const Dashboard = () => {
         
         <Card.Img variant="top" src={Image2}  style={{ width: '100px', height: '100px' ,marginBottom:'5px'}} />
           
-          <Button  style={{marginLeft:'102px'}} variant="primary" onClick={()=> navigate('/profile')}>Go </Button>
+          <Button  style={{marginLeft:'102px'}} variant="primary" onClick={()=> navigate('/user')}>Go </Button>
         </Card.Body>
       </Card>
 
