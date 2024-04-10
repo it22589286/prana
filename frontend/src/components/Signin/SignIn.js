@@ -35,19 +35,29 @@ const SignIn = () => {
         email,
         password
       }).then((response)=>{
+
+        
+
+        toast.success('login success')
         console.log(response);
-        if(response.data.role ==="customer"){
+         if(response.data.role ==="customer"){
           navigate('/dashboard')
         }else if(response.data.role ==="Instructor"){
           navigate('/instructor')
         }else if(response.data.role ==="Supplier"){
           navigate('/supplier')
+        }else if(response.data.role ==="admin"){
+          navigate('/admin')
         }
+       
         localStorage.setItem("user",JSON.stringify(response.data))
       })
     }
     catch(error){
+           
 
+    
+     
     }
     
     

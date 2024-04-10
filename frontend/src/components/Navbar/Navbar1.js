@@ -5,6 +5,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import '../imagefiles/logo.png'
 import Image from 'react-bootstrap/Image';
+import logo3 from '../imagefiles/logo3.png'
 //import NavDropdown from 'react-bootstrap/NavDropdown';
 import './navbar.css';
 //import { LoaderIcon } from 'react-hot-toast';
@@ -24,6 +25,8 @@ const Navbar1 = () => {
         navigate('/dashboard');
       }else if (userRole === 'Instructor') {
         navigate('/instructor');
+      }else if (userRole === 'admin') {
+        navigate('/admin');
       }
     } else { // If user is logged out
       navigate('/');
@@ -40,13 +43,13 @@ const Navbar1 = () => {
     
     <Navbar className="nav1" >
     <Container>
-      <Navbar.Brand   onClick={handleHomeClick} style={{ fontSize: '24px', fontWeight: 'bold' }}>Prana</Navbar.Brand>
-      <Nav className="me-auto " style={{marginLeft:"450px",padding:"10px"}}>
+      <Navbar.Brand   onClick={handleHomeClick} style={{ fontSize: '40px', fontWeight: 'bold' }}><Image src={logo3} style={{ width: '75px', height: '75px' ,marginBottom:'5px'}}/>Prana</Navbar.Brand>
+      <Nav className="me-auto " style={{marginLeft:"450px",padding:"10px",}}>
         <Nav.Link  onClick={handleHomeClick} >Home</Nav.Link>
-        {userRole !== 'Supplier' && userRole !== 'Instructor' && (
+        {userRole !== 'Supplier' && userRole !== 'Instructor' && userRole !== 'admin' && (
             <Nav.Link as={Link} to="/store">Store</Nav.Link>
           )}
-          {userRole !== 'Supplier' && userRole !== 'Instructor' && (
+          {userRole !== 'Supplier' && userRole !== 'Instructor' && userRole !== 'admin' &&  (
             <Nav.Link as={Link} to="/packages">Packages</Nav.Link>
           )}
        

@@ -20,7 +20,7 @@ import axios from 'axios'
 import {Toaster} from 'react-hot-toast'
 
 import Dashboard from './components/Dashboards/Dashboard';
-import Admin from './components/Admin';
+import Admin from './components/Dashboards/Admin';
 import Instructor from './components/Dashboards/Instructor';
 import Supplier from './components/Dashboards/Supplier';
 import UserProfile from './components/UserProfile';

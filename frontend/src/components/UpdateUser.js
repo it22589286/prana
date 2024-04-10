@@ -5,12 +5,13 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Card from 'react-bootstrap/Card';
 import axios from 'axios';
-//import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Image5 from './imagefiles/userprofile.jpg'
+import {toast} from 'react-hot-toast'
 
 const UpdateUser = () => {
   
-  //const navigate =useNavigate()
+  const navigate =useNavigate()
    
   const userData = JSON.parse(localStorage.getItem("user"))
   const id = userData["_id"]
@@ -56,16 +57,27 @@ const UpdateUser = () => {
        const handleSubmit = async(event) =>{
         console.log(user)
         event.preventDefault();
-        axios.put(`/update/${id}`,{
+        try{
+            const response = await axios.put(`/update/${id}`,{
           name:String(user.name),
           email:String(user.email),
           nic:String(user.nic),
           number:String(user.number),
           password:String(user.password)})
-        .then(res =>res.data)
-        .catch(err =>console.log(err))
+
+          if(response.data.error){
+            toast.error(response.data.error)
+          } else{
+         
+         
+          toast.success('profile updated successfully')
+          navigate('/user')
+          }}
+        catch (error){
+          console.log(error)
+        }
        
-       
+          
         
       }
 
@@ -78,7 +90,7 @@ const UpdateUser = () => {
      
      <Card.Body>
        <Card.Title style={{ textAlign: 'center' }}>{user &&<p>{user.name}`s Profile</p>}  </Card.Title>
-        hi
+        
 
 <Form onSubmit={handleSubmit}>
       

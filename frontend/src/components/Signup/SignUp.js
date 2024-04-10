@@ -32,12 +32,12 @@ const SignUp = () => {
     const {email,nic,name,password,number,role,gender} =data
     try{
       const {data} =await axios.post('/register',{email,nic,name,password,number,role,gender})
-      if(data.error){
+    if(data.error){
         toast.error(data.error)
-      }
+      }  
       else{
         setData({})
-        toast.success('login ok')
+        toast.success('Regisration Successfully completed')
         navigate('/signin')
         
 

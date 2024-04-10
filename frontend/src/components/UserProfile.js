@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { Button, Card } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import Image5 from './imagefiles/userprofile.jpg'
+import {toast} from 'react-hot-toast'
 //import { useParams } from 'react-router-dom';
 
 const UserProfile = () => {
@@ -39,6 +40,7 @@ const UserProfile = () => {
         if( window.confirm("Are you sure that you wanted to delete that user record")){
          try {
            await axios.delete(`/${id}`);
+           toast.success('Account deleted Successfully')
            
            logout();
          } catch (error) {
