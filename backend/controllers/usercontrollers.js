@@ -18,6 +18,11 @@ const registeruser = async(req,res) =>{
                 error:"name is required"
             })
         };
+        if(!role){
+            return res.json({
+                error:"please select a role"
+            })
+        };
         //check is password is good
         if(!password ||password.length <6 ){
             return res.json({
@@ -28,7 +33,13 @@ const registeruser = async(req,res) =>{
         const exist =await User.findOne({email});
         if(exist){
             return res.json({
-                error:"Email is taken"
+                error:"Email is  already taken"
+            })
+        };
+        const identity =await User.findOne({nic});
+        if(identity){
+            return res.json({
+                error:"Your nic has previously used"
             })
         };
         const hashedPassword=await hashPassword(password)
@@ -94,18 +105,35 @@ const loginUser = async(req,res) =>{
 
 const updateUser =async(req,res,next)=>{
     const id =req.params.id;
-    const {nic,name,password,number,role,gender} =req.body;
+    const {email,nic,name,password,number,role,gender} =req.body;
     let user;
     try{
 
+         if(!password ||password.length <6 ){
+            return res.json({
+                error:"password is required and should be at least 6 characters long"
+            })
+        };
+
+        if(nic !== nic){
+
+        const identity =await User.findOne({nic});
+        if(identity){
+            return res.json({
+                error:"Your nic has previously used"
+            })
+        }
+
+    }
+
        
       
-
+        const hashedPassword=await hashPassword(password)
         user = await User.findByIdAndUpdate(id,{
             email,
             nic,
             name,
-            password,
+            password:hashedPassword,
             number,
             role,
             gender

@@ -1,16 +1,38 @@
 import React from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate,useLocation } from 'react-router-dom'
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
+import '../imagefiles/logo.png'
+import Image from 'react-bootstrap/Image';
+import logo3 from '../imagefiles/logo3.png'
+//import NavDropdown from 'react-bootstrap/NavDropdown';
 import './navbar.css';
-import { LoaderIcon } from 'react-hot-toast';
+//import { LoaderIcon } from 'react-hot-toast';
 
 
 const Navbar1 = () => {
   const navigate = useNavigate(); 
-  const auth = localStorage.getItem('user');
+  const location = useLocation();
+  const auth = JSON.parse(localStorage.getItem('user'));
+  const userRole = auth ?auth.role : null;
+
+  const handleHomeClick = () => {
+    if (auth) { // If user is logged in
+      if (userRole === 'Supplier') {
+        navigate('/supplier');
+      } else if (userRole === 'customer') {
+        navigate('/dashboard');
+      }else if (userRole === 'Instructor') {
+        navigate('/instructor');
+      }else if (userRole === 'admin') {
+        navigate('/admin');
+      }
+    } else { // If user is logged out
+      navigate('/');
+    }
+  };
+
   const logout =()=>{
     localStorage.clear()
     navigate('/signup')
@@ -21,12 +43,15 @@ const Navbar1 = () => {
     
     <Navbar className="nav1" >
     <Container>
-      <Navbar.Brand  as ={Link}to="/">Prana</Navbar.Brand>
-      <Nav className="me-auto">
-        <Nav.Link  as={Link} to="/">Home</Nav.Link>
-        <Nav.Link  as={Link} to="/store">Store</Nav.Link>
-        <Nav.Link as={Link} to="/packages">Packages</Nav.Link>
-        
+      <Navbar.Brand   onClick={handleHomeClick} style={{ fontSize: '40px', fontWeight: 'bold' }}><Image src={logo3} style={{ width: '75px', height: '75px' ,marginBottom:'5px'}}/>Prana</Navbar.Brand>
+      <Nav className="me-auto " style={{marginLeft:"450px",padding:"10px",}}>
+        <Nav.Link  onClick={handleHomeClick} >Home</Nav.Link>
+        {userRole !== 'Supplier' && userRole !== 'Instructor' && userRole !== 'admin' && (
+            <Nav.Link as={Link} to="/store">Store</Nav.Link>
+          )}
+          {userRole !== 'Supplier' && userRole !== 'Instructor' && userRole !== 'admin' &&  (
+            <Nav.Link as={Link} to="/packages">Packages</Nav.Link>
+          )}
        
       
         
