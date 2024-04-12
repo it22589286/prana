@@ -13,17 +13,17 @@ const UpdateUser = () => {
   
   const navigate =useNavigate()
    
-  const userData = JSON.parse(localStorage.getItem("user"))
+  const userData = JSON.parse(localStorage.getItem("user"))  
   const id = userData["_id"]
   const[user,setUser] = useState({
 
-    email: '',
-    nic: '',
-    name: '',
-    password: '',
-    number: '',
-    role: '',
-    gender: ''
+    email: '',  
+    nic: '',  
+    name: '', 
+    password: '', 
+    number: '', 
+    role: '', 
+    gender: '' 
   })
 
 

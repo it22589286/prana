@@ -80,8 +80,8 @@ const loginUser = async(req,res) =>{
         const match = await comparePassword(password,user.password)
         if(match){
 
-            const accessToken = jwt.sign({email: email},"nipun",{expiresIn:'1m'})
-            const refreshToken = jwt.sign({email: email},"lahiru",{expiresIn:'5m'})
+            const accessToken = jwt.sign({email: email, id: user._id},"nipun",{expiresIn:'1m'})
+            const refreshToken = jwt.sign({email: email, id: user._id},"lahiru",{expiresIn:'5m'})
             res.cookie('accessToken',accessToken,{maxAge:60000})
             res.cookie('refreshToken',refreshToken,{maxAge:300000,httpOnly:true,secure:true,sameSite:'strict'})
           res.json(user)
