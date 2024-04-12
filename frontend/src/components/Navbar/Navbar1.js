@@ -44,7 +44,10 @@ const Navbar1 = () => {
     <Navbar className="nav1" >
     <Container>
       <Navbar.Brand   onClick={handleHomeClick} style={{ fontSize: '40px', fontWeight: 'bold' }}><Image src={logo3} style={{ width: '75px', height: '75px' ,marginBottom:'5px'}}/>Prana</Navbar.Brand>
-      <Nav className="me-auto " style={{marginLeft:"450px",padding:"10px",}}>
+
+      <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+        <Navbar.Collapse id="responsive-navbar-nav">
+      <Nav className="me-auto " >
         <Nav.Link  onClick={handleHomeClick} >Home</Nav.Link>
         {userRole !== 'Supplier' && userRole !== 'Instructor' && userRole !== 'admin' && (
             <Nav.Link as={Link} to="/store">Store</Nav.Link>
@@ -56,7 +59,7 @@ const Navbar1 = () => {
       
         
       </Nav>
-      <Nav className='box'>
+      <Nav >
 
      {
       auth ?<Nav.Link as={Link} to="/signup" onClick={logout} style={{ backgroundColor: '#E54545', borderRadius: '20px', color: 'white' }}>LogOut</Nav.Link>
@@ -67,7 +70,7 @@ const Navbar1 = () => {
      }
       </Nav>
 
-    
+      </Navbar.Collapse>
     </Container>
   </Navbar>
     

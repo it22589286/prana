@@ -28,13 +28,16 @@ const Instructor = () => {
     .catch(err => console.log(err))
   })
   return (
+  
     <div  style={{ height: '100vh', backgroundImage: `url(${Image4})`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat',}}>
+       
         hi{message}
 
         <Container style={{ marginTop: '5rem' }}>
+       
      <Row className ="justify-content-center">
 
-        <Col md={4}>
+        <Col sm={12} md={6} lg={4}>
 
    <Card style={{ width: '18rem', backgroundColor: 'rgba(139, 190, 227, 0.7)', color: 'white' ,height:'200px',boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)'}}>
    <Card.Body className='text-center'>
@@ -50,7 +53,7 @@ const Instructor = () => {
       </Col>
 
 
-      <Col md={4} >
+      <Col  sm={12} md={6} lg={4} >
 
       <Card style={{ width: '18rem' , backgroundColor: 'rgba(139, 190, 227, 0.7)', color: 'white',height:'200px'}}>
       <Card.Body className='text-center'>
@@ -65,7 +68,7 @@ const Instructor = () => {
 
       </Col>
 
-      <Col md={4} >
+      <Col  sm={12} md={6} lg={4} >
 
       <Card style={{ width: '18rem', backgroundColor: 'rgba(139, 190, 227, 0.7)', color: 'white',height:'200px' }}>
       <Card.Body className='text-center'>
@@ -85,7 +88,7 @@ const Instructor = () => {
 <Container style={{ marginTop: '5rem' }}>
       <Row className ="justify-content-center">
 
-      <Col md={4}>
+      <Col  sm={12} md={6} lg={4}>
 
       <Card style={{ width: '18rem', backgroundColor: 'rgba(139, 190, 227, 0.7)', color: 'white', height:'200px'}}>
       <Card.Body className='text-center'>
@@ -100,7 +103,7 @@ const Instructor = () => {
       </Card>
       </Col>
 
-      <Col md={4}>
+      <Col  sm={12} md={6} lg={4}>
 
       <Card  style={{ width: '18rem', backgroundColor: 'rgba(139, 190, 227, 0.7)', color: 'white',height:'200px' }}>
       <Card.Body className='text-center'>
@@ -115,7 +118,7 @@ const Instructor = () => {
 
       </Col>
 
-      <Col md={4}>
+      <Col  sm={12} md={6} lg={4}>
       <Card style={{ width: '18rem', backgroundColor: 'rgba(139, 190, 227, 0.7)', color: 'white',height:'200px' }}>
       <Card.Body className='text-center'>
       <Card.Title>Feedbacks</Card.Title>
@@ -131,8 +134,10 @@ const Instructor = () => {
       </Row>
       </Container>
      
-      
+     
     </div>
+   
+    
   )
 }
 
