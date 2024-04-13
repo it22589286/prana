@@ -1,9 +1,10 @@
 import React from 'react'
+import Image from "../../imagefiles/hompage.jpg"
 
 const Feedback = () => {
   return (
     <div>
-      amasha gamage bittare
+      fedd
       
     </div>
   )

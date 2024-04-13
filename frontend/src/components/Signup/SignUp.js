@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
@@ -12,7 +12,9 @@ import { toast } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 
 const SignUp = () => {
+  
   const navigate =useNavigate()
+ 
 
   const [data,setData] =useState({
     email:'',
@@ -30,13 +32,14 @@ const SignUp = () => {
     const {email,nic,name,password,number,role,gender} =data
     try{
       const {data} =await axios.post('/register',{email,nic,name,password,number,role,gender})
-      if(data.error){
+    if(data.error){
         toast.error(data.error)
-      }
+      }  
       else{
         setData({})
-        toast.success('login ok')
-        navigate('/')
+        toast.success('Regisration Successfully completed')
+        navigate('/signin')
+        
 
       }
     }catch (error){
@@ -58,8 +61,8 @@ const SignUp = () => {
     <div className='hero' style={{backgroundImage:`url(${Image})`}}>
     <div className='container'  >
         <div className='form'>
-    <Card className='shadow-lg'>
-       <Card.Header className='mb-3'style={{backgroundColor:'orange',height:'60px'}}><h4>Register</h4></Card.Header>
+    <Card className='shadow-lg'style={{backgroundColor: 'rgba(255, 255, 255, 0.7)'}}>
+       <Card.Header className='mb-3'style={{backgroundColor:'orange',height:'60px', textAlign:"center"}}><h4>Register</h4></Card.Header>
        <Card.Body>
     <Form onSubmit={handleSubmit}>
       
@@ -104,7 +107,7 @@ const SignUp = () => {
         <Form.Group as={Col} controlId="formGridState">
           
           <Form.Select defaultValue="Choose..." name="gender" onChange={handlechange} value={data.gender}>
-            
+          <option >Gender</option>
             <option value="male" >Male</option>
             <option value="female" >Female</option>
           </Form.Select>
@@ -120,7 +123,7 @@ const SignUp = () => {
 
       
 <div className='btn'>
-      <Button variant="primary" type="submit" >
+      <Button variant="primary" type="submit" style={{marginRight:"300px"}}>
         Register
       </Button>
       </div>

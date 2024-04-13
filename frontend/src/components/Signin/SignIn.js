@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
@@ -14,30 +14,50 @@ import { useNavigate } from 'react-router-dom';
 
 const SignIn = () => {
 
+  useEffect (()=>{
+    const auth = localStorage.getItem('user');
+    if(auth){
+     
+    }
+  })
+
   const navigate =useNavigate()
   const [data,setData] =useState({
     email:'',
     password:''
   });
   const handleSubmit =  async(event) =>{
-    console.log(data)
+   
     event.preventDefault();
     const {email,password} =data
     try{
       const {data} = await axios.post('/login',{
         email,
         password
-      });
-      if(data.error){
-        toast.error(data.error)
-      }else{
-        setData({});
-        navigate('/')
+      }).then((response)=>{
 
-      }
+        
+
+        toast.success('login success')
+        console.log(response);
+         if(response.data.role ==="customer"){
+          navigate('/dashboard')
+        }else if(response.data.role ==="Instructor"){
+          navigate('/instructor')
+        }else if(response.data.role ==="Supplier"){
+          navigate('/supplier')
+        }else if(response.data.role ==="admin"){
+          navigate('/admin')
+        }
+       
+        localStorage.setItem("user",JSON.stringify(response.data))
+      })
     }
     catch(error){
+           
 
+    
+     
     }
     
     
@@ -57,8 +77,8 @@ const SignIn = () => {
     <div className='container'>
       
         <div className='form'>
-     <Card className='shadow-lg'style={{width:'600px'}}>
-       <Card.Header className='mb-3'style={{backgroundColor:'orange',height:'60px'}}><h4 className='s'>Sign In</h4></Card.Header>
+     <Card className='shadow-lg'style={{width:'600px',backgroundColor: 'rgba(255, 255, 255, 0.7)'}}>
+       <Card.Header className='mb-3'style={{backgroundColor:'orange',height:'60px',textAlign:"center"}}><h4 >Sign In</h4></Card.Header>
         <Card.Body>
       <Form onSubmit={handleSubmit}>
       <Form.Group as={Row} className="mb-3">
