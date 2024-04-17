@@ -19,6 +19,7 @@ import SignUp from './components/Signup/SignUp';
 import axios from 'axios'
 import {Toaster} from 'react-hot-toast'
 
+
 import Dashboard from './components/Dashboards/Dashboard';
 import Admin from './components/Dashboards/Admin';
 import Instructor from './components/Dashboards/Instructor';
@@ -29,6 +30,9 @@ import CustomerData from './components/user Manager/CustomerData';
 import SupplierData from './components/user Manager/SupplierData';
 import InstructorData from './components/user Manager/InstructorData';
 import UpdateUser from './components/UpdateUser';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import FeedbackForm from './components/feedback/feedbackform';
+import Submissions from './components/feedback/submissions'
 
 
 axios.defaults.baseURL ='http://localhost:8000'
@@ -73,7 +77,11 @@ function App() {
        <Route path="/instructorData" element={<InstructorData/>}/>
        <Route path="/supplierData" element={<SupplierData/>}/>
        <Route path="/updateuser" element={<UpdateUser/>}/>
-       
+
+       <Route path="/feedbackform" element={<FeedbackForm/>}/>
+       <Route path="submissions" element={<Submissions />} />
+       <Route path="submission/:id" element={<Submissions />} />
+
        
        
        </Routes>

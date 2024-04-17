@@ -20,7 +20,7 @@ const Admin = () => {
 
    
      <Container style={{ marginTop: '5rem' }}>
-     <Row className ="justify-content-center">
+     <Row className ="justify-content-center">]'0'
 
         <Col md={3}>
 
