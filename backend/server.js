@@ -23,6 +23,7 @@ app.use(express.json())
 
 
 app.use('/',require('./Routes/routes'))
+app.use('/promopackage',require('./Routes/promo-routes'))
 
 
 const port =8000;
