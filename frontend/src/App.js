@@ -29,6 +29,9 @@ import CustomerData from './components/user Manager/CustomerData';
 import SupplierData from './components/user Manager/SupplierData';
 import InstructorData from './components/user Manager/InstructorData';
 import UpdateUser from './components/UpdateUser';
+import Addpromo from './components/Packages/Addpromo';
+import Promopackages from './components/Packages/Promopackages';
+import PromoDetail from './components/Packages/PromoDetail';
 
 
 axios.defaults.baseURL ='http://localhost:8000'
@@ -73,6 +76,11 @@ function App() {
        <Route path="/instructorData" element={<InstructorData/>}/>
        <Route path="/supplierData" element={<SupplierData/>}/>
        <Route path="/updateuser" element={<UpdateUser/>}/>
+
+
+       <Route path="/add" element={<Addpromo/>} exact />
+        <Route path="/package" element={<Promopackages/>}  exact/>
+        <Route path="/packages/:id" element={<PromoDetail/>}  exact/>     
        
        
        

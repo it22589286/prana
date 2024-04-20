@@ -96,3 +96,4 @@ exports.getbyId=getbyId;
 exports.updatepromopackage=updatepromopackage;
 exports.deletepromopackage=deletepromopackage;
 
+

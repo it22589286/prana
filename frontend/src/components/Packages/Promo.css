@@ -1,0 +1,59 @@
+ul {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif; /* Adjust font family as needed */
+  background-image: url('../imagefiles/propack.jpg'); /* Add background image */
+  background-size: cover; 
+  backdrop-filter: blur(5px); /* Adjust background image size */
+  background-repeat: no-repeat; /* Prevent background image from repeating */
+}
+
+li {
+  padding: 10px;
+  margin: 10px;
+  width: 100%;
+  max-width: 250px;
+  list-style-type: none;
+}
+
+.card {
+  margin: auto;
+  margin-top: 20px;
+  padding: 5px;
+  height: 500px;
+  max-width: 100%;
+  box-shadow: 5px 5px 10px #ccc;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* align-items: flex-start;
+    align-content: flex-start; */
+    backdrop-filter: blur(5px); /* Apply blur effect */
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.card img {
+  margin: auto;
+  width: 100%;
+  height: 200px;
+}
+
+.card article {
+  padding: 5px;
+}
+
+.card h3 {
+  padding: 4px;
+}
+
+.card p {
+  padding: 3x;
+}

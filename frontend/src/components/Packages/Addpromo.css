@@ -1,0 +1,62 @@
+/* CSS for Addpromo component */
+
+/* Container styling */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  /* Button styling */
+  .button-container {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 20px;
+  }
+  
+  .button-container button {
+    background-color: #386FA2;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .button-container button + button {
+    margin-left: 10px;
+  }
+  
+  /* Form styling */
+  .form-container {
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: #f9f9f9;
+    margin-bottom: 30px;
+  }
+  
+  .form-container h2 {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .form-label {
+    display: inline-block;
+    width: 100px; /* Adjust as needed */
+    margin-right: 10px;
+  }
+  
+  .form-control {
+    width: calc(100% - 110px); /* Adjust as needed */
+  }
+  
+  .submit-button {
+    text-align: center;
+    margin-top: 20px;
+  }
+  

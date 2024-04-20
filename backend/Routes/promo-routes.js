@@ -14,7 +14,6 @@ router.use(
 //const promopackage =require ("../models/promopackage");
 const promopackagesController=require("../controllers/promo-controller");
 
-
 router.get( "/" ,promopackagesController.getAllpromopackages);
 router.post( "/" ,promopackagesController.addpromopackages);
 router.get("/:id",promopackagesController.getbyId);
