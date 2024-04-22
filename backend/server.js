@@ -3,7 +3,7 @@ const {mongoose }= require('mongoose')
 const dotenv =require('dotenv').config()
 const cors = require('cors');
 const cookieParser =require('cookie-parser')
-const fed = require("./Routes/feedback-routes")
+const fed = require("./Routes/feedback.routes")
 
 
 
