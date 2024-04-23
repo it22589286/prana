@@ -137,15 +137,14 @@ const Promopackages = () => {
           </Button>
         </ButtonGroup>
         <div style={{ display: 'flex', alignItems: 'center', position: 'relative' }}>
-  <FaSearch style={{ position: 'absolute', left: '10px', fontSize: '20px', color: '#386FA2' }} />
   <input
     type="text"
-    placeholder="Search by name..."
+    placeholder="Search here..."
     value={searchQuery}
     onChange={handleSearch}
     style={{
-      paddingLeft: '30px', // Add padding left to accommodate the icon
-      marginRight: '10px',
+      paddingRight: '30px', // Add padding right to accommodate the icon
+      marginLeft: '10px',
       padding: '8px',
       border: '1px solid #ccc',
       borderRadius: '6px',
@@ -155,7 +154,9 @@ const Promopackages = () => {
       width: '700px', // Adjust width as needed
     }}
   />
+  <FaSearch style={{ position: 'absolute', right: '10px', fontSize: '20px', color: '#386FA2' }} />
 </div>
+
 
       </div>
       {noResults ? (
