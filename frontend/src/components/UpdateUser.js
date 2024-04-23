@@ -23,7 +23,8 @@ const UpdateUser = () => {
     password: '', 
     number: '', 
     role: '', 
-    gender: '' 
+    gender: ''
+
   })
 
 

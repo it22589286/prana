@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react';
-import { Button, Table, FormControl } from 'react-bootstrap';
+import { Button, Table, FormControl, ButtonGroup } from 'react-bootstrap';
 import { useReactToPrint } from 'react-to-print';
 
 const CustomerData = () => {
@@ -18,8 +18,9 @@ const CustomerData = () => {
             user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
             user.number.toLowerCase().includes(searchTerm.toLowerCase()) ||
             user.role.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            user.gender.toLowerCase().includes(searchTerm.toLowerCase()))
-        );
+            user.gender.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            user.attendance.toString().includes(searchTerm.toLowerCase())
+        ));
         setUser(filteredUsers);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -46,6 +47,50 @@ const CustomerData = () => {
     onAfterPrint: () => alert('Instruction Details Printed Successfully!')
   });
 
+  const IncrementAttendance = async (id) => {
+    try {
+
+      // Fetch the user from the state based on the id
+    const currentUser = user.find(user => user._id === id);
+      //Increment attendance by1
+
+      let newAttendance = currentUser.attendance + 1;
+      //If the new attendace is greater than 30, set it to 0
+      if (newAttendance > 30) {
+      const confirmReset = window.confirm("Attendance is reaching 30. Do you want to reset it to 0?");
+      
+
+      if (confirmReset) {
+        newAttendance = 0;}
+      }
+        //Update the attendance
+
+      await axios.put(`/update/${id}`, { attendance:newAttendance });
+      setUser(user.map(user => user._id === id ? { ...user, attendance: newAttendance} : user));
+    } catch (error) {
+      console.error('Error incrementing attendance:', error);
+    }
+
+   
+  }
+  const DecrementAttendance = async (id) => {
+    try {
+
+      const currentUser = user.find(user => user._id === id);
+
+      let deccreaseAttendance =currentUser.attendance - 1;
+
+      if (deccreaseAttendance < 0) {
+
+        deccreaseAttendance = 0;}
+
+      await axios.put(`/update/${id}`, { attendance: deccreaseAttendance });
+      setUser(user.map(user => user._id === id ? { ...user, attendance:deccreaseAttendance } : user));
+    } catch (error) {
+      console.error('Error decrementing attendance:', error);
+    }
+  }
+
   return (
     <div>
       <p style={{ textAlign: 'center', paddingTop: '20px', fontSize: '42px', fontStyle: 'bold' }}>Instructor Details</p>
@@ -68,6 +113,7 @@ const CustomerData = () => {
               <th>Number</th>
               <th>Role</th>
               <th>Gender</th>
+              <th>Attendance</th>
               
             </tr>
           </thead>
@@ -80,13 +126,13 @@ const CustomerData = () => {
                 <td>{users.number}</td>
                 <td>{users.role}</td>
                 <td>{users.gender}</td>
-                <td>
-                  <Button
-                    variant="danger"
-                    onClick={() => deleteHandler(users._id)}
-                  >
-                    Delete
-                  </Button>
+                <td>{users.attendance}</td>
+                <td colSpan="3" className="text-center"> 
+                <ButtonGroup>
+                     <Button variant="warning" onClick={()=>IncrementAttendance(users._id)}>+</Button>{' '}
+                     <Button variant="warning" onClick={()=>DecrementAttendance(users._id)}>-</Button>{' '}
+                     <Button variant="danger" onClick={() => deleteHandler(users._id)} > Delete</Button>
+                     </ButtonGroup>     
                 </td>
               </tr>
             ))}

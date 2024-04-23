@@ -23,8 +23,12 @@ const SignUp = () => {
     password:'',
     number:'',
     role:'',
-    gender:''
+    gender:'',
+    attendance:0
   });
+  const [showPassword, setShowPassword] = useState(false);
+
+  
 
   const handleSubmit = async(event) =>{
     console.log(data)
@@ -56,7 +60,11 @@ const SignUp = () => {
       [event.target.name]:event.target.value
       
     })
-  }
+  };
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
   return (
     <div className='hero' style={{backgroundImage:`url(${Image})`}}>
     <div className='container'  >
@@ -82,20 +90,21 @@ const SignUp = () => {
         <Form.Control type="text" placeholder="Enter name" name="name" onChange={handlechange}/>
       </Form.Group>
 
-      <Form.Group className="mb-3" >
+      <Form.Group className="mb-3 d-flex align-items-center" >
        
-        <Form.Control type="password" placeholder="Enter password" name="password" onChange={handlechange}/>
+      <Form.Control type={showPassword ? "text" : "password"} placeholder="Enter password" name="password" className="me-2" style={{ width: "80%" }} onChange={handlechange} />
+      <Button variant="outline-secondary" onClick={togglePasswordVisibility} style={{ marginLeft: "10px" }}>{showPassword ? "Hide" : "Show"} </Button>
       </Form.Group>
      
 
-     <Form.Group className="mb-3" >
+     <Form.Group className="mb-3 " >
        
        <Form.Control type="number" placeholder="Enter Contact Number" name="number" onChange={handlechange}/>
      </Form.Group>
 
      <Row className="mb-3" >
         <Form.Group as={Col} controlId="formGridCity">
-        <Form.Select defaultValue="Choose..." name="role" onChange={handlechange} value={data.role} >
+        <Form.Select defaultValue="Choose..." name="role" onChange={handlechange} value={data.role} required >
             <option >Role</option>
             <option value="customer" >customer</option>
             <option value="Instructor">Instructor</option>
@@ -106,7 +115,7 @@ const SignUp = () => {
 
         <Form.Group as={Col} controlId="formGridState">
           
-          <Form.Select defaultValue="Choose..." name="gender" onChange={handlechange} value={data.gender}>
+          <Form.Select defaultValue="Choose..." name="gender" onChange={handlechange} value={data.gender} required>
           <option >Gender</option>
             <option value="male" >Male</option>
             <option value="female" >Female</option>

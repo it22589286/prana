@@ -38,7 +38,12 @@ const userSchema = new Schema(
             type:String,
             required:true
 
+        },
+        attendance:{
+            type:Number,
+            default:0
         }
+       
     }
 )
 

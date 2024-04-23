@@ -12,7 +12,7 @@ const test = (req,res) =>{
 const registeruser = async(req,res) =>{
 
     try{
-        const{email,nic,name,password,number,role,gender} =req.body;
+        const{email,nic,name,password,number,role,gender,attendance} =req.body;
         if(!name){
             return res.json({
                 error:"name is required"
@@ -22,7 +22,18 @@ const registeruser = async(req,res) =>{
             return res.json({
                 error:"please select a role"
             })
+
+           
         };
+
+        if(!gender){
+            return res.json({
+                error:"please select your gender"
+            })
+
+           
+        };
+        
         //check is password is good
         if(!password ||password.length <6 ){
             return res.json({
@@ -50,7 +61,9 @@ const registeruser = async(req,res) =>{
             password:hashedPassword,
             number,
             role,
-            gender
+            gender,
+            attendance
+
         })
 
         return res.json(user)
@@ -105,7 +118,7 @@ const loginUser = async(req,res) =>{
 
 const updateUser =async(req,res,next)=>{
     const id =req.params.id;
-    const {email,nic,name,password,number,role,gender} =req.body;
+    const {email,nic,name,password,number,role,gender,attendance} =req.body;
     let user;
     try{
 
@@ -136,7 +149,8 @@ const updateUser =async(req,res,next)=>{
             password:hashedPassword,
             number,
             role,
-            gender
+            gender,
+            attendance
            
         });
         user= await user.save()
@@ -261,6 +275,75 @@ const updateUser =async(req,res,next)=>{
     return res.json({valid:true,message:"authorized"})
  }
 
+ //forgot password
+
+    const forgotPassword = async(req,res) =>{
+
+        const {email} = req.body;
+        let user;
+        try{
+            user = await User.findOne({email});
+            if(!user){
+                return res.status(404).json({message:'user not found'})
+            }
+            const accessToken = jwt.sign({email: email, id: user._id},"nipun",{expiresIn:'1m'})
+            const refreshToken = jwt.sign({email: email, id: user._id},"lahiru",{expiresIn:'5m'})
+            res.cookie('accessToken',accessToken,{maxAge:60000})
+            res.cookie('refreshToken',refreshToken,{maxAge:300000,httpOnly:true,secure:true,sameSite:'strict'})
+
+            var transporter = nodemailer.createTransport({
+                service: 'gmail',
+                auth: {
+                  user: 'youremail@gmail.com',
+                  pass: 'yourpassword'
+                }
+              });
+              
+              var mailOptions = {
+                from: 'youremail@gmail.com',
+                to: 'myfriend@yahoo.com',
+                subject: 'Reset Password',
+                text: `http://localhost:3000/resetpassword/${user._id}/${accessToken}`
+              };
+              
+              transporter.sendMail(mailOptions, function(error, info){
+                if (error) {
+                  console.log(error);
+                } else {
+                  return res.send({status:"success"})
+                }
+              });
+            return res.status(200).json({message:'user found'})
+        }
+        catch(err){
+            console.log(err);
+        }
+
+    };
+
+    //reset password
+
+    const resetPassword = (req,res) =>{
+
+        const {id,token} = req.params;
+        const {password} = req.body;
+       
+        jwt.verify(token,'nipun',(err,decoded)=>{
+            if(err){
+                return res.json({message:"invalid token"})
+            }
+            else{
+                const hashedPassword=hashPassword(password)
+                const user =  User.findByIdAndUpdate({_id: id},{
+                    password:hashedPassword
+                });
+                user=  user.save()
+                return res.json({message:"password updated"})
+            }
+        })
+
+    }
+    
 
 
 module.exports ={
@@ -270,6 +353,9 @@ module.exports ={
     updateUser,
     delterUser,
     getbyId,
-    getAllUsers,auth
+    getAllUsers,
+    auth,
+    resetPassword,
+    forgotPassword
   
 }

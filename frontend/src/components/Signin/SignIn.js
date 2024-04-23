@@ -20,12 +20,14 @@ const SignIn = () => {
      
     }
   })
-
+  const [showPassword, setShowPassword] = useState(false);
   const navigate =useNavigate()
   const [data,setData] =useState({
     email:'',
     password:''
   });
+  
+
   const handleSubmit =  async(event) =>{
    
     event.preventDefault();
@@ -36,7 +38,9 @@ const SignIn = () => {
         password
       }).then((response)=>{
 
-        
+        if(response.data.error){
+          toast.error(response.data.error)
+        } else{
 
         toast.success('login success')
         console.log(response);
@@ -50,13 +54,13 @@ const SignIn = () => {
           navigate('/admin')
         }
        
-        localStorage.setItem("user",JSON.stringify(response.data))
+        localStorage.setItem("user",JSON.stringify(response.data))}
       })
     }
     catch(error){
-           
 
-    
+      
+      console.log(error)
      
     }
     
@@ -70,7 +74,11 @@ const SignIn = () => {
        [event.target.name]:event.target.value
        
      })
-   }
+   };
+
+   const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
   
   return (
     <div className='hero' style={{backgroundImage:`url(${Image})`}}>
@@ -94,9 +102,14 @@ const SignIn = () => {
         <Form.Label column sm={2}>
           Password
         </Form.Label>
-        <Col sm={10}>
-          <Form.Control type="password" placeholder="Password" name="password" onChange={handlechange} />
+        <Col sm={8}>
+          <Form.Control type={showPassword ? 'text' : 'password'} placeholder="Password" name="password" onChange={handlechange} />
         </Col>
+        <Col sm={2}>
+                    <Button variant="outline-secondary" onClick={togglePasswordVisibility} style={{ marginLeft: "10px" }}>
+                      {showPassword ? 'Hide' : 'Show'}
+                    </Button>
+                  </Col>
       </Form.Group>
       
      
@@ -107,6 +120,7 @@ const SignIn = () => {
         </Col>
       </Form.Group>
       <br/>
+     <p> <Link to="/forgotPassword">forgot password  ?</Link></p>
       <p>OR</p>
       <br/>
       <p>you do not have an account?<Link to="/signup">Sign Up</Link></p>

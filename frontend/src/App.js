@@ -29,6 +29,8 @@ import CustomerData from './components/user Manager/CustomerData';
 import SupplierData from './components/user Manager/SupplierData';
 import InstructorData from './components/user Manager/InstructorData';
 import UpdateUser from './components/UpdateUser';
+import ForgotPassword from './components/Signin/ForgotPassword';
+import ResetPassword from './components/Signin/ResetPassword';
 
 
 axios.defaults.baseURL ='http://localhost:8000'
@@ -73,6 +75,8 @@ function App() {
        <Route path="/instructorData" element={<InstructorData/>}/>
        <Route path="/supplierData" element={<SupplierData/>}/>
        <Route path="/updateuser" element={<UpdateUser/>}/>
+       <Route path="/forgotPassword" element={<ForgotPassword/>}/>
+       <Route path="/reset-password/:id/token" element={<ResetPassword/>}/>
        
        
        
