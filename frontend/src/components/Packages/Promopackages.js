@@ -88,11 +88,14 @@ const Promopackages = () => {
     reportWindow.print();
   };
 
-  const handleSearch = () => {
+  const handleSearch = (e) => {
+    const query = e.target.value.toLowerCase();
+    setSearchQuery(query);
+
     fetchHandler().then((data) => {
       const filteredPromoPackages = data.promopackages.filter((promoPackage) => {
         return Object.values(promoPackage).some((field) => {
-          return field.toString().toLowerCase().includes(searchQuery.toLowerCase());
+          return field.toString().toLowerCase().includes(query);
         });
       });
 
@@ -100,10 +103,6 @@ const Promopackages = () => {
       setNoResults(filteredPromoPackages.length === 0);
     });
   }
-
-  const handleInputChange = (e) => {
-    setSearchQuery(e.target.value);
-  };
 
   /*const handleKeyPress = (e) => {
     if (e.key === 'Enter') {
@@ -137,42 +136,27 @@ const Promopackages = () => {
             Generate Report
           </Button>
         </ButtonGroup>
-        <div style={{ display: 'flex', alignItems: 'center' }}>
-          <input
-            type="text"
-            placeholder="Search by name..."
-            value={searchQuery}
-            onChange={handleInputChange}
-           // onKeyPress={handleKeyPress}
-            style={{
-              marginRight: '10px',
-              padding: '8px',
-              border: '1px solid #ccc',
-              borderRadius: '6px',
-              fontSize: '16px',
-              outline: 'none',
-              boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
-              width: '700px', // Adjust width as needed
-            }}
-          />
-          
-          <button
-            onClick={handleSearch}
-            style={{
-              backgroundColor: '#386FA2',
-              color: 'white',
-              padding: '10px',
-              borderRadius: '6px',
-              border: 'none',
-              cursor: 'pointer',
-              margin: '0',
-              boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
-            }}
-          >
-            <FaSearch />
-            Search
-          </button>
-        </div>
+        <div style={{ display: 'flex', alignItems: 'center', position: 'relative' }}>
+  <FaSearch style={{ position: 'absolute', left: '10px', fontSize: '20px', color: '#386FA2' }} />
+  <input
+    type="text"
+    placeholder="Search by name..."
+    value={searchQuery}
+    onChange={handleSearch}
+    style={{
+      paddingLeft: '30px', // Add padding left to accommodate the icon
+      marginRight: '10px',
+      padding: '8px',
+      border: '1px solid #ccc',
+      borderRadius: '6px',
+      fontSize: '16px',
+      outline: 'none',
+      boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
+      width: '700px', // Adjust width as needed
+    }}
+  />
+</div>
+
       </div>
       {noResults ? (
         <div>
