@@ -33,6 +33,12 @@ const registeruser = async(req,res) =>{
 
            
         };
+        //check lenght of number
+        if(number.length !=10 ){
+            return res.json({
+                error:"lenght of the number should be 10 digits"
+            })
+        };
         
         //check is password is good
         if(!password ||password.length <6 ){
