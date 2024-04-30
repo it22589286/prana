@@ -1,7 +1,7 @@
 
 import './App.css';
 import Home from './components/Home';
-
+import "antd/dist/reset.css"
 import Navbar1 from './components/Navbar/Navbar1';
 import {BrowserRouter,  Route, Routes } from 'react-router-dom'
 import Packages from './components/Packages';
@@ -31,8 +31,12 @@ import SupplierData from './components/user Manager/SupplierData';
 import InstructorData from './components/user Manager/InstructorData';
 import UpdateUser from './components/UpdateUser';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import FeedbackForm from './components/feedback/feedbackform';
-import Submissions from './components/feedback/submissions'
+import Feedbacktable from './components/Feedbacks/Feedbacks';
+import MyFeedbacks from './components/Feedbacks/MyFeedbacks';
+import GiveFeedbacks from './components/Feedbacks/GiveFeedbacks';
+import AddFeedbacks from './components/Feedbacks/AddFeedbacks';
+import Feedbacks from './components/Feedbacks/Feedbacks';
+
 
 
 axios.defaults.baseURL ='http://localhost:8000'
@@ -78,10 +82,10 @@ function App() {
        <Route path="/supplierData" element={<SupplierData/>}/>
        <Route path="/updateuser" element={<UpdateUser/>}/>
 
-       <Route path="/feedbackform" element={<FeedbackForm/>}/>
-       <Route path="submissions" element={<Submissions />} />
-       <Route path="submission/:id" element={<Submissions />} />
-
+       <Route path="/fed" element={<GiveFeedbacks/>} />
+          <Route path="/feedbacks" element={<MyFeedbacks/>} />
+          <Route path="/admin-feedbacks" element={<Feedbacks/>} />
+          <Route path="/addfeedbacks" element={<AddFeedbacks/>} />
        
        
        </Routes>

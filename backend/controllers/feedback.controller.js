@@ -18,7 +18,7 @@ exports.createFeedback = async (req, res) => {
 // Controller function to get all feedbacks
 exports.getAllFeedbacks = async (req, res) => {
   try {
-    const feedbacks = await Feedback.find();
+    const feedbacks = await Feedback.find().populate("instructor");
     res.status(200).json({ success: true, feedbacks });
   } catch (error) {
     res.status(500).json({ success: false, error: error.message });

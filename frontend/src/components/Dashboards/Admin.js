@@ -20,7 +20,7 @@ const Admin = () => {
 
    
      <Container style={{ marginTop: '5rem' }}>
-     <Row className ="justify-content-center">]'0'
+     <Row className ="justify-content-center">
 
         <Col md={3}>
 
@@ -75,7 +75,7 @@ const Admin = () => {
         
         <Card.Img variant="top" src={Image3}  style={{ width: '100px', height: '100px' ,marginBottom:'5px'}} /> 
          
-          <Button variant="primary" style={{marginLeft:'90px'}} >Manage</Button>
+          <Button variant="primary" style={{marginLeft:'90px'}} onClick={()=> navigate('/admin-feedbacks')}>Manage</Button>
         </Card.Body>
       </Card>
       </Col>

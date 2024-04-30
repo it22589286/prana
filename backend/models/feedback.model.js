@@ -17,7 +17,8 @@ const feedbackSchema = new Schema({
     required: true,
   },
   instructor: {
-    type: String,
+    type: Schema.Types.ObjectId,
+    ref: "User",
     required: true,
   },
   rating: {
