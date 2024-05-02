@@ -76,7 +76,7 @@ function App() {
        <Route path="/supplierData" element={<SupplierData/>}/>
        <Route path="/updateuser" element={<UpdateUser/>}/>
        <Route path="/forgotPassword" element={<ForgotPassword/>}/>
-       <Route path="/reset-password/:id/token" element={<ResetPassword/>}/>
+       <Route path="/reset-password/:id/:token" element={<ResetPassword/>}/>
        
        
        

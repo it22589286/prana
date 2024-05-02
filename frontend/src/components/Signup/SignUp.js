@@ -69,37 +69,56 @@ const SignUp = () => {
     <div className='hero' style={{backgroundImage:`url(${Image})`}}>
     <div className='container'  >
         <div className='form'>
-    <Card className='shadow-lg'style={{backgroundColor: 'rgba(255, 255, 255, 0.7)'}}>
-       <Card.Header className='mb-3'style={{backgroundColor:'orange',height:'60px', textAlign:"center"}}><h4>Register</h4></Card.Header>
+    <Card className='shadow-lg'style={{backgroundColor: 'rgba(255, 255, 255, 0.7)',width:'600px'}}>
+       <Card.Header className='mb-3'style={{backgroundColor:'orange',height:'60px', textAlign:"center",}}><h4>Register</h4></Card.Header>
        <Card.Body>
     <Form onSubmit={handleSubmit}>
       
-        <Form.Group className="mb-3" >
-        
-          <Form.Control type="email" placeholder="Enter email" name="email" onChange={handlechange}/>
-        </Form.Group>
-
-   <Form.Group className="mb-3">
-        
+    <Form.Group as={Row} className="mb-3">
+        <Form.Label column sm={2}>
+          Email
+        </Form.Label>
+        <Col sm={10}>
+          <Form.Control type="email" placeholder="Email" name="email" onChange={handlechange} />
+        </Col>
+      </Form.Group>
+   <Form.Group as={Row} className="mb-3">
+   <Form.Label column sm={2}>NIC</Form.Label>
+   <Col sm={10}>
           <Form.Control type="text" placeholder="Enter nic" name="nic" onChange={handlechange}/>
+          </Col>
         </Form.Group>
       
 
-      <Form.Group className="mb-3" >
-        
+      <Form.Group className="mb-3"  as={Row}>
+      <Form.Label column sm={2}>Name</Form.Label>
+         <Col sm={10}>
         <Form.Control type="text" placeholder="Enter name" name="name" onChange={handlechange}/>
+        </Col>
       </Form.Group>
 
-      <Form.Group className="mb-3 d-flex align-items-center" >
-       
-      <Form.Control type={showPassword ? "text" : "password"} placeholder="Enter password" name="password" className="me-2" style={{ width: "80%" }} onChange={handlechange} />
-      <Button variant="outline-secondary" onClick={togglePasswordVisibility} style={{ marginLeft: "10px" }}>{showPassword ? "Hide" : "Show"} </Button>
+      <Form.Group as={Row} className="mb-3" >
+        <Form.Label column sm={2}>
+          Password
+        </Form.Label>
+        <Col sm={8}>
+          <Form.Control type={showPassword ? 'text' : 'password'} placeholder="Password" name="password" onChange={handlechange} />
+        </Col>
+        <Col sm={2}>
+                    <Button variant="outline-secondary" onClick={togglePasswordVisibility} style={{ marginLeft: "10px" }}>
+                      {showPassword ? 'Hide' : 'Show'}
+                    </Button>
+                  </Col>
       </Form.Group>
      
 
-     <Form.Group className="mb-3 " >
+     <Form.Group className="mb-3 " as={Row} >
+
+     <Form.Label column sm={2}>Number</Form.Label>
+         <Col sm={10}>
        
        <Form.Control type="number" placeholder="Enter Contact Number" name="number" onChange={handlechange}/>
+       </Col>
      </Form.Group>
 
      <Row className="mb-3" >

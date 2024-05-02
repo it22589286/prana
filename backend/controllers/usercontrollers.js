@@ -53,10 +53,19 @@ const registeruser = async(req,res) =>{
                 error:"Email is  already taken"
             })
         };
+
+        //check nic exits
         const identity =await User.findOne({nic});
         if(identity){
             return res.json({
                 error:"Your nic has previously used"
+            })
+        };
+
+        //check lentgh of nic
+        if( password.length > 15 ||password.length < 6 ){
+            return res.json({
+                error:"lenght of the nic should be 6-15 characters"
             })
         };
         const hashedPassword=await hashPassword(password)
@@ -292,24 +301,24 @@ const updateUser =async(req,res,next)=>{
             if(!user){
                 return res.status(404).json({message:'user not found'})
             }
-            const accessToken = jwt.sign({email: email, id: user._id},"nipun",{expiresIn:'1m'})
-            const refreshToken = jwt.sign({email: email, id: user._id},"lahiru",{expiresIn:'5m'})
-            res.cookie('accessToken',accessToken,{maxAge:60000})
-            res.cookie('refreshToken',refreshToken,{maxAge:300000,httpOnly:true,secure:true,sameSite:'strict'})
-
+            const token = jwt.sign({email: email, id: user._id},process.env.JWT_SECRET,{expiresIn:'10m'})
+           
+           
+           
+            var nodemailer = require('nodemailer');
             var transporter = nodemailer.createTransport({
                 service: 'gmail',
                 auth: {
-                  user: 'youremail@gmail.com',
-                  pass: 'yourpassword'
+                  user: 'taprobanasl233@gmail.com',
+                  pass: 'jskfmilkkykokfnj'
                 }
               });
               
               var mailOptions = {
-                from: 'youremail@gmail.com',
-                to: 'myfriend@yahoo.com',
+                from: 'pranayoga880@gmail.com',
+                to: email,
                 subject: 'Reset Password',
-                text: `http://localhost:3000/resetpassword/${user._id}/${accessToken}`
+                text: `http://localhost:3000/reset-password/${user._id}/${token}`
               };
               
               transporter.sendMail(mailOptions, function(error, info){
@@ -329,26 +338,64 @@ const updateUser =async(req,res,next)=>{
 
     //reset password
 
-    const resetPassword = (req,res) =>{
+    const resetPassword = async (req, res) => {
+        try {
+            const { id, token } = req.params;
+            const { password } = req.body;
+    
+            // Verify the token
+            jwt.verify(token,process.env.JWT_SECRET, async (err, decoded) => {
+                if (err) {
+                    console.error("JWT verification failed:", err);
+                    return res.status(400).json({ message: "Invalid token" });
+                }
+    
+                try {
+                    // Hash the new password
+                    const hashedPassword = await hashPassword(password);
+    
+                    // Update the user's password in the database
+                    const user = await User.findByIdAndUpdate(id, {
+                        password: hashedPassword
+                    });
+    
+                    if (!user) {
+                        return res.status(404).json({ message: 'User not found' });
+                    }
+    
+                    return res.json({ message: "Password updated successfully" });
+                } catch (error) {
+                    console.error("Error updating password:", error);
+                    return res.status(500).json({ error: "Internal Server Error" });
+                }
+            });
+        } catch (error) {
+            console.error("Unexpected error:", error);
+            return res.status(500).json({ error: "Internal Server Error" });
+        }
+    };
 
-        const {id,token} = req.params;
-        const {password} = req.body;
-       
-        jwt.verify(token,'nipun',(err,decoded)=>{
-            if(err){
-                return res.json({message:"invalid token"})
+    //
+    const updateAttendance = async (req, res, next) => {
+        const id = req.params.id;
+        const { attendance } = req.body;
+        try {
+            // Find the user by ID
+            let user = await User.findByIdAndUpdate(id, { attendance }, { new: true });
+    
+            // Check if the user exists
+            if (!user) {
+                return res.status(404).json({ message: 'User not found' });
             }
-            else{
-                const hashedPassword=hashPassword(password)
-                const user =  User.findByIdAndUpdate({_id: id},{
-                    password:hashedPassword
-                });
-                user=  user.save()
-                return res.json({message:"password updated"})
-            }
-        })
-
-    }
+    
+            // Return the updated user
+            return res.status(200).json({ user });
+        } catch (err) {
+            console.error('Error updating attendance:', err);
+            return res.status(500).json({ error: 'Internal Server Error' });
+        }
+    };
+    
     
 
 
@@ -362,6 +409,7 @@ module.exports ={
     getAllUsers,
     auth,
     resetPassword,
-    forgotPassword
+    forgotPassword,
+    updateAttendance
   
 }

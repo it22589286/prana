@@ -39,13 +39,18 @@ const userSchema = new Schema(
             required:true
 
         },
-        attendance:{
-            type:Number,
-            default:0
+        attendance: {
+            type: Number,
+            default: function() {
+                return this.role === 'Instructor' ? 0 : undefined;
+            }
         }
        
+       
     }
-)
+);
+
+
 
 const userModel =mongoose.model('User',userSchema)
 module.exports = userModel;

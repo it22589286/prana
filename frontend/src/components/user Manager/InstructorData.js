@@ -65,7 +65,7 @@ const CustomerData = () => {
       }
         //Update the attendance
 
-      await axios.put(`/update/${id}`, { attendance:newAttendance });
+      await axios.put(`/updateAttendance/${id}`, { attendance:newAttendance });
       setUser(user.map(user => user._id === id ? { ...user, attendance: newAttendance} : user));
     } catch (error) {
       console.error('Error incrementing attendance:', error);
@@ -84,7 +84,7 @@ const CustomerData = () => {
 
         deccreaseAttendance = 0;}
 
-      await axios.put(`/update/${id}`, { attendance: deccreaseAttendance });
+      await axios.put(`/updateAttendance/${id}`, { attendance: deccreaseAttendance });
       setUser(user.map(user => user._id === id ? { ...user, attendance:deccreaseAttendance } : user));
     } catch (error) {
       console.error('Error decrementing attendance:', error);
