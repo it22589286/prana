@@ -1,29 +1,24 @@
-*{
-    padding:0;
-    margin: 0;
-    box-sizing: border-box;
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
-.signin{
-    text-align: left;
-    
-    
+.signin {
+  text-align: left;
 }
-.nav1{
-
-    height: 100px;
-    background-color: #386FA2;
-    
-
+.nav1 {
+  height: 100px;
+  background-color: #386fa2;
 }
 
-.nav-link{
-    color: white;
-    padding-left: 30px;
-    padding-right: 30px;
+.nav-link {
+  color: white;
+  padding-left: 30px;
+  padding-right: 30px;
 }
-.navbar-brand{
-    color: white;
+.navbar-brand {
+  color: white;
 }
-.me-auto{
-    margin-left: 100px;
+.me-auto {
+  margin-left: 100px;
 }

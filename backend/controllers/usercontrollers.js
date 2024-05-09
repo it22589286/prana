@@ -108,8 +108,8 @@ const loginUser = async(req,res) =>{
         const match = await comparePassword(password,user.password)
         if(match){
 
-            const accessToken = jwt.sign({email: email, id: user._id},"nipun",{expiresIn:'1m'})
-            const refreshToken = jwt.sign({email: email, id: user._id},"lahiru",{expiresIn:'5m'})
+            const accessToken = jwt.sign({email: email, id: user._id},process.env.Access_Secret,{expiresIn:'1m'})
+            const refreshToken = jwt.sign({email: email, id: user._id},process.env.Refresh_Secret,{expiresIn:'5m'})
             res.cookie('accessToken',accessToken,{maxAge:60000})
             res.cookie('refreshToken',refreshToken,{maxAge:300000,httpOnly:true,secure:true,sameSite:'strict'})
           res.json(user)
@@ -127,7 +127,67 @@ const loginUser = async(req,res) =>{
 
     }
 
-}
+};
+
+ //
+ const varifyUser =(req,res,next) =>{
+
+    const accessToken = req.cookies.accessToken;
+    if(!accessToken){
+
+        if(renewToken(req,res)){
+
+            next()
+
+        }
+
+    }
+    else{
+        jwt.verify(accessToken,process.env.Access_Secret,(err,decoded)=>{
+            if(err){
+                return res.jason({valid:false,message:"invalid token"})
+            }else{
+                req.email = decoded.email
+                next()
+            }
+        })
+    }
+
+ };
+
+     const renewToken = (req,res) =>{
+
+        const refreshToken = req.cookies.refreshToken;
+        let exist = false;
+        if(!accessToken){
+
+            return res.json({valid:false,message:"no refresh token"})
+    
+        }
+        else{
+            jwt.verify(refreshToken,process.env.Refresh_Secret,(err,decoded)=>{
+                if(err){
+                    return res.jason({valid:false,message:"invalid refresh token"})
+                }else{
+
+                    const accessToken = jwt.sign({email: email},process.env.Access_Secret,{expiresIn:'1m'})
+                    res.cookie('accessToken',accessToken,{maxAge:60000})
+                    exist = true;
+                }
+            })
+        }
+
+        return exist;
+
+     }
+
+ //
+
+ const auth = (req,res) =>{
+
+    return res.json({valid:true,message:"authorized"})
+ }
+
 
 //update user endpoint
 
@@ -231,64 +291,6 @@ const updateUser =async(req,res,next)=>{
     return res.status(200).json({user})
  };
 
- //
- const varifyUser =(req,res,next) =>{
-
-    const accessToken = req.cookies.accessToken;
-    if(!accessToken){
-
-        if(renewToken(req,res)){
-
-            next()
-
-        }
-
-    }
-    else{
-        jwt.verify(accessToken,'nipun',(err,decoded)=>{
-            if(err){
-                return res.jason({valid:false,message:"invalid token"})
-            }else{
-                req.email = decoded.email
-                next()
-            }
-        })
-    }
-
- };
-
-     const renewToken = (req,res) =>{
-
-        const refreshToken = req.cookies.refreshToken;
-        let exist = false;
-        if(!accessToken){
-
-            return res.json({valid:false,message:"no refresh token"})
-    
-        }
-        else{
-            jwt.verify(refreshToken,'lahiru',(err,decoded)=>{
-                if(err){
-                    return res.jason({valid:false,message:"invalid refresh token"})
-                }else{
-
-                    const accessToken = jwt.sign({email: email},"nipun",{expiresIn:'1m'})
-                    res.cookie('accessToken',accessToken,{maxAge:60000})
-                    exist = true;
-                }
-            })
-        }
-
-        return exist;
-
-     }
-
- //
-
- const auth = (req,res) =>{
-
-    return res.json({valid:true,message:"authorized"})
- }
 
  //forgot password
 
