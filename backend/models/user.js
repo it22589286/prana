@@ -38,9 +38,19 @@ const userSchema = new Schema(
             type:String,
             required:true
 
+        },
+        attendance: {
+            type: Number,
+            default: function() {
+                return this.role === 'Instructor' ? 0 : undefined;
+            }
         }
+       
+       
     }
-)
+);
+
+
 
 const userModel =mongoose.model('User',userSchema)
 module.exports = userModel;
