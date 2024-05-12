@@ -7,6 +7,9 @@ import Image4 from "../imagefiles/dashboard.jpg";
 import Image1 from "../imagefiles/feedback.png";
 import Image2 from "../imagefiles/user.png";
 import Image3 from "../imagefiles/payment.png";
+import Image5 from "../imagefiles/notification.png";
+import Image6 from "../imagefiles/schedule.png";
+import Image7 from "../imagefiles/package.png";
 import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
@@ -34,10 +37,10 @@ const Dashboard = () => {
         backgroundRepeat: "no-repeat",
       }}
     >
-      <h2>dashboard.{message}</h2>
+     
 
-      <Container style={{ marginTop: "5rem" }}>
-        <Row className="justify-content-center">
+      <Container>
+        <Row className="justify-content-center"  style={{ marginTop: "5rem" }}>
           <Col md={4}>
             <Card
               style={{
@@ -86,7 +89,7 @@ const Dashboard = () => {
 
                 <Card.Img
                   variant="top"
-                  src={Image3}
+                  src={Image7}
                   style={{
                     width: "100px",
                     height: "100px",
@@ -115,7 +118,7 @@ const Dashboard = () => {
 
                 <Card.Img
                   variant="top"
-                  src={Image3}
+                  src={Image6}
                   style={{
                     width: "100px",
                     height: "100px",
@@ -148,7 +151,7 @@ const Dashboard = () => {
 
                 <Card.Img
                   variant="top"
-                  src={Image3}
+                  src={Image5}
                   style={{
                     width: "100px",
                     height: "100px",
@@ -205,7 +208,7 @@ const Dashboard = () => {
 
                 <Card.Img
                   variant="top"
-                  src={Image3}
+                  src={Image1}
                   style={{
                     width: "100px",
                     height: "100px",

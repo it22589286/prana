@@ -70,18 +70,19 @@ const UserProfile = () => {
             backgroundColor: "rgba(255, 255, 255, 0.7)",
           }}
         >
+           <Card.Header style={{ textAlign: "center",background:"orange" }}>
+             <h4> {user && <p>{user.name}`s Profile</p>}{" "}</h4>
+            </Card.Header>
           <Card.Body>
-            <Card.Title style={{ textAlign: "center" }}>
-              {user && <p>{user.name}`s Profile</p>}{" "}
-            </Card.Title>
-
-            {user && <p>Name:{user.name}</p>}
-            {user && <p>Email:{user.email}</p>}
-            {user && <p>NIC:{user.nic}</p>}
-            {user && <p>Contact No:{user.number}</p>}
-            {user && <p>Gender:{user.gender}</p>}
-            {user && <p>Role:{user.role}</p>}
-
+           
+         <div style={{marginLeft:"200px"}}>
+            {user && <p style={{textAlign:"left"}}><b>Name:</b>{user.name}</p>}
+            {user && <p style={{textAlign:"left"}}><b>Email:</b>{user.email}</p>}
+            {user && <p style={{textAlign:"left"}}><b>NIC:</b>{user.nic}</p>}
+            {user && <p style={{textAlign:"left"}}><b>Contact No:</b>{user.number}</p>}
+            {user && <p style={{textAlign:"left"}}><b>Gender:</b>{user.gender}</p>}
+            {user && <p style={{textAlign:"left"}}><b>Role:</b>{user.role}</p>}
+            </div>
             <div className="d-flex  flex-column ">
               <Button
                 variant="primary"

@@ -5,7 +5,14 @@ import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
-    <div className="hero" style={{ backgroundImage: `url(${Image})` }}>
+    <div 
+    style={{
+      height: "100vh",
+      backgroundImage: `url(${Image})`,
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+      backgroundRepeat: "no-repeat",
+    }}>
       <div className="content">
         <h1>Your home for Yoga</h1>
         <p>Find Balance, Strength, and Serenity at Prana Yoga Institute!"</p>
