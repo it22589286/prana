@@ -10,6 +10,7 @@ import "./Signin.css";
 import axios from "axios";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import { Container } from "react-bootstrap";
 
 const ForgotPassword = () => {
   const navigate = useNavigate();
@@ -39,14 +40,21 @@ const ForgotPassword = () => {
   };
 
   return (
-    <div className="hero" style={{ backgroundImage: `url(${Image})` }}>
-      <div className="container">
-        <div className="form">
+    <div
+    style={{
+      height: "100vh",
+      backgroundImage: `url(${Image})`,
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+      backgroundRepeat: "no-repeat",
+    }}>
+      <Container>
           <Card
             className="shadow-lg"
             style={{
               width: "600px",
               backgroundColor: "rgba(255, 255, 255, 0.7)",
+              marginTop: "100px",
             }}
           >
             <Card.Header
@@ -85,8 +93,7 @@ const ForgotPassword = () => {
               </Form>
             </Card.Body>
           </Card>
-        </div>
-      </div>
+          </Container>
     </div>
   );
 };

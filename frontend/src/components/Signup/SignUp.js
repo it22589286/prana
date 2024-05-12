@@ -10,6 +10,7 @@ import Image from "../imagefiles/register.jpg";
 import axios from "axios";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import { Container } from "react-bootstrap";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -64,15 +65,22 @@ const SignUp = () => {
     setShowPassword(!showPassword);
   };
   return (
-    <div className="hero" style={{ backgroundImage: `url(${Image})`,position:"relative" }}>
-      <div className="container">
-        <div className="form">
+    <div
+    style={{
+      height: "100vh",
+      backgroundImage: `url(${Image})`,
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+      backgroundRepeat: "no-repeat",
+    }}>
+     <Container>
           <Card
             className="shadow-lg"
             style={{
               backgroundColor: "rgba(255, 255, 255, 0.7)",
               width: "600px",
-              position:"relative"
+              position:"relative",
+              marginTop:"100px"
             }}
           >
             <Card.Header
@@ -212,8 +220,7 @@ const SignUp = () => {
               </Form>
             </Card.Body>
           </Card>
-        </div>
-      </div>
+        </Container>
     </div>
   );
 };

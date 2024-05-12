@@ -180,6 +180,7 @@ const CustomerData = () => {
           display: "flex",
           justifyContent: "center",
           marginBottom: "20px",
+          marginRight: "150px",
         }}
       >
         <Button variant="success" onClick={handlePrint}>

@@ -2,16 +2,23 @@ import React from "react";
 import { Button, Card } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
-import customer from "../imagefiles/customer.png";
-import supplier from "../imagefiles/supplier.png";
+import customer from "../imagefiles/cus.png";
+import supplier from "../imagefiles/sup.png";
 import instructor from "../imagefiles/instructor.png";
+import Image from "../imagefiles/umanage.jpg";
 
 const UserManager = () => {
   const navigate = useNavigate();
   return (
-    <div className="">
-      <Container style={{ marginTop: "5rem" }}>
-        <Row className="justify-content-center">
+    <div  style={{
+      height: "100vh",
+      backgroundImage: `url(${Image})`,
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+      backgroundRepeat: "no-repeat",
+    }}>
+      <Container >
+        <Row className="justify-content-center" style={{ marginTop: "10rem" }}>
           <Col md={4}>
             <Card
               style={{
