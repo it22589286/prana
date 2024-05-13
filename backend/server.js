@@ -3,6 +3,7 @@ const {mongoose }= require('mongoose')
 const dotenv =require('dotenv').config()
 const cors = require('cors');
 const cookieParser =require('cookie-parser')
+const LeaveRoute = require('./Routes/leaveroute')
 
 
 
@@ -23,6 +24,7 @@ app.use(express.json())
 
 
 app.use('/',require('./Routes/routes'))
+app.use('/api/leave',LeaveRoute)
 
 
 const port =8000;

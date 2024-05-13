@@ -94,7 +94,7 @@ const Instructor = () => {
                   }}
                 />
 
-                <Button variant="primary" style={{ marginLeft: "102px" }}>
+                <Button variant="primary" style={{ marginLeft: "102px" }} onClick={() => navigate("/applyleavedashboard")}>
                   Go{" "}
                 </Button>
               </Card.Body>

@@ -30,6 +30,10 @@ import InstructorData from "./components/user Manager/InstructorData";
 import UpdateUser from "./components/UpdateUser";
 import ForgotPassword from "./components/Signin/ForgotPassword";
 import ResetPassword from "./components/Signin/ResetPassword";
+import LeaveManagerScreen from './components/Leave/LeaveManagerScreen';
+import UpdateLeave from './components/Leave/UpdateLeave';
+import ApplyLeaveDashboard from './components/Dashboards/ApplyLeaveDashboard'
+import LeaveForm from './components/Leave/LeaveForm';
 
 axios.defaults.baseURL = "http://localhost:8000";
 axios.defaults.withCredentials = true;
@@ -71,6 +75,10 @@ function App() {
               path="/reset-password/:id/:token"
               element={<ResetPassword />}
             />
+            <Route path="/leaverequests" element={<LeaveManagerScreen />} />
+            <Route path="/updateleave/:id" element={<UpdateLeave />} />
+            <Route path="/applyleavedashboard" element={<ApplyLeaveDashboard />} />
+            <Route path="/leaveform" element={<LeaveForm />} />
           </Routes>
         </div>
 
