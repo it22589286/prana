@@ -9,7 +9,7 @@ import packagepromo from "../imagefiles/packagepromo.jpg"
 const Addpromo = () => {
   const history = useNavigate();
   const [inputs, setInputs] = useState({
-    pid: "",
+    pid:  generatePID(),
     name: "",
     description: "",
     price: "",
@@ -49,8 +49,8 @@ const Addpromo = () => {
       valid = false;
     }
 
-    if (!inputs.price.trim() || isNaN(inputs.price.trim())) {
-      errors.price = 'Price should be a number';
+    if (!inputs.price.trim() || isNaN(inputs.price.trim())|| parseFloat(inputs.price) < 0) {
+      errors.price = 'Price should be a non-negative number';
       valid = false;
     }
 
@@ -133,7 +133,7 @@ const Addpromo = () => {
   <Form.Group controlId="price" className="mb-3">
     <Form.Label style={{ fontWeight: 'bold', color: 'black' }}>Price:</Form.Label>
     <Form.Control type="text" placeholder="Enter price" name="price" onChange={handleChange} value={inputs.price} className="form-control" />
-    {errors.price && <p className="text-danger">{errors.price}</p>}
+   {errors.price && <p className="text-danger">{errors.price}</p>}
   </Form.Group>
   <Form.Group controlId="validity" className="mb-3">
     <Form.Label style={{ fontWeight: 'bold', color: 'black' }}>Valid till:</Form.Label>
@@ -181,5 +181,8 @@ const submitButtonStyle = {
   boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
  
 };
+const generatePID = () => {
+  return 'PR' + Math.floor(Math.random() * 100000000).toString().padStart(8, '0');
+}
 
 export default Addpromo;

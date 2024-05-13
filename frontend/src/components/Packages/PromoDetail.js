@@ -45,10 +45,12 @@ const PromoDetail = () => {
   }
 
   const handleChange = (e) => {
-    setInputs(prevState => ({
-      ...prevState,
-      [e.target.name]: e.target.value
-    }));
+    if (e.target.name !== 'pid') { // Ignore changes to the pid field
+      setInputs(prevState => ({
+        ...prevState,
+        [e.target.name]: e.target.value
+      }));
+    }
   }
 
   const handleSubmit = async (e) => {
