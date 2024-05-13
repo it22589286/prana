@@ -98,11 +98,11 @@ const LeaveManagerScreen = () => {
 
   return (
     <div>
-      <h1 className="mt-4">Leave Manager</h1>
-        <div className="d-flex justify-content-center">
+      
+        <div className="d-flex justify-content-center mt-5">
     <input
         type="text"
-        className=" form-control mt-3 w-50"
+        className=" form-control mt-3 w-50 mb-3"
         placeholder="Search by Employee ID"
         value={searchInput} 
         onChange={handleSearchInputChange} 
@@ -120,7 +120,7 @@ const LeaveManagerScreen = () => {
         <table className="table table-striped table-bordered table-hover">
           <thead className="table-dark text-center">
             <tr>
-              <th>Employee ID</th>
+              <th>Employee Name</th>
               <th>Start Date</th>
               <th>End Date</th>
               <th>Leave Type</th>
@@ -129,41 +129,46 @@ const LeaveManagerScreen = () => {
             </tr>
           </thead>
           <tbody>
-            {filteredLeaves.map((leave) => (
-              <tr key={leave._id}>
-                <td className="text-center">{leave.empID}</td>
-                <td className="text-center">
-                  {new Date(leave.startDate).toLocaleDateString()}
-                </td>
-                <td className="text-center">
-                  {new Date(leave.endDate).toLocaleDateString()}
-                </td>
-                <td className="text-center">{leave.leaveType}</td>
-                <td className="text-center">
-                  <div className="d-flex justify-content-center">
-                    <button
-                      className="btn btn-success"
-                      onClick={() => handleApprove(leave._id)}
-                    >
-                      Approve
-                    </button>
-                    <button
-                      className="btn btn-danger"
-                      onClick={() => handleReject(leave._id)}
-                    >
-                      Reject
-                    </button>
-                    <button
-                      className="btn btn-warning"
-                      onClick={() => handleUpdate(leave._id)}
-                    >
-                      Update
-                    </button>
-                  </div>
-                </td>
-                <td className="text-center">{leave.status}</td>
-              </tr>
-            ))}
+          {filteredLeaves.map((leave) => (
+  <tr key={leave._id}>
+    <td className="text-center">{leave.empID}</td>
+    <td className="text-center">
+      {new Date(leave.startDate).toLocaleDateString()}
+    </td>
+    <td className="text-center">
+      {new Date(leave.endDate).toLocaleDateString()}
+    </td>
+    <td className="text-center">{leave.leaveType}</td>
+    <td className="text-center">
+      <div className="d-flex justify-content-center">
+        <button
+          className="btn btn-success"
+          onClick={() => handleApprove(leave._id)}
+          disabled={leave.status === 'Approved' || leave.status === 'Rejected'} // Disable if status is not "Pending"
+        >
+          Approve
+        </button>
+        <button
+          className="btn btn-danger"
+          onClick={() => handleReject(leave._id)}
+          disabled={leave.status === 'Approved' || leave.status === 'Rejected'} // Disable if status is not "Pending"
+        >
+          Reject
+        </button>
+        <button
+          className="btn btn-warning"
+          onClick={() => handleUpdate(leave._id)}
+          disabled={leave.status === 'Approved' || leave.status === 'Rejected'}
+        >
+          Update
+        </button>
+      </div>
+    </td>
+    <td className="text-center">{leave.status}</td>
+  </tr>
+))}
+
+
           </tbody>
         </table>
       </div>

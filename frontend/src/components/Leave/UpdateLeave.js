@@ -45,14 +45,10 @@ const UpdateLeave = () => {
                 console.error('Error updating date fields:', err);
                 // Handle error, show error message, etc.
             });
-
     };
 
-    
-
     return (
-        <div>
-            <h1>Update Leave Request</h1>
+        <div style={{ marginTop: '-50px' }}>
             <div className='hero'>
                 <div className='container'>
                     <div className='form'>
@@ -66,16 +62,26 @@ const UpdateLeave = () => {
                             <Card.Body>
                                 <Form onSubmit={handleDateUpdate}>
                                     <Form.Group className='mb-3' controlId='empID'>
-                                        <Form.Label>Employee ID:</Form.Label>
+                                        <Form.Label>Employee Name:</Form.Label>
                                         <Form.Control type='text' value={empID} readOnly />
                                     </Form.Group>
                                     <Form.Group className='mb-3' controlId='startDate'>
                                         <Form.Label>Start Date:</Form.Label>
-                                        <Form.Control type='date' value={startDate} onChange={(e) => setStartDate(e.target.value)} />
+                                        <Form.Control
+                                            type='date'
+                                            value={startDate}
+                                            onChange={(e) => setStartDate(e.target.value)}
+                                            min={new Date().toISOString().split('T')[0]} // Set minimum date to today
+                                        />
                                     </Form.Group>
                                     <Form.Group className='mb-3' controlId='endDate'>
                                         <Form.Label>End Date:</Form.Label>
-                                        <Form.Control type='date' value={endDate} onChange={(e) => setEndDate(e.target.value)} />
+                                        <Form.Control
+                                            type='date'
+                                            value={endDate}
+                                            onChange={(e) => setEndDate(e.target.value)}
+                                            min={startDate} // Set minimum date to start date
+                                        />
                                     </Form.Group>
                                     <Form.Group className='mb-3' controlId='leaveType'>
                                         <Form.Label>Leave Type:</Form.Label>
