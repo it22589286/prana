@@ -22,9 +22,9 @@ const AddFeedbacks = () => {
   return (
     <div style={backgroundImageStyle}>
       <div style={{ textAlign: 'center' }}>
-        <Button variant="secondary" style={{ marginTop: '-85px', marginBottom: '10px', width: '350px' }} onClick={() => navigate('/fed')}>Add Feedbacks</Button>
+        <Button variant="secondary" style={{ marginTop: '-85px', marginBottom: '10px', width: '350px' }} onClick={() => navigate('/givefeedback')}>Add Feedbacks</Button>
         <br />
-        <Button variant="secondary" style={{ width: '350px' }} onClick={() => navigate('/feedbacks')}>Edit or Delete Feedbacks</Button>
+        <Button variant="secondary" style={{ width: '350px' }} onClick={() => navigate('/myfeedbacks')}>Edit or Delete Feedbacks</Button>
       </div>
     </div>
   );

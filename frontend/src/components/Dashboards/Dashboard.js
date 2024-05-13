@@ -213,7 +213,7 @@ const Dashboard = () => {
                   }}
                 />
 
-                <Button variant="primary" style={{ marginLeft: "102px" }}>
+                <Button variant="primary" style={{ marginLeft: "102px" }}  onClick={() => navigate("/addfeedback")}>
                   Go{" "}
                 </Button>
               </Card.Body>

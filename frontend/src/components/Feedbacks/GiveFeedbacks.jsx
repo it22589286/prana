@@ -17,7 +17,7 @@ const StarIcon = ({ selected, onSelect }) => {
 };
 
 const GiveFeedbacks = () => {
-   const navigate = useNavigate()
+  const navigate = useNavigate();
   const [instructors, setInstructors] = useState([]);
   const [selectedStars, setSelectedStars] = useState(0);
   const [formData, setFormData] = useState({
@@ -58,7 +58,7 @@ const GiveFeedbacks = () => {
       errors.instructor = "Instructor selection is required";
     }
     if (formData.rating === 0) {
-      errors.rating = "Rating is required"; 
+      errors.rating = "Rating is required";
     }
     if (!formData.feedback.trim()) {
       errors.feedback = "Feedback is required";
@@ -72,15 +72,16 @@ const GiveFeedbacks = () => {
     e.preventDefault();
     if (validateForm()) {
       try {
+        const userId = JSON.parse(localStorage.getItem("user"))["_id"];
         const response = await axios.post(
           "http://localhost:8000/api/feedbacks",
           {
             ...formData,
             name: formData.fullName,
-            userId: "661acf95d3b3ad2e612a6f8e",
+            userId: userId,
           }
         );
-        
+
         console.log(response.data);
         setFormData({
           fullName: "",
@@ -91,7 +92,7 @@ const GiveFeedbacks = () => {
         });
         setSelectedStars(0);
         message.success("Feedback sent successfully");
-        navigate('/feedbacks')
+        navigate("/feedbacks");
       } catch (error) {
         console.error("Error creating feedback:", error);
       }
@@ -160,7 +161,7 @@ const GiveFeedbacks = () => {
                 E-mail
               </label>
               <input
-                type="email"//validation
+                type="email" //validation
                 style={{ backgroundColor: "transparent" }}
                 id="email"
                 name="email"
@@ -185,7 +186,7 @@ const GiveFeedbacks = () => {
               <select
                 id="instructor"
                 name="instructor"
-                style={{ backgroundColor: "transparent" ,color: "black" }}
+                style={{ backgroundColor: "transparent", color: "black" }}
                 value={formData.instructor}
                 onChange={handleChange}
                 className={`w-full px-4 py-2 border rounded-lg text-gray-100 focus:outline-none focus:border-blue-500 ${
@@ -243,8 +244,9 @@ const GiveFeedbacks = () => {
             </div>
             <div className="flex justify-between">
               <button
-                type="submit"//vv
-                className="px-4 py-2 font-medium text-white bg-blue-500 rounded hover:bg-blue-400 transition duration-300">
+                type="submit" //vv
+                className="px-4 py-2 font-medium text-white bg-blue-500 rounded hover:bg-blue-400 transition duration-300"
+              >
                 Submit
               </button>
               <button
@@ -269,6 +271,6 @@ const GiveFeedbacks = () => {
       </div>
     </section>
   );
-}
+};
 
 export default GiveFeedbacks;

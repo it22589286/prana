@@ -30,6 +30,10 @@ import InstructorData from "./components/user Manager/InstructorData";
 import UpdateUser from "./components/UpdateUser";
 import ForgotPassword from "./components/Signin/ForgotPassword";
 import ResetPassword from "./components/Signin/ResetPassword";
+import GiveFeedbacks from "./components/Feedbacks/GiveFeedbacks";
+import AddFeedbacks from "./components/Feedbacks/AddFeedbacks";
+import Feedbacks from "./components/Feedbacks/Feedbacks";
+import MyFeedbacks from "./components/Feedbacks/MyFeedbacks";
 
 axios.defaults.baseURL = "http://localhost:8000";
 axios.defaults.withCredentials = true;
@@ -67,8 +71,11 @@ function App() {
             <Route path="/supplierData" element={<SupplierData />} />
             <Route path="/updateuser" element={<UpdateUser />} />
             <Route path="/forgotPassword" element={<ForgotPassword />} />
-            <Route
-              path="/reset-password/:id/:token"
+            <Route path="/givefeedback" element={<GiveFeedbacks/>}/>
+            <Route path="/addfeedback" element={<AddFeedbacks/>}/>
+            <Route path="/fed" element={<Feedbacks/>}/>
+            <Route path="/myfeedbacks" element={<MyFeedbacks/>}/>
+            <Route path="/reset-password/:id/:token"
               element={<ResetPassword />}
             />
           </Routes>

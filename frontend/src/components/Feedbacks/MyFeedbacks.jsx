@@ -1,24 +1,41 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import
- {
-  Card,Skeleton,Space,Rate, Button, Popconfirm, message, Modal, Form, Select, Input,
- } //various components and utilities from the Ant Design library
-from "antd";
+import {
+  Card,
+  Skeleton,
+  Space,
+  Rate,
+  Button,
+  Popconfirm,
+  message,
+  Modal,
+  Form,
+  Select,
+  Input, //various components and utilities from the Ant Design library
+} from "antd";
+import { useNavigate } from "react-router-dom";
 
 const { Meta } = Card;
 const { Option } = Select;
 const MyFeedbacks = () => {
+  const [instructors, setInstructors] = useState([]);
   const [loading, setLoading] = useState(true);
   const [feedbacks, setFeedbacks] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [currentFeedback, setCurrentFeedback] = useState(null);
+  const navigate = useNavigate();
   const [form] = Form.useForm();
 
   const fetchFeedbacks = async () => {
     try {
       const response = await axios.get("http://localhost:8000/api/feedbacks");
-      setFeedbacks(response.data.feedbacks);
+      const id = JSON.parse(localStorage.getItem("user"))["_id"];
+      setFeedbacks(
+        response.data.feedbacks.filter((feedback) => {
+          console.log(feedback);
+          return feedback.userId === id;
+        })
+      );
     } catch (err) {
       console.error("Error fetching feedbacks: ", err);
     } finally {
@@ -34,6 +51,16 @@ const MyFeedbacks = () => {
     } catch (err) {
       message.error("Failed to delete feedback");
     }
+  };
+
+  const fetchInstructors = async () => {
+    try {
+      const result = await axios.get(`http://localhost:8000/api/users`);
+      const instructors = result.data["user"].filter(
+        (user) => user.role === "Instructor"
+      );
+      setInstructors(instructors);
+    } catch (error) {}
   };
 
   const showEditModal = (feedback) => {
@@ -66,10 +93,18 @@ const MyFeedbacks = () => {
 
   useEffect(() => {
     fetchFeedbacks();
+    fetchInstructors();
   }, []);
 
   return (
     <div style={{ minHeight: "80vh", padding: 32 }}>
+      <Button
+        onClick={() => {
+          navigate("/fed");
+        }}
+      >
+        Add Feedback
+      </Button>
       {loading ? (
         <Skeleton active />
       ) : (
@@ -105,14 +140,13 @@ const MyFeedbacks = () => {
                   <Button danger style={{ marginLeft: 8 }}>
                     Delete
                   </Button>
-                  
                 </Popconfirm>
               </div>
             </Card>
           ))}
         </Space>
       )}
-      
+
       <Modal
         title="Edit Feedback"
         visible={isModalVisible}
@@ -128,9 +162,9 @@ const MyFeedbacks = () => {
             ]}
           >
             <Select placeholder="Select an instructor">
-              <Option value="Instructor 1">Instructor 1</Option>
-              <Option value="Instructor 2">Instructor 2</Option>
-              <Option value="Instructor 3">Instructor 3</Option>
+              {instructors.map((instructor) => (
+                <Option value={instructor._id}>{instructor.name}</Option>
+              ))}
             </Select>
           </Form.Item>
           <Form.Item
