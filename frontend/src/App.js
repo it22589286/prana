@@ -32,6 +32,7 @@ import UpdateUser from './components/UpdateUser';
 import Addpromo from './components/Packages/Addpromo';
 import Promopackages from './components/Packages/Promopackages';
 import PromoDetail from './components/Packages/PromoDetail';
+import Subscriptionpage from './components/SubscriptionPage'
 
 
 axios.defaults.baseURL ='http://localhost:8000'
@@ -81,7 +82,7 @@ function App() {
        <Route path="/add" element={<Addpromo/>} exact />
         <Route path="/package" element={<Promopackages/>}  exact/>
         <Route path="/packages/:id" element={<PromoDetail/>}  exact/>     
-       
+        <Route path="/subscription/:id" element={<Subscriptionpage />} />
        
        
        </Routes>

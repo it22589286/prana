@@ -85,7 +85,7 @@ const Addpromo = () => {
     if (validateForm()) {
       try {
         await sendRequest();
-        toast.success('Package added successfully', { autoClose: 9000 });
+        toast.success('Package added successfully', { autoClose: 25000 });
         history('/package');
       } catch (error) {
         toast.error(error.message);

@@ -59,7 +59,7 @@ const Instructor = () => {
         
         <Card.Img variant="top" src={Image3}  style={{ width: '100px', height: '100px' ,marginBottom:'5px'}}/>
          
-          <Button variant="primary"  style={{marginLeft:'102px'}}>Go </Button>
+          <Button variant="primary"  style={{marginLeft:'102px'}}  >Go </Button>
         </Card.Body>
       </Card>
 
