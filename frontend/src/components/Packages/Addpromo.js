@@ -67,6 +67,19 @@ const Addpromo = () => {
     setErrors(errors);
     return valid;
   }
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setInputs((prevState) => ({
+          ...prevState,
+          image: reader.result // set the image URL
+        }));
+      };
+      reader.readAsDataURL(file);
+    }
+  };
 
   const sendRequest = async () => {
     await axios.post("http://localhost:8000/promopackage", {
@@ -141,10 +154,11 @@ const Addpromo = () => {
     {errors.validity && <p className="text-danger">{errors.validity}</p>}
   </Form.Group>
   <Form.Group controlId="image" className="mb-3">
-    <Form.Label style={{ fontWeight: 'bold', color: 'black' }}>Image URL:</Form.Label>
-    <Form.Control type="text" placeholder="Enter image URL" name="image" onChange={handleChange} value={inputs.image} className="form-control" />
-    {errors.image && <p className="text-danger">{errors.image}</p>}
-  </Form.Group>
+              <Form.Label style={{ fontWeight: 'bold', color: 'black' }}>Image:</Form.Label>
+              <Form.Control type="file" name="image" onChange={handleImageChange} accept="image/*" className="form-control" />
+              {inputs.image && <img src={inputs.image} alt="Selected" style={{ maxWidth: '10%', marginTop: '10px' }} />}
+              {errors.image && <p className="text-danger">{errors.image}</p>}
+            </Form.Group>
   <Button variant="primary" type="submit" style={submitButtonStyle}>
     Submit
   </Button>
