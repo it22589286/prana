@@ -34,6 +34,10 @@ import Addpromo from './components/Packages/Addpromo';
 import Promopackages from './components/Packages/Promopackages';
 import PromoDetail from './components/Packages/PromoDetail';
 import Subscriptionpage from './components/SubscriptionPage'
+import GiveFeedbacks from "./components/Feedbacks/GiveFeedbacks";
+import AddFeedbacks from "./components/Feedbacks/AddFeedbacks";
+import Feedbacks from "./components/Feedbacks/Feedbacks";
+import MyFeedbacks from "./components/Feedbacks/MyFeedbacks";
 import LeaveManagerScreen from './components/Leave/LeaveManagerScreen';
 import UpdateLeave from './components/Leave/UpdateLeave';
 import ApplyLeaveDashboard from './components/Dashboards/ApplyLeaveDashboard'
@@ -81,6 +85,12 @@ function App() {
             <Route path="/subscription/:id" element={<Subscriptionpage />} />
             <Route
               path="/reset-password/:id/:token"
+              element={<ResetPassword/>}/>
+            <Route path="/givefeedback" element={<GiveFeedbacks/>}/>
+            <Route path="/addfeedback" element={<AddFeedbacks/>}/>
+            <Route path="/fed" element={<Feedbacks/>}/>
+            <Route path="/myfeedbacks" element={<MyFeedbacks/>}/>
+            <Route path="/reset-password/:id/:token"
               element={<ResetPassword />}
             />
             <Route path="/leaverequests" element={<LeaveManagerScreen />} />
