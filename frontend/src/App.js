@@ -38,7 +38,10 @@ import LeaveManagerScreen from './components/Leave/LeaveManagerScreen';
 import UpdateLeave from './components/Leave/UpdateLeave';
 import ApplyLeaveDashboard from './components/Dashboards/ApplyLeaveDashboard'
 import LeaveForm from './components/Leave/LeaveForm';
-
+import Addpromo from "./components/Packages/Addpromo";
+import Promopackages from "./components/Packages/Promopackages";
+import PromoDetail from "./components/Packages/PromoDetail";
+import Subscriptionpage from './components/SubscriptionPage'
 axios.defaults.baseURL = "http://localhost:8000";
 axios.defaults.withCredentials = true;
 
@@ -86,6 +89,11 @@ function App() {
             <Route path="/updateleave/:id" element={<UpdateLeave />} />
             <Route path="/applyleavedashboard" element={<ApplyLeaveDashboard />} />
             <Route path="/leaveform" element={<LeaveForm />} />
+
+            <Route path="/add" element={<Addpromo/>} exact />
+            <Route path="/packages/:id" element={<PromoDetail/>}  exact/> 
+            <Route path="/package" element={<Promopackages/>}  exact/>
+            <Route path="/subscription/:id" element={<Subscriptionpage />} />
           </Routes>
         </div>
 
