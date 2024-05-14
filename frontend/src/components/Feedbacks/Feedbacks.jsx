@@ -1,37 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
-import { Table, Skeleton, Button, Input } from "antd";
+import { Table, Button, Form, Row, Col } from "react-bootstrap";
 import { useReactToPrint } from 'react-to-print';
-
-const { Search } = Input;
 
 const Feedbacks = () => {
   const [loading, setLoading] = useState(true);
   const [feedbacks, setFeedbacks] = useState([]);
   const [searchText, setSearchText] = useState('');
-
-  const columns = [
-    {
-      title: "Reviewer's Name",
-      dataIndex: "name",
-      key: "name",
-    },
-    {
-      title: "Reviewer's Email",
-      dataIndex: "email",
-      key: "email",
-    },
-    {
-      title: "Rating",
-      dataIndex: "rating",
-      key: "rating",
-    },
-    {
-      title: "Feedback",
-      dataIndex: "feedback",
-      key: "feedback",
-    },
-  ];
 
   const fetchFeedbacks = async () => {
     try {
@@ -48,20 +23,13 @@ const Feedbacks = () => {
     fetchFeedbacks();
   }, []);
 
- // const handleGenerateReport = () => {
-    // Logic to generate the report goes here
-   // console.log("Generating report...");
- // };
-
- //report generate function
   const ComponentsRef = useRef();
   const handlePrint = useReactToPrint({
     content: () => ComponentsRef.current,
-    documentTitle: 'Instructor Details',
-    onAfterPrint: () => alert('Instruction Details Printed Successfully!')
+    documentTitle: 'Feedbacks Report',
+    onAfterPrint: () => alert('Feedbacks Report Printed Successfully!')
   });
 
-  //search function
   const filteredFeedbacks = feedbacks.filter(feedback =>
     feedback.name.toLowerCase().includes(searchText.toLowerCase())
   );
@@ -69,28 +37,47 @@ const Feedbacks = () => {
   return (
     <div style={{ minHeight: "80vh", padding: 32 }} ref={ComponentsRef}>
       <h1>Feedbacks</h1>
-      <div style={{ marginBottom: 16 }}>
-        <Search
-          placeholder="Search by reviewer's name"
-          value={searchText}
-          onChange={e => setSearchText(e.target.value)}
-          style={{ width: 300 }}
-        />
-      </div>
+      <Form.Group as={Row} className="mb-3" controlId="searchText">
+        <Form.Label column sm="2">
+          Search by Reviewer's Name
+        </Form.Label>
+        <Col sm="10">
+          <Form.Control
+            type="text"
+            placeholder="Enter name"
+            value={searchText}
+            onChange={(e) => setSearchText(e.target.value)}
+          />
+        </Col>
+      </Form.Group>
       {loading ? (
-        <Skeleton active />
+        <p>Loading...</p>
       ) : (
-        <Table
-          dataSource={filteredFeedbacks}
-          columns={columns}
-          pagination={{ pageSize: 10 }}
-        />
+        <Table striped bordered hover>
+          <thead>
+            <tr>
+              <th>Reviewer's Name</th>
+              <th>Reviewer's Email</th>
+              <th>Rating</th>
+              <th>Feedback</th>
+            </tr>
+          </thead>
+          <tbody>
+            {filteredFeedbacks.map((feedback, index) => (
+              <tr key={index}>
+                <td>{feedback.name}</td>
+                <td>{feedback.email}</td>
+                <td>{feedback.rating}</td>
+                <td>{feedback.feedback}</td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
       )}
       <div style={{ marginTop: "20px", textAlign: "center" }}>
-        <Button type="primary" onClick={handlePrint}> 
+        <Button variant="primary" onClick={handlePrint}>
           Generate Report
         </Button>
-       
       </div>
     </div>
   );

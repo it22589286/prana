@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Table, Tag } from "antd";
+import { Table, Badge } from "react-bootstrap";
 
 const Feedback = () => {
   const [feedbacks, setFeedbacks] = useState([]);
@@ -44,61 +44,51 @@ const Feedback = () => {
     setInstructorAverages(averages);
   };
 
-  const columns = [
-    {
-      title: "Reviewer's Name",
-      dataIndex: "name",
-      key: "name",
-    },
-    {
-      title: "Reviewer's Email",
-      dataIndex: "email",
-      key: "email",
-    },
-    {
-      title: "Rating",
-      dataIndex: "rating",
-      key: "rating",
-      render: (rating) => <Tag color="blue">{rating}</Tag>,
-    },
-    {
-      title: "Feedback",
-      dataIndex: "feedback",
-      key: "feedback",
-    },
-  ];
-
-  const averageColumns = [
-    {
-      title: "Instructor Name",
-      dataIndex: "name",
-      key: "name",
-    },
-    {
-      title: "Average Rating",
-      dataIndex: "averageRating",
-      key: "averageRating",
-      render: (rating) => <Tag color="green">{rating}</Tag>,
-    },
-  ];
-
   return (
     <div style={{ padding: 32 }}>
       <h2>Feedbacks</h2>
-      <Table
-        columns={columns}
-        dataSource={feedbacks}
-        rowKey="_id"
-        loading={loading}
-        pagination={{ pageSize: 5 }}
-      />
+      <Table striped bordered hover responsive>
+        <thead>
+          <tr>
+            <th>Reviewer's Name</th>
+            <th>Reviewer's Email</th>
+            <th>Rating</th>
+            <th>Feedback</th>
+          </tr>
+        </thead>
+        <tbody>
+          {feedbacks.map((feedback) => (
+            <tr key={feedback._id}>
+              <td>{feedback.name}</td>
+              <td>{feedback.email}</td>
+              <td>
+                <Badge variant="primary">{feedback.rating}</Badge>
+              </td>
+              <td>{feedback.feedback}</td>
+            </tr>
+          ))}
+        </tbody>
+      </Table>
+
       <h2>Instructor Average Ratings</h2>
-      <Table
-        columns={averageColumns}
-        dataSource={instructorAverages}
-        rowKey="instructorId"
-        pagination={{ pageSize: 5 }}
-      />
+      <Table striped bordered hover responsive>
+        <thead>
+          <tr>
+            <th>Instructor Name</th>
+            <th>Average Rating</th>
+          </tr>
+        </thead>
+        <tbody>
+          {instructorAverages.map((instructor) => (
+            <tr key={instructor.instructorId}>
+              <td>{instructor.name}</td>
+              <td>
+                <Badge variant="success">{instructor.averageRating}</Badge>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </Table>
     </div>
   );
 };

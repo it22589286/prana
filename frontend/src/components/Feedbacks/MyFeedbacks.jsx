@@ -1,30 +1,27 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import {
   Card,
-  Skeleton,
-  Space,
-  Rate,
   Button,
-  Popconfirm,
-  message,
   Modal,
   Form,
-  Select,
-  Input, //various components and utilities from the Ant Design library
-} from "antd";
+  Col,
+  Row,
+} from "react-bootstrap";
+import { StarFill } from "react-bootstrap-icons";
 import { useNavigate } from "react-router-dom";
 
 const { Meta } = Card;
-const { Option } = Select;
+
 const MyFeedbacks = () => {
   const [instructors, setInstructors] = useState([]);
   const [loading, setLoading] = useState(true);
   const [feedbacks, setFeedbacks] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [currentFeedback, setCurrentFeedback] = useState(null);
+  const [rating, setRating] = useState(0); // State to manage the rating
   const navigate = useNavigate();
-  const [form] = Form.useForm();
+  const formRef = useRef();
 
   const fetchFeedbacks = async () => {
     try {
@@ -32,7 +29,6 @@ const MyFeedbacks = () => {
       const id = JSON.parse(localStorage.getItem("user"))["_id"];
       setFeedbacks(
         response.data.feedbacks.filter((feedback) => {
-          console.log(feedback);
           return feedback.userId === id;
         })
       );
@@ -47,9 +43,9 @@ const MyFeedbacks = () => {
     try {
       await axios.delete(`http://localhost:8000/api/feedbacks/${id}`);
       await fetchFeedbacks();
-      message.success("Feedback deleted successfully");
+      alert("Feedback deleted successfully");
     } catch (err) {
-      message.error("Failed to delete feedback");
+      alert("Failed to delete feedback");
     }
   };
 
@@ -65,30 +61,26 @@ const MyFeedbacks = () => {
 
   const showEditModal = (feedback) => {
     setCurrentFeedback(feedback);
-    form.setFieldsValue({
-      instructor: feedback.instructor,
-      feedback: feedback.feedback,
-      rating: feedback.rating,
-    });
+    setRating(feedback.rating); // Initialize the rating state
     setIsModalVisible(true);
   };
 
-  const handleEdit = async (values) => {
+  const handleEdit = async (e) => {
+    e.preventDefault();
+    const formData = new FormData(formRef.current);
+    const values = Object.fromEntries(formData.entries());
+
     try {
       await axios.put(
-        `http://localhost:8000/api/feedbacks/${currentFeedback._id}`,
-        values
+       `http://localhost:8000/api/feedbacks/${currentFeedback._id}`,
+        { ...values, rating }
       );
       await fetchFeedbacks();
       setIsModalVisible(false);
-      message.success("Feedback updated successfully");
+      alert("Feedback updated successfully");
     } catch (err) {
-      message.error("Failed to update feedback");
+      alert("Failed to update feedback");
     }
-  };
-
-  const handleCancel = () => {
-    setIsModalVisible(false);
   };
 
   useEffect(() => {
@@ -96,88 +88,91 @@ const MyFeedbacks = () => {
     fetchInstructors();
   }, []);
 
+  const renderStarRating = (rating) => {
+    const stars = [];
+    for (let i = 0; i < rating; i++) {
+      stars.push(<StarFill key={i} style={{ color: "orange" }}  />);
+    }
+    return stars;
+  };
+
   return (
     <div style={{ minHeight: "80vh", padding: 32 }}>
-      <Button
-        onClick={() => {
-          navigate("/fed");
-        }}
-      >
-        Add Feedback
-      </Button>
       {loading ? (
-        <Skeleton active />
+        <p>Loading...</p>
       ) : (
-        <Space direction="horizontal" style={{ width: "100%" }}>
+        <Row xs={1} md={3} className="g-4" >
           {feedbacks.map((feedback) => (
-            <Card
-              onLoad={() => {
-                setTimeout(() => {
-                  const cards = document.querySelectorAll(".card-item");
-                  cards.forEach((card) => card.classList.add("loaded"));
-                }, 100);
-              }}
-              key={feedback._id}
-              style={{ width: 300 }}
-            >
-              <Meta
-                title={`Instructor: ${feedback.instructor?.name}`}
-                description={`Feedback: ${feedback.feedback}`}
-              />
-              <div style={{ marginTop: 16 }}>
-                <Rate defaultValue={feedback.rating} disabled />
-              </div>
-              <div style={{ marginTop: 16 }}>
-                <Button type="primary" onClick={() => showEditModal(feedback)}>
-                  Edit
-                </Button>
-                <Popconfirm
-                  title="Are you sure you want to delete this feedback?"
-                  onConfirm={() => deleteFeedback(feedback._id)}
-                  okText="Yes"
-                  cancelText="No"
-                >
-                  <Button danger style={{ marginLeft: 8 }}>
-                    Delete
-                  </Button>
-                </Popconfirm>
-              </div>
-            </Card>
+            <Col key={feedback._id} style={{marginRight:"-150px"}}>
+              <Card style={{ width: '18rem'}}>
+                <Card.Body>
+                  <Card.Title>{`Instructor: ${feedback.instructor?.name}`}</Card.Title>
+                  <Card.Text style={{ textAlign: "left" }}>
+                    Feedback: {feedback.feedback}
+                  </Card.Text>
+                  <Card.Text style={{ textAlign: "left" }}>
+                    <div>
+                      Rating: {renderStarRating(feedback.rating)}
+                    </div>
+                  </Card.Text>
+                  <div style={{ marginLeft: "-90px" }}>
+                    <Col>
+                      <Button variant="primary" onClick={() => showEditModal(feedback)} style={{ width: "100px", marginBottom: "5px" }}>
+                        Edit
+                      </Button>
+                    </Col>
+                    <Col>
+                      <Button variant="danger" onClick={() => deleteFeedback(feedback._id)} style={{ width: "100px" }}>
+                        Delete
+                      </Button>
+                    </Col>
+                  </div>
+                </Card.Body>
+              </Card>
+            </Col>
           ))}
-        </Space>
+        </Row>
       )}
 
       <Modal
         title="Edit Feedback"
-        visible={isModalVisible}
-        onOk={form.submit}
-        onCancel={handleCancel}
+        show={isModalVisible}
+        onHide={() => setIsModalVisible(false)}
       >
-        <Form form={form} onFinish={handleEdit} layout="vertical">
-          <Form.Item
-            name="instructor"
-            label="Instructor"
-            rules={[
-              { required: true, message: "Please select an instructor!" },
-            ]}
-          >
-            <Select placeholder="Select an instructor">
-              {instructors.map((instructor) => (
-                <Option value={instructor._id}>{instructor.name}</Option>
-              ))}
-            </Select>
-          </Form.Item>
-          <Form.Item
-            name="feedback"
-            label="Feedback"
-            rules={[{ required: true }]}
-          >
-            <Input />
-          </Form.Item>
-          <Form.Item name="rating" label="Rating" rules={[{ required: true }]}>
-            <Rate />
-          </Form.Item>
-        </Form>
+        <Modal.Body>
+          <Form ref={formRef} onSubmit={handleEdit}>
+            <Form.Group controlId="instructor">
+              <Form.Label>Instructor</Form.Label>
+              <Form.Control as="select" name="instructor" placeholder="Select an instructor">
+                {instructors.map((instructor) => (
+                  <option key={instructor._id} value={instructor._id}>{instructor.name}</option>
+                ))}
+              </Form.Control>
+            </Form.Group>
+            <Form.Group controlId="feedback">
+              <Form.Label>Feedback</Form.Label>
+              <Form.Control type="text" name="feedback" defaultValue={currentFeedback?.feedback} />
+            </Form.Group>
+            <Form.Group controlId="rating">
+              <Form.Label>Rating</Form.Label>
+              <div>
+                {[...Array(5)].map((_, index) => (
+                  <span
+                    key={index}
+                    style={{ cursor: "pointer" }}
+                    onClick={() => setRating(index + 1)} // Update the rating state
+                  >
+                    {index < rating ? <StarFill style={{ color: "orange" }} /> : <StarFill />}
+                  </span>
+                ))}
+              </div>
+              <Form.Control type="hidden" name="rating" value={rating} />
+            </Form.Group>
+            <Button variant="primary" type="submit">
+              Submit
+            </Button>
+          </Form>
+        </Modal.Body>
       </Modal>
     </div>
   );
