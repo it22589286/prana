@@ -1,14 +1,10 @@
 import React from 'react';
 import axios from 'axios';
 import { Button } from 'react-bootstrap';
-import './Promo.css';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { FaTrash, FaEdit } from 'react-icons/fa';
-
-
-
 
 const Promo = (props) => {
   const { _id, pid, name, description, price, validity, image } = props.promopackage;
@@ -24,36 +20,94 @@ const Promo = (props) => {
       toast.error('Package deletion failed');
     }
   };
+
   const updateHandler = () => {
     history(`/packages/${_id}`);
   };
 
   return (
-    
-  <div className='card' >
-
-  <img src={image} alt={name} />
-  <p  style={{ fontSize: '16px', lineHeight: '1.5', color: '#333' }}>
-    <strong>{pid}</strong>
-    <br />
-    <span style={{ fontSize: '24px', fontWeight: 'bold' }}>{name}</span>
-    <br />
-    {description}
-    <br />
-    <span style={{ fontSize: '20px', fontWeight: 'bold' }}>{price}</span>
-    <br />
-    <h6> valid till {validity}</h6>
-  </p>
-
-  <div >
-    <Button variant='success' onClick={updateHandler} style={{marginLeft:"0px",width: '100%' , backgroundColor: '#386FA2'}} > <FaEdit />Update</Button>
-    <Button onClick={deleteHandler} variant='danger'style={{marginLeft:"0px",width: '100%',marginTop:'5px'}} ><FaTrash />Delete</Button>
-  </div>
-  
-</div>
-
-
+    <div style={cardStyle}>
+      <img src={image} alt={name} style={cardImageStyle} />
+      <div style={cardTextStyle}>
+        <strong>{pid}</strong>
+        <br />
+        <span style={cardNameStyle}>{name}</span>
+        <br />
+        {description}
+        <br />
+        <span style={cardPriceStyle}>{price}</span>
+        <br />
+        <h6 style={cardValidityStyle}>Valid till {validity}</h6>
+      </div>
+      <div style={buttonContainerStyle}>
+        <Button variant="success" onClick={updateHandler} style={updateButtonStyle}>
+          <FaEdit /> Update
+        </Button>
+        <Button onClick={deleteHandler} variant="danger" style={deleteButtonStyle}>
+          <FaTrash /> Delete
+        </Button>
+      </div>
+    </div>
   );
+};
+
+const cardStyle = {
+  margin: 'auto',
+  marginTop: '20px',
+  padding: '5px',
+  height: '500px',
+  maxWidth: '100%',
+  boxShadow: '5px 5px 10px #ccc',
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'center',
+  backdropFilter: 'blur(5px)',
+  backgroundColor: 'rgba(255, 255, 255, 0.5)',
+};
+
+const cardImageStyle = {
+  margin: 'auto',
+  width: '100%',
+  height: '200px',
+};
+
+const cardTextStyle = {
+  padding: '5px',
+  fontSize: '16px',
+  lineHeight: '1.5',
+  color: '#333',
+};
+
+const cardNameStyle = {
+  fontSize: '24px',
+  fontWeight: 'bold',
+};
+
+const cardPriceStyle = {
+  fontSize: '20px',
+  fontWeight: 'bold',
+};
+
+const cardValidityStyle = {
+  fontSize: '16px',
+  fontWeight: 'bold',
+};
+
+const buttonContainerStyle = {
+  display: 'flex',
+  flexDirection: 'column',
+};
+
+const updateButtonStyle = {
+  marginLeft: '0px',
+  width: '100%',
+  backgroundColor: '#386FA2',
+};
+
+const deleteButtonStyle = {
+  marginLeft: '0px',
+  width: '100%',
+  marginTop: '5px',
 };
 
 export default Promo;
