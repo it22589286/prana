@@ -30,10 +30,6 @@ import InstructorData from "./components/user Manager/InstructorData";
 import UpdateUser from "./components/UpdateUser";
 import ForgotPassword from "./components/Signin/ForgotPassword";
 import ResetPassword from "./components/Signin/ResetPassword";
-import Addpromo from './components/Packages/Addpromo';
-import Promopackages from './components/Packages/Promopackages';
-import PromoDetail from './components/Packages/PromoDetail';
-import Subscriptionpage from './components/SubscriptionPage'
 import GiveFeedbacks from "./components/Feedbacks/GiveFeedbacks";
 import AddFeedbacks from "./components/Feedbacks/AddFeedbacks";
 import Feedbacks from "./components/Feedbacks/Feedbacks";
@@ -79,13 +75,6 @@ function App() {
             <Route path="/supplierData" element={<SupplierData />} />
             <Route path="/updateuser" element={<UpdateUser />} />
             <Route path="/forgotPassword" element={<ForgotPassword />} />
-            <Route path="/add" element={<Addpromo/>} exact />
-            <Route path="/package" element={<Promopackages/>}  exact/>
-            <Route path="/packages/:id" element={<PromoDetail/>}  exact/>     
-            <Route path="/subscription/:id" element={<Subscriptionpage />} />
-            <Route
-              path="/reset-password/:id/:token"
-              element={<ResetPassword/>}/>
             <Route path="/givefeedback" element={<GiveFeedbacks/>}/>
             <Route path="/addfeedback" element={<AddFeedbacks/>}/>
             <Route path="/fed" element={<Feedbacks/>}/>
