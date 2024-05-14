@@ -11,7 +11,7 @@ function TrainingDetails() {
     // Read
     const getfetchdata = async () => {
         try {
-            const data = await axios.get("http://localhost:8020/_training");
+            const data = await axios.get("http://localhost:8000/_training");
             console.log(data.data.success);
             if (data.data.success) {
                 setshowdiscounts(data.data.data);
@@ -27,7 +27,7 @@ function TrainingDetails() {
 
     // Delete
     const handledelete = async (id) => {
-        const data = await axios.delete(`http://localhost:8020/delete_training/${id}`);
+        const data = await axios.delete(`http://localhost:8000/delete_training/${id}`);
         if (data.data.success) {
             getfetchdata();
             console.log(data.data.message);

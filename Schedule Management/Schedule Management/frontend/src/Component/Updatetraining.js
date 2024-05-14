@@ -14,7 +14,7 @@ function UpdateTraining(){
     useEffect(() => {
         const fetchUserData = async () => {
           try {
-            const response = await fetch(`http://localhost:8020/order_training/${id}`);
+            const response = await fetch(`http://localhost:8000/order_training/${id}`);
             const data = await response.json();
             console.log(data);
     
@@ -41,7 +41,7 @@ function UpdateTraining(){
       };
       const handleUpdate = async () => {
         try {
-          const response = await fetch(`http://localhost:8020/update_training`, {
+          const response = await fetch(`http://localhost:8000/update_training`, {
             method: 'PUT',
             headers: {
               'Content-Type': 'application/json',

@@ -12,7 +12,7 @@ function BuyersDashboard(){
 //read
 const getfetchdata=async()=>{
     try{
-    const data=await axios.get("http://localhost:8020/count_payment")
+    const data=await axios.get("http://localhost:8000/count_payment")
    const { count } = data.data;
    setcountlist(count);//get count
    setcustomerlist(data.data.data);//get table data

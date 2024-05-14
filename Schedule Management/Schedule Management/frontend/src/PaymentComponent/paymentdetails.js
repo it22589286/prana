@@ -11,7 +11,7 @@ function PaymentDetails() {
     // Read
     const getfetchdata = async () => {
         try {
-            const data = await axios.get('http://localhost:8020/_payment');
+            const data = await axios.get('http://localhost:8000/_payment');
             if (data.data.success) {
                 setshowdiscounts(data.data.data);
             }
@@ -26,7 +26,7 @@ function PaymentDetails() {
 
     // Delete
     const handledelete = async (id) => {
-        const data = await axios.delete('http://localhost:8020/delete_payment/' + id);
+        const data = await axios.delete('http://localhost:8000/delete_payment/' + id);
         if (data.data.success) {
             getfetchdata();
             alert('Payment deleted successfully!');
@@ -70,11 +70,11 @@ function PaymentDetails() {
                             <th>User Name</th>
                             <th>Payment Method</th>
                             <th>Card Type</th>
-                            <th>Card Holder</th>
+                            <th>Card Holder Name</th>
                             <th>Card Number</th>
                             <th>Expire Date</th>
-                            <th>CVC</th>
-                            <th>Pay Details</th>
+                            <th>cvv</th>
+                            <th>Amount</th>
                             <th className="action-header">Action</th>
                         </tr>
                     </thead>
@@ -84,11 +84,11 @@ function PaymentDetails() {
                                 <td>{e1.usename}</td>
                                 <td>{e1.type}</td>
                                 <td>{e1.card_type}</td>
-                                <td>{e1.card_holder}</td>
+                                <td>{e1.card_holder_name}</td>
                                 <td>{e1.card_number}</td>
                                 <td>{e1.expir_date}</td>
-                                <td>{e1.cvc}</td>
-                                <td>{e1.pay}</td>
+                                <td>{e1.cvv}</td>
+                                <td>{e1.amount}</td>
                                 <td className="action-cell">
                                     <button onClick={() => handledelete(e1._id)}>Reject</button>
                                 </td>

@@ -38,6 +38,10 @@ import LeaveManagerScreen from './components/Leave/LeaveManagerScreen';
 import UpdateLeave from './components/Leave/UpdateLeave';
 import ApplyLeaveDashboard from './components/Dashboards/ApplyLeaveDashboard'
 import LeaveForm from './components/Leave/LeaveForm';
+import paymentdetails from './PaymentComponent/paymentdetails';
+
+
+
 
 axios.defaults.baseURL = "http://localhost:8000";
 axios.defaults.withCredentials = true;
@@ -86,6 +90,14 @@ function App() {
             <Route path="/updateleave/:id" element={<UpdateLeave />} />
             <Route path="/applyleavedashboard" element={<ApplyLeaveDashboard />} />
             <Route path="/leaveform" element={<LeaveForm />} />
+
+            <Route path="/trainingdetails" element={<trainingdetails/>} />
+            <Route path="/updatetraining/:id" element={<updatetraining/>} />
+            <Route path="/addpayment" element={<addpayment/>} />
+            <Route path="/paydetails" element={<paymentdetails/>} />
+            <Route path="/requestdetaisl" element={<request/>} />
+
+
           </Routes>
         </div>
 

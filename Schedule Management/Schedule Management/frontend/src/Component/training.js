@@ -37,7 +37,7 @@ function Training() {
         if (!order.error) {
             // Proceed only if there are no validation errors
             try {
-                const response = await axios.post("http://localhost:8020/create_training", order);
+                const response = await axios.post("http://localhost:8000/create_training", order);
                 console.log(response);
                 alert("Details added successfully!");
             } catch (error) {

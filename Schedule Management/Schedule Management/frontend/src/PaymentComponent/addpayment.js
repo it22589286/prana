@@ -7,11 +7,11 @@ function AddPayment() {
         username: "",
         type: "Card", // Fixed initial state
         card_type: "",
-        card_holder: "",
+        card_holder_name: "",
         card_number: "",
         expir_date: "",
-        cvc: "",
-        pay: ""
+        cvv: "",
+        amount: ""
     });
 
     const [errors, setErrors] = useState({});
@@ -75,7 +75,7 @@ function AddPayment() {
         }
 
         try {
-            const data = await axios.post("http://localhost:8020/create_payment", order);
+            const data = await axios.post("http://localhost:8000/create_payment", order);
             console.log(data);
             alert("Payment successful!");
         } catch (error) {
@@ -115,13 +115,13 @@ function AddPayment() {
                             value={order.card_type}
                         />
 
-                        <label>Card Holder:</label>
+                        <label>Card Holder Name:</label>
                         <input
                             type="text"
-                            id="card_holder"
-                            name="card_holder"
+                            id="card_holder_name"
+                            name="card_holder_name"
                             onChange={handleOnChange}
-                            value={order.card_holder}
+                            value={order.card_holder_name}
                         />
                         {errors.card_holder && <p className="error">{errors.card_holder}</p>}
 
@@ -138,29 +138,29 @@ function AddPayment() {
                         <label>Expire Date:</label>
                         <input
                             type="date"
-                            id="expir_date"
-                            name="expir_date"
+                            id="expire_date"
+                            name="expire_date"
                             onChange={handleOnChange}
                             value={order.expir_date}
                         />
                         {errors.expir_date && <p className="error">{errors.expir_date}</p>}
 
-                        <label>CVC:</label>
+                        <label>CVV:</label>
                         <input
                             type="text"
-                            id="cvc"
-                            name="cvc"
+                            id="cvv"
+                            name="cvv"
                             onChange={handleOnChange}
-                            value={order.cvc}
+                            value={order.cvv}
                         />
                     </>
                 )}
 
-                <label>Pay Now:</label>
+                <label>Amount:</label>
                 <input
                     type="text"
-                    id="pay"
-                    name="pay"
+                    id="amount"
+                    name="amount"
                     onChange={handleOnChange}
                     value={order.pay}
                 />
