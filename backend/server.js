@@ -5,6 +5,8 @@ const cors = require('cors');
 const cookieParser =require('cookie-parser')
 const fed = require("./Routes/feedback.routes")
 const user = require("./Routes/routes")
+const LeaveRoute = require('./Routes/leaveroute')
+
 
 
 const app = express();
@@ -26,6 +28,8 @@ app.use(express.json())
 app.use('/',require('./Routes/routes'))
 app.use("/api/feedbacks",fed) 
 app.use("/api/users",user)
+app.use('/api/leave',LeaveRoute)
+
 
 const port =8000;
 app.listen(port,()=>console.log(`server is running on port ${port}`))

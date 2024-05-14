@@ -34,6 +34,10 @@ import GiveFeedbacks from "./components/Feedbacks/GiveFeedbacks";
 import AddFeedbacks from "./components/Feedbacks/AddFeedbacks";
 import Feedbacks from "./components/Feedbacks/Feedbacks";
 import MyFeedbacks from "./components/Feedbacks/MyFeedbacks";
+import LeaveManagerScreen from './components/Leave/LeaveManagerScreen';
+import UpdateLeave from './components/Leave/UpdateLeave';
+import ApplyLeaveDashboard from './components/Dashboards/ApplyLeaveDashboard'
+import LeaveForm from './components/Leave/LeaveForm';
 
 axios.defaults.baseURL = "http://localhost:8000";
 axios.defaults.withCredentials = true;
@@ -78,6 +82,10 @@ function App() {
             <Route path="/reset-password/:id/:token"
               element={<ResetPassword />}
             />
+            <Route path="/leaverequests" element={<LeaveManagerScreen />} />
+            <Route path="/updateleave/:id" element={<UpdateLeave />} />
+            <Route path="/applyleavedashboard" element={<ApplyLeaveDashboard />} />
+            <Route path="/leaveform" element={<LeaveForm />} />
           </Routes>
         </div>
 
