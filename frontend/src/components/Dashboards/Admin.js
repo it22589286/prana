@@ -54,7 +54,7 @@ const Admin = () => {
         
         <Card.Img variant="top" src={Image5}  style={{ width: '100px', height: '100px' ,marginBottom:'5px'}}/>
          
-          <Button  style={{marginLeft:'90px'}} variant="primary"  >Manage </Button>
+          <Button onClick={()=> navigate('/package')}  style={{marginLeft:'90px'}} variant="primary"  >Manage </Button>
         </Card.Body>
       </Card>
 
