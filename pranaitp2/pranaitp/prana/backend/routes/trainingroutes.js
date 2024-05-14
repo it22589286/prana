@@ -4,6 +4,7 @@ const express=require("express")
 const trainingmodel = require("../models/trainingmodels");
 
 const router = express.Router();
+//tttt
 
 
 router.get("/_training",async(req,res)=>{
