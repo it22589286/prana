@@ -51,7 +51,7 @@ function App() {
       <BrowserRouter>
         <div className="content-wrap">
           <Navbar1 />
-          <Toaster position="bottom-right" toastOptions={{ duration: 2000 }} />
+          <Toaster position="top-center" toastOptions={{ duration: 2000 }}  />
 
           <Routes>
             <Route path="/signin" element={<SignIn />} />

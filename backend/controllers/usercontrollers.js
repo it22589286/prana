@@ -63,7 +63,7 @@ const registeruser = async(req,res) =>{
         };
 
         //check lentgh of nic
-        if( password.length > 15 ||password.length < 6 ){
+        if( nic.length > 15 ||nic.length < 6 ){
             return res.json({
                 error:"lenght of the nic should be 6-15 characters"
             })
@@ -190,14 +190,12 @@ const loginUser = async(req,res) =>{
 
 
 //update user endpoint
+const updateUser = async (req, res, next) => {
+    const id = req.params.id;
+    const { email, nic, name, password, number, role, gender, attendance } = req.body;
+    try {
 
-const updateUser =async(req,res,next)=>{
-    const id =req.params.id;
-    const {email,nic,name,password,number,role,gender,attendance} =req.body;
-    let user;
-    try{
-
-         if(!password ||password.length <6 ){
+           if(!password ||password.length <6 ){
             return res.json({
                 error:"password is required and should be at least 6 characters long"
             })
@@ -210,34 +208,56 @@ const updateUser =async(req,res,next)=>{
             return res.json({
                 error:"Your nic has previously used"
             })
+        }};
+
+         //check lentgh of nic
+         if( nic.length > 15 ||nic.length < 6 ){
+            return res.json({
+                error:"lenght of the nic should be 6-15 characters"
+            })
+        };
+          //check lenght of number
+          if(number.length !=10 ){
+            return res.json({
+                error:"lenght of the number should be 10 digits"
+            })
+        };
+
+        // Fetch the user from the database
+        let user = await User.findById(id);
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
         }
 
-    }
+        // Check if the password is being updated
+        if (password && password !== user.password) {
+            // Hash the new password
+            const hashedPassword = await hashPassword(password);
+            // Update the user's password in the database
+            user.password = hashedPassword;
+        }
 
-       
-      
-        const hashedPassword=await hashPassword(password)
-        user = await User.findByIdAndUpdate(id,{
-            email,
-            nic,
-            name,
-            password:hashedPassword,
-            number,
-            role,
-            gender,
-            attendance
-           
-        });
-        user= await user.save()
-    }catch(err){
-        console.log(err);
+        // Update other user fields
+        user.email = email || user.email;
+        user.nic = nic || user.nic;
+        user.name = name || user.name;
+        user.number = number || user.number;
+        user.role = role || user.role;
+        user.gender = gender || user.gender;
+        user.attendance = attendance || user.attendance;
+
+        // Save the updated user
+        user = await user.save();
+
+        return res.status(200).json({ user });
+    } catch (err) {
+        console.error('Error updating user:', err);
+        return res.status(500).json({ error: 'Internal Server Error' });
     }
-    
-    if(!user){
-        return res.status(404).json({message:'unable to update'})
-    }
-    return res.status(200).json({user})
 };
+
+
+
 
 //delete user
  const delterUser = async(req,res,next)=>{
