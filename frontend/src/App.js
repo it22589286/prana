@@ -1,6 +1,5 @@
 import "./App.css";
 import Home from "./components/Home";
-
 import Navbar1 from "./components/Navbar/Navbar1";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Packages from "./components/Packages";
@@ -17,7 +16,6 @@ import SignIn from "./components/Signin/SignIn";
 import SignUp from "./components/Signup/SignUp";
 import axios from "axios";
 import { Toaster } from "react-hot-toast";
-
 import Dashboard from "./components/Dashboards/Dashboard";
 import Admin from "./components/Dashboards/Admin";
 import Instructor from "./components/Dashboards/Instructor";
@@ -36,10 +34,15 @@ import Feedbacks from "./components/Feedbacks/Feedbacks";
 import MyFeedbacks from "./components/Feedbacks/MyFeedbacks";
 import LeaveManagerScreen from './components/Leave/LeaveManagerScreen';
 import UpdateLeave from './components/Leave/UpdateLeave';
-import ApplyLeaveDashboard from './components/Dashboards/ApplyLeaveDashboard'
+import ApplyLeaveDashboard from './components/Dashboards/ApplyLeaveDashboard';
 import LeaveForm from './components/Leave/LeaveForm';
-import paymentdetails from './PaymentComponent/paymentdetails';
 
+import Training from './components/Schedule/training';
+import TrainingDetails from './components/Schedule/trainingdetails';
+import UpdateTraining from './components/Schedule/Updatetraining';
+import AddPayment from './components/payment/addpayment';
+import PaymentDetails from './components/payment/paymentdetails';
+import TrainingReqDetails from './components/Schedule/request';
 
 
 
@@ -83,21 +86,30 @@ function App() {
             <Route path="/addfeedback" element={<AddFeedbacks/>}/>
             <Route path="/fed" element={<Feedbacks/>}/>
             <Route path="/myfeedbacks" element={<MyFeedbacks/>}/>
-            <Route path="/reset-password/:id/:token"
-              element={<ResetPassword />}
-            />
+            <Route path="/reset-password/:id/:token" element={<ResetPassword />} />
             <Route path="/leaverequests" element={<LeaveManagerScreen />} />
             <Route path="/updateleave/:id" element={<UpdateLeave />} />
             <Route path="/applyleavedashboard" element={<ApplyLeaveDashboard />} />
             <Route path="/leaveform" element={<LeaveForm />} />
 
-            <Route path="/trainingdetails" element={<trainingdetails/>} />
-            <Route path="/updatetraining/:id" element={<updatetraining/>} />
-            <Route path="/addpayment" element={<addpayment/>} />
-            <Route path="/paydetails" element={<paymentdetails/>} />
-            <Route path="/requestdetaisl" element={<request/>} />
+          
 
 
+            <Route path='/training' element={<Training/>}></Route>
+<Route path='/trainingdetails' element={<TrainingDetails/>}></Route>
+<Route path='/updatetraining/:id' element={<UpdateTraining/>}></Route>
+
+<Route path='/requestdetaisl' element={<TrainingReqDetails/>}></Route>
+
+<Route path='/addpayment' element={<AddPayment/>}></Route>
+<Route path='/paydetails' element={<PaymentDetails/>}></Route>
+
+
+
+
+
+            
+            
           </Routes>
         </div>
 

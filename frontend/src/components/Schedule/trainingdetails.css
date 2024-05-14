@@ -1,0 +1,80 @@
+.showorders {
+  width: 100%;
+  height: 100vh; /* Set height to full viewport height */
+  background-image: url('yoga.jpg');
+  background-size: cover; /* Cover the entire container */
+  background-position: center; /* Center the background image */
+  background-repeat: no-repeat; /* Prevent repeating the image */
+  background-attachment: fixed; /* Fix the background image */
+  position: relative; /* Make sure it covers the entire container */
+}
+
+/* Rest of your existing styles */
+.showorders table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.showorders th,
+.showorders td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.showorders th {
+  background-color: #386FA2;
+}
+
+.showorders tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.showorders tbody tr:hover {
+  background-color: #f2f2f2;
+}
+
+.showorders a {
+  text-decoration: none;
+  color: #fafafa;
+  margin-right: 10px;
+  background-color: #000000;
+  border-radius: 5px;
+  padding: 5px 10px;
+}
+
+.showorders a:hover {
+  text-decoration: underline;
+}
+
+.showorders button {
+  padding: 5px 10px;
+  background-color: #000000;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+}
+
+.showorders button:hover {
+  background-color: #c82333;
+}
+
+.searchbtn {
+  position: absolute;
+  left: 70%;
+}
+#acceptbtn:hover{
+background-color: greenyellow;
+color: #000000;
+}
+
+/* trainingdetails.css */
+@media print {
+  .action-header,
+  .action-cell {
+      display: none;
+  }
+}
+

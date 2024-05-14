@@ -7,6 +7,9 @@ const fed = require("./Routes/feedback.routes")
 const user = require("./Routes/routes")
 const LeaveRoute = require('./Routes/leaveroute')
 
+const traingRoutes = require("./routes/trainingroutes");
+const cardRoutes = require("./routes/cardroutes");
+
 
 
 const app = express();
@@ -29,6 +32,10 @@ app.use('/',require('./Routes/routes'))
 app.use("/api/feedbacks",fed) 
 app.use("/api/users",user)
 app.use('/api/leave',LeaveRoute)
+
+app.use("/api/training", traingRoutes);
+app.use("/api/card", cardRoutes);
+
 
 
 const port =8000;
