@@ -29,6 +29,7 @@ app.use('/',require('./Routes/routes'))
 app.use("/api/feedbacks",fed) 
 app.use("/api/users",user)
 app.use('/api/leave',LeaveRoute)
+app.use('/promopackage',require('./Routes/promo-routes'))
 
 
 const port =8000;
