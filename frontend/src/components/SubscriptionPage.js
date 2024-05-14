@@ -39,6 +39,8 @@ const SubscriptionDetails = () => {
     return totalPrice;
   };
 
+  
+
   return (
     <div  
     >

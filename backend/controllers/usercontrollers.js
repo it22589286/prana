@@ -13,11 +13,18 @@ const registeruser = async(req,res) =>{
 
     try{
         const{email,nic,name,password,number,role,gender,attendance} =req.body;
+
+        
         if(!name){
             return res.json({
                 error:"name is required"
             })
         };
+        if (!name.match(/^[a-zA-Z]+$/)) {
+            return res.json({
+                error: "name should contain only alphabets"
+            });
+        }
         if(!role){
             return res.json({
                 error:"please select a role"
