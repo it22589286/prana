@@ -72,7 +72,7 @@ const GiveFeedbacks = () => {
         });
         setSelectedStars(0);
         alert("Feedback sent successfully");
-        navigate("/feedbacks");
+        navigate("/myfeedbacks");
       } catch (error) {
         console.error("Error creating feedback:", error);
       }

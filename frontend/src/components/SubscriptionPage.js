@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import {  useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import Image5 from "./imagefiles/propack.jpg"
 import { Container } from 'react-bootstrap';
 
 const SubscriptionDetails = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [packageDetails, setPackageDetails] = useState(null);
   const [subscriptionType, setSubscriptionType] = useState('monthly'); // Default to monthly subscription
   const additionalCosts = {
@@ -39,6 +40,18 @@ const SubscriptionDetails = () => {
     return totalPrice;
   };
 
+  const handlePayNow = () => {
+    // Check if there is user data in local storage
+    const userData = localStorage.getItem('user');
+
+    if (userData) {
+      // User data exists, navigate to '/signin'
+      navigate('/payment');
+    } else {
+      // No user data, navigate to '/payment'
+      navigate('/signin');
+    }
+  };
   
 
   return (
@@ -70,7 +83,7 @@ const SubscriptionDetails = () => {
                 </div>
               </div>
               <p style={{ fontSize: '28px', fontWeight: 'bold' }}>Total Price: {calculateTotalPrice()}</p> {/* Added fontWeight */}
-              <button style={{ backgroundColor: 'green', color: 'white', padding: '10px 20px', border: 'none', borderRadius: '5px', fontSize: '16px', fontWeight: 'bold', cursor: 'pointer' }}>Pay Now</button>
+              <button onClick={handlePayNow} style={{ backgroundColor: 'green', color: 'white', padding: '10px 20px', border: 'none', borderRadius: '5px', fontSize: '16px', fontWeight: 'bold', cursor: 'pointer' }}>Pay Now</button>
             </div>
           </div>
         </div>

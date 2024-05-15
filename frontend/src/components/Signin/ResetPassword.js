@@ -5,7 +5,7 @@ import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Card from "react-bootstrap/Card";
-import Image from "../imagefiles/signin.jpg";
+import Image from "../imagefiles/password.jpg";
 import "./Signin.css";
 import axios from "axios";
 import { toast } from "react-hot-toast";

@@ -55,7 +55,7 @@ This async/await approach offers a cleaner and more concise syntax for handling 
           fontStyle: "bold",
         }}
       >
-        Customer Details
+       <b> Customer Details</b>
       </p>
       <div style={{ padding: "40px 40px 10px 40px" }}>
         <Table striped>
