@@ -4,6 +4,7 @@ import axios from 'axios';
 import Image5 from "./imagefiles/propack.jpg"
 import { Container } from 'react-bootstrap';
 
+
 const SubscriptionDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -56,6 +57,7 @@ const SubscriptionDetails = () => {
 
   return (
     <div  
+    style={backgroundContainerStyle}
     >
       <Container>
       {packageDetails && (
@@ -92,5 +94,19 @@ const SubscriptionDetails = () => {
     </div>
   );
 }
+const backgroundContainerStyle = {
+  margin: 0,
+  padding: 0,
+  fontFamily: 'Arial, sans-serif',
+  backgroundImage: `url(${Image5})`,
+  backgroundSize: 'cover',
+  backgroundPosition: 'center',
+  backgroundRepeat: 'no-repeat',
+  minHeight: '100vh',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  
+};
 
 export default SubscriptionDetails;

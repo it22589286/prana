@@ -5,7 +5,8 @@ import { useNavigate } from "react-router-dom";
 import { FaSearch } from 'react-icons/fa';
 import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
-import packagepromo from "../imagefiles/packagepromo.jpg"
+import packagepromo from "../imagefiles/propack.jpg"
+
 const URL = "http://localhost:8000/promopackage";
 
 const fetchHandler = async () => {
@@ -147,10 +148,9 @@ const containerStyle = {
   margin: 0,
   padding: 0,
   fontFamily: 'Arial, sans-serif',
-  backgroundImage: 'url("../imagefiles/propack.jpg")',
-  backgroundSize: 'cover',
-  backdropFilter: 'blur(5px)',
-  backgroundRepeat: 'no-repeat',
+  position:'relative',
+
+  minHeight:'100vh'
 };
 
 const buttonContainerStyle = {

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import packagepromo from './imagefiles/propack.jpg';
 
 const Packages = () => {
   const [promopackages, setPromopackages] = useState([]);
@@ -19,7 +20,7 @@ const Packages = () => {
   }, []);
 
   return (
-    <div>
+    <div  style={containerStyle}>
       <div className="packages-container" style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around' }}>
         {promopackages.map((promopackage) => (
           <div key={promopackage._id} className="card" style={{ width: '300px', margin: '20px', boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2)', transition: '0.3s', borderRadius: '5px', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
@@ -39,6 +40,17 @@ const Packages = () => {
       </div>
     </div>
   );
+
 }
+const containerStyle = {
+  margin: 0,
+  padding: 0,
+  fontFamily: 'Arial, sans-serif',
+  position: 'relative',
+  minHeight: '100vh',
+  backgroundImage:` url(${packagepromo})`,
+  backgroundSize: 'cover',
+  backgroundPosition: 'center',
+};
 
 export default Packages;
