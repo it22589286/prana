@@ -41,13 +41,13 @@ function PaymentDetails() {
     });
 
     // Search
-    const handlesearch = (e) => {
+    const handlesearch = () => {
         filterdata(searchkey);
     };
 
     const filterdata = (searchKey) => {
         const filteredData = showdiscounts.filter(customer =>
-            customer.usename && customer.usename.toLowerCase().includes(searchKey.toLowerCase())
+            customer.username && customer.username.toLowerCase().includes(searchKey.toLowerCase())
         );
         setshowdiscounts(filteredData);
     };
@@ -61,7 +61,7 @@ function PaymentDetails() {
                     placeholder='Search'
                     className='in'
                 />
-                <button id='search-btn' onClick={(e) => handlesearch(e)}>Search</button>
+                <button id='search-btn' onClick={handlesearch}>Search</button>
             </div>
             <div ref={componentPDF} style={{ width: '100%' }}>
                 <table>
@@ -70,25 +70,25 @@ function PaymentDetails() {
                             <th>User Name</th>
                             <th>Payment Method</th>
                             <th>Card Type</th>
-                            <th>Card Holder</th>
+                            <th>Card Holder Name</th>
                             <th>Card Number</th>
                             <th>Expire Date</th>
-                            <th>CVC</th>
-                            <th>Pay Details</th>
+                            <th>CVV</th>
+                            <th>Amount</th>
                             <th className="action-header">Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         {showdiscounts.map((e1) => (
                             <tr key={e1._id}>
-                                <td>{e1.usename}</td>
+                                <td>{e1.username}</td>
                                 <td>{e1.type}</td>
                                 <td>{e1.card_type}</td>
-                                <td>{e1.card_holder}</td>
+                                <td>{e1.card_holder_name}</td>
                                 <td>{e1.card_number}</td>
-                                <td>{e1.expir_date}</td>
-                                <td>{e1.cvc}</td>
-                                <td>{e1.pay}</td>
+                                <td>{e1.expire_date}</td>
+                                <td>{e1.cvv}</td>
+                                <td>{e1.amount}</td>
                                 <td className="action-cell">
                                     <button onClick={() => handledelete(e1._id)}>Reject</button>
                                 </td>
