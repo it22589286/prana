@@ -40,8 +40,7 @@ const SubscriptionDetails = () => {
   };
 
   return (
-    <div  
-    >
+    <div style={backgroundContainerStyle}>
       <Container>
       {packageDetails && (
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
@@ -77,5 +76,20 @@ const SubscriptionDetails = () => {
     </div>
   );
 }
+const backgroundContainerStyle = {
+  margin: 0,
+  padding: 0,
+  fontFamily: 'Arial, sans-serif',
+  backgroundImage: `url(${Image5})`,
+  backgroundSize: 'cover',
+  backgroundPosition: 'center',
+  backgroundRepeat: 'no-repeat',
+  minHeight: '100vh',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  
+};
+
 
 export default SubscriptionDetails;
