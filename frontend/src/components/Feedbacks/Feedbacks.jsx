@@ -30,6 +30,16 @@ const Feedbacks = () => {
     onAfterPrint: () => alert('Feedbacks Report Printed Successfully!')
   });
 
+  const approveFeedback = (id) => {
+    // Logic to approve feedback with given id
+    console.log("Feedback with ID", id, "approved!");
+  };
+
+  const deleteFeedback = (id) => {
+    // Logic to delete feedback with given id
+    console.log("Feedback with ID", id, "deleted!");
+  };
+
   const filteredFeedbacks = feedbacks.filter(feedback =>
     feedback.name.toLowerCase().includes(searchText.toLowerCase())
   );
@@ -60,6 +70,7 @@ const Feedbacks = () => {
               <th>Reviewer's Email</th>
               <th>Rating</th>
               <th>Feedback</th>
+              <th>Actions</th> {/* New column for actions */}
             </tr>
           </thead>
           <tbody>
@@ -69,6 +80,10 @@ const Feedbacks = () => {
                 <td>{feedback.email}</td>
                 <td>{feedback.rating}</td>
                 <td>{feedback.feedback}</td>
+                <td style={{ display: "flex" }}> {/* Style added */}
+                  <Button variant="success" onClick={() => approveFeedback(feedback.id)}>Approve</Button> {/* Approve button */}
+                  <Button variant="danger" onClick={() => deleteFeedback(feedback.id)} style={{ marginLeft: "5px" }}>Delete</Button> {/* Delete button */}
+                </td>
               </tr>
             ))}
           </tbody>
