@@ -7,11 +7,12 @@ function AddPayment() {
         usename: "",
         type: "Cash",
         card_type: "",
-        card_holder: "",
+        card_holder_name: "",
         card_number: "",
         expir_date: "",
-        cvc: "",
-        pay: ""
+        cvv: "",
+        amount: "",
+        payment_details: ""
     });
 
     const [errors, setErrors] = useState({});
@@ -30,7 +31,7 @@ function AddPayment() {
         let error = "";
         switch (name) {
             case "usename":
-            case "card_holder":
+            case "card_holder_name":
                 if (!/^[A-Za-z\s]+$/.test(value)) {
                     error = "This field should only contain letters.";
                 }
@@ -44,7 +45,7 @@ function AddPayment() {
                 const today = new Date();
                 const selectedDate = new Date(value);
                 if (selectedDate <= today) {
-                    error = "The card is expired!";
+                    error = "Expiration date must be in the future.";
                 }
                 break;
             default:
@@ -100,68 +101,86 @@ function AddPayment() {
 
                 <label>Select Payment Method:</label>
                 <select id="type" name="type" onChange={handleOnChange} value={order.type}>
-                    <option>Cash</option>
-                    <option>Card</option>
+                    <option value="Cash">Cash</option>
+                    <option value="Card">Card</option>
                 </select>
 
-                <label>Card Type:</label>
+                {order.type === "Cash" &&
+                <>
+                    <label>Payment Details:</label>
+                    <input
+                        type="text"
+                        id="payment_details"
+                        name="payment_details"
+                        onChange={handleOnChange}
+                        value={order.payment_details}
+                    />
+                </>
+                }
+
+                {order.type === "Card" &&
+                <>
+                    <label>Card Type:</label>
+                    <input
+                        type="text"
+                        id="card_type"
+                        name="card_type"
+                        onChange={handleOnChange}
+                        value={order.card_type}
+                    />
+
+                    <label>Card Holder Name:</label>
+                    <input
+                        type="text"
+                        id="card_holder_name"
+                        name="card_holder_name"
+                        onChange={handleOnChange}
+                        value={order.card_holder_name}
+                    />
+                    {errors.card_holder_name && <p className="error">{errors.card_holder_name}</p>}
+
+                    <label>Card Number:</label>
+                    <input
+                        type="text"
+                        id="card_number"
+                        name="card_number"
+                        onChange={handleOnChange}
+                        value={order.card_number}
+                    />
+                    {errors.card_number && <p className="error">{errors.card_number}</p>}
+
+                    <label>Expire Date:</label>
+                    <input
+                        type="date"
+                        id="expir_date"
+                        name="expir_date"
+                        onChange={handleOnChange}
+                        value={order.expir_date}
+                    />
+                    {errors.expir_date && <p className="error">{errors.expir_date}</p>}
+
+                    <label>CVV:</label>
+                    <input
+                        type="text"
+                        id="cvv"
+                        name="cvv"
+                        onChange={handleOnChange}
+                        value={order.cvv}
+                    />
+                </>
+                }
+
+                <label>Amount:</label>
                 <input
                     type="text"
-                    id="card_type"
-                    name="card_type"
+                    id="amount"
+                    name="amount"
                     onChange={handleOnChange}
-                    value={order.card_type}
+                    value={order.amount}
                 />
+                {errors.amount && <p className="error">{errors.amount}</p>}
 
-                <label>Card Holder:</label>
-                <input
-                    type="text"
-                    id="card_holder"
-                    name="card_holder"
-                    onChange={handleOnChange}
-                    value={order.card_holder}
-                />
-                {errors.card_holder && <p className="error">{errors.card_holder}</p>}
-
-                <label>Card Number:</label>
-                <input
-                    type="text"
-                    id="card_number"
-                    name="card_number"
-                    onChange={handleOnChange}
-                    value={order.card_number}
-                />
-                {errors.card_number && <p className="error">{errors.card_number}</p>}
-
-                <label>Expire Date:</label>
-                <input
-                    type="date"
-                    id="expir_date"
-                    name="expir_date"
-                    onChange={handleOnChange}
-                    value={order.expir_date}
-                />
-                {errors.expir_date && <p className="error">{errors.expir_date}</p>}
-
-                <label>CVC:</label>
-                <input
-                    type="text"
-                    id="cvc"
-                    name="cvc"
-                    onChange={handleOnChange}
-                    value={order.cvc}
-                />
-
-                <label>Pay Now:</label>
-                <input
-                    type="text"
-                    id="pay"
-                    name="pay"
-                    onChange={handleOnChange}
-                    value={order.pay}
-                />
-
-                <button type="submit">Pay</button>
+                <button type="submit">{order.type === "Cash" ? "Place Order" : "Pay"}</button>
             </form>
             <br />
         </div>

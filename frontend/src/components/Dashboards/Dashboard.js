@@ -126,7 +126,7 @@ const Dashboard = () => {
                   }}
                 />
 
-                <Button variant="primary" style={{ marginLeft: "102px" }}>
+                <Button variant="primary" style={{ marginLeft: "102px" }}  onClick={() => navigate("/training")}>
                   Go{" "}
                 </Button>
               </Card.Body>
@@ -187,7 +187,7 @@ const Dashboard = () => {
                     marginBottom: "5px",
                   }}
                 />
-                <Button variant="primary" style={{ marginLeft: "102px" }}>
+                <Button variant="primary" style={{ marginLeft: "102px" }}  onClick={() => navigate("/addpayment")}>
                   Go{" "}
                 </Button>
               </Card.Body>

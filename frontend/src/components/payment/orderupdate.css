@@ -1,38 +1,59 @@
+.searchbtn {
+  position: fixed; /* Fixed position to keep it in place */
+  top: 10px; /* Adjust top position */
+  right: 10px; /* Adjust right position */
+  z-index: 9999; /* Ensure it's above other elements */
+}
+.body-background {
+  
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-image: url('666.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 130vh;
+}
+
+
 .order-update {
-    max-width: 400px;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-top: 10%;
-    background-color: #c2d6ec;
-  }
-  
-  .order-update label {
-    margin-bottom: 5px;
-    display: block;
-  }
-  
-  .order-update input[type="text"],
-  .order-update input[type="date"] {
-    padding: 8px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
-  }
-  
-  .order-update button {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-  }
-  
-  .order-update button:hover {
-    background-color: #0056b3;
-  }
-  
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-top: 10%;
+  background-color: #c2d6ec;
+}
+
+.order-update label {
+  margin-bottom: 5px;
+  display: block;
+}
+
+.order-update input[type="text"],
+.order-update input[type="date"] {
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.order-update button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.order-update button:hover {
+  background-color: #0056b3;
+}

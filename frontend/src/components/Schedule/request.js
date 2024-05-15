@@ -2,11 +2,14 @@ import { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import './trainingdetails.css';
 import { useReactToPrint } from 'react-to-print';
+import { Button } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 
 function TrainingReqDetails() {
     const componentPDF = useRef();
     const [showdiscounts, setshowdiscounts] = useState([]);
     const [searchkey, setsearchkey] = useState('');
+    const navigate = useNavigate();
 
     // Read
     const getfetchdata = async () => {
@@ -100,6 +103,7 @@ function TrainingReqDetails() {
             </div>
             <br /><br /><br /><br />
             <button onClick={generatePDF}>Download Report</button>
+            <Button  style={{marginLeft:'90px'}} variant="primary" onClick={()=> navigate('/paydetails')} >payment Management </Button>
         </div>
     );
 }

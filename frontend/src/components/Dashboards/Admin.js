@@ -69,7 +69,7 @@ const Admin = () => {
         
         <Card.Img variant="top" src={Image6}  style={{ width: '100px', height: '100px' ,marginBottom:'5px'}} />
           
-          <Button  style={{marginLeft:'90px'}} variant="primary"  >Manage </Button>
+          <Button  style={{marginLeft:'90px'}} variant="primary" onClick={()=> navigate('/requestdetaisl')} >Manage </Button>
         </Card.Body>
       </Card>
       </Col>
