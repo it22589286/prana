@@ -60,10 +60,13 @@ const Navbar1 = () => {
             {userRole !== "Supplier" &&
               userRole !== "Instructor" &&
               userRole !== "admin" && (
-                <Nav.Link as={Link} to="/store">
+                <Nav.Link as={Link} to="/UserMain">
                   Store
                 </Nav.Link>
               )}
+              {userRole !== 'Supplier' && userRole !== 'Instructor' && userRole !== 'admin' && (
+            <Nav.Link as={Link} to="/Cartlist">Cart</Nav.Link>
+          )}
             {userRole !== "Supplier" &&
               userRole !== "Instructor" &&
               userRole !== "admin" && (

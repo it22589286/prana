@@ -35,6 +35,16 @@ import UpdateLeave from './components/Leave/UpdateLeave';
 import ApplyLeaveDashboard from './components/Dashboards/ApplyLeaveDashboard'
 import LeaveForm from './components/Leave/LeaveForm';
 
+
+import AddItem from './components/Item Pages/Additem';
+import ItemList from './components/Item Pages/Itemlist';
+import UpdateItem from './components/Item Pages/Updateitem';
+import CartList from './components/Cart pages/Cartlist';
+import UserMain from './components/UserMain';
+import Request from './components/Request';
+import ItemManagement from './components/Itemmanagement';
+
+
 axios.defaults.baseURL = "http://localhost:8000";
 axios.defaults.withCredentials = true;
 
@@ -51,6 +61,16 @@ function App() {
             <Route path="/store" element={<Store />} />
             <Route path="/packages" element={<Packages />} />
             <Route path="/" element={<Home />} />
+
+        {/* Item & Cart */}
+        <Route path="/Additem" element={<AddItem />} />
+        <Route path="/Itemlist" element={<ItemList />} />
+        <Route path="/Updateitem/:itemId" element={<UpdateItem />} />
+        <Route path="/UserMain" element={<UserMain />} />
+        <Route path="/Cartlist" element={<CartList />} />
+        <Route path="/Request" element={<Request />} />
+        <Route path="/ItemManagement" element={<ItemManagement />} />
+
             <Route path="/contactus" element={<ContactUs />} />
             <Route path="/aims" element={<Aims />} />
             <Route path="/conditions" element={<Conditions />} />
@@ -79,6 +99,9 @@ function App() {
             <Route path="/updateleave/:id" element={<UpdateLeave />} />
             <Route path="/applyleavedashboard" element={<ApplyLeaveDashboard />} />
             <Route path="/leaveform" element={<LeaveForm />} />
+
+
+
           </Routes>
         </div>
 

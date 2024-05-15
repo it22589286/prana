@@ -13,6 +13,8 @@ import Image6 from '../imagefiles/schedule.png'
 import Image7 from '../imagefiles/inventory.png'
 import Image8 from '../imagefiles/leave.png'
 import Image9 from '../imagefiles/supply.png'
+import Nav from 'react-bootstrap/Nav';
+import { Link } from 'react-router-dom';
 
 
 import { useNavigate } from 'react-router-dom';
@@ -131,7 +133,7 @@ const Admin = () => {
         
         <Card.Img variant="top" src={Image7}  style={{ width: '100px', height: '100px' ,marginBottom:'5px'}} /> 
          
-          <Button variant="primary" style={{marginLeft:'90px'}} >Manage</Button>
+        <Nav.Link as={Link} to="/ItemManagement"><Button variant="primary" style={{marginLeft:'56px'}} >Manage</Button></Nav.Link>
         </Card.Body>
       </Card>
       </Col>
