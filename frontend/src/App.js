@@ -37,13 +37,13 @@ import UpdateLeave from './components/Leave/UpdateLeave';
 import ApplyLeaveDashboard from './components/Dashboards/ApplyLeaveDashboard';
 import LeaveForm from './components/Leave/LeaveForm';
 
+
 import Training from './components/Schedule/training';
 import TrainingDetails from './components/Schedule/trainingdetails';
 import UpdateTraining from './components/Schedule/Updatetraining';
 import AddPayment from './components/payment/addpayment';
 import PaymentDetails from './components/payment/paymentdetails';
 import TrainingReqDetails from './components/Schedule/request';
-
 
 
 axios.defaults.baseURL = "http://localhost:8000";
@@ -55,7 +55,7 @@ function App() {
       <BrowserRouter>
         <div className="content-wrap">
           <Navbar1 />
-          <Toaster position="bottom-right" toastOptions={{ duration: 2000 }} />
+          <Toaster position="top-center" toastOptions={{ duration: 2000 }}  />
 
           <Routes>
             <Route path="/signin" element={<SignIn />} />
@@ -92,6 +92,7 @@ function App() {
             <Route path="/applyleavedashboard" element={<ApplyLeaveDashboard />} />
             <Route path="/leaveform" element={<LeaveForm />} />
 
+
           
 
 
@@ -110,6 +111,9 @@ function App() {
 
             
             
+
+            
+
           </Routes>
         </div>
 

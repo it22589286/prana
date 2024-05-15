@@ -32,6 +32,7 @@ app.use('/',require('./Routes/routes'))
 app.use("/api/feedbacks",fed) 
 app.use("/api/users",user)
 app.use('/api/leave',LeaveRoute)
+app.use('/promopackage',require('./Routes/promo-routes'))
 
 app.use("/api/training", traingRoutes);
 app.use("/api/card", cardRoutes);
