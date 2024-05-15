@@ -55,186 +55,150 @@ export default function CartList() {
   };
 
   const calculateMonthlyCost = () => {
-   
     const monthlyCost = 0; 
     setMonthlyCost(monthlyCost);
   };
 
   const generateMonthlyReport = () => {
-    // Generate PDF report
-    const doc = new jsPDF();
-    doc.text("Monthly Cart Report", 10, 10);
-    doc.text("Cart Items:", 10, 40);
-    doc.text("Monthly Cost: $" + monthlyCost.toFixed(2), 10, 30);
-    doc.text("Total Price: $" + totalPrice.toFixed(2), 10, 20);
-    
-    let yPos = 50;
-    cartItems.forEach((item) => {
-      doc.text(
-        `${item.name} - ${item.quantity} x $${item.price} = $${item.price * item.quantity}`,
-        10,
-        yPos
-      );
-      yPos += 10;
+    const input = document.getElementById('pdf-report-content');
+    html2canvas(input, { scale: 2 }).then((canvas) => {
+      const imgData = canvas.toDataURL('image/png');
+      const pdf = new jsPDF('p', 'mm', 'a4');
+      const imgWidth = 190;
+      pdf.addImage(imgData, 'PNG', 10, 10, 190, 0);
+      pdf.save('monthly_cart_report.pdf');
+      
     });
-    doc.save("monthly_cart_report.pdf");
   };
 
   return (
-    <div style={{ 
-      maxWidth: "900px", 
-      margin: "0 auto", 
-      padding: "20px", 
-      backgroundColor: "#f8f9fa", 
-      borderRadius: "10px", 
-      boxShadow: "0 50px 20px rgba(255, 0, 0, 0.3)"
+    <div style={{
+      marginTop: "40px",
+      maxWidth: "900px",
+      margin: "0 auto",
+      padding: "20px",
+      backgroundColor: "#f8f9fa",
+      borderRadius: "10px",
+      boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.1)',
     }}>
-
-  
-      {cartItems.length === 0 ? (
-        <p style={{ textAlign: "center", color: "#6c757d" }}>
-          No items in cart
-        </p>
-      ) : (
-        <table style={{ 
-          width: "100%", 
-          borderCollapse: "collapse", 
-          marginTop: "20px", 
-          backgroundColor: "#fff", 
-          borderRadius: "10px", 
-          boxShadow: "0 5px 15px rgba(0, 0, 0, 0.1)" 
-        }}>
-          <thead style={{ backgroundColor: "#007bff", color: "#fff" }}>
-            <tr>
-              <th style={{ 
-                padding: "12px", 
-                textAlign: "left", 
-                border: "1px solid #007bff" 
-              }}>
-                Name
-              </th>
-              <th style={{ 
-                padding: "12px", 
-                textAlign: "left", 
-                border: "1px solid #007bff" 
-              }}>
-                Item Code
-              </th>
-              <th style={{ 
-                padding: "12px", 
-                textAlign: "left", 
-                border: "1px solid #007bff" 
-              }}>
-                Count
-              </th>
-              <th style={{ 
-                padding: "12px", 
-                textAlign: "left", 
-                border: "1px solid #007bff" 
-              }}>
-                Price
-              </th>
-              <th style={{ 
-                padding: "12px", 
-                textAlign: "left", 
-                border: "1px solid #007bff" 
-              }}>
-                Colour
-              </th>
-              <th style={{ 
-                padding: "12px", 
-                textAlign: "left", 
-                border: "1px solid #007bff" 
-              }}>
-                Image
-              </th>
-              <th style={{ 
-                padding: "12px", 
-                textAlign: "left", 
-                border: "1px solid #007bff" 
-              }}>
-                Actions
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {cartItems.map((item) => (
-              <tr 
-                key={item._id} 
-                style={{ backgroundColor: "#f8f9fa", border: "1px solid #ddd" }}
-              >
-                <td style={{ padding: "12px", textAlign: "left", border: "1px solid #ddd" }}>
-                  {item.name}
-                </td>
-                <td style={{ padding: "12px", textAlign: "left", border: "1px solid #ddd" }}>
-                  {item.itemcode}
-                </td>
-                <td style={{ padding: "12px", textAlign: "left", border: "1px solid #ddd" }}>
-                  {item.quantity}
-                </td>
-                <td style={{ padding: "12px", textAlign: "left", border: "1px solid #ddd" }}>
-                  ${item.price}
-                </td>
-                <td style={{ padding: "12px", textAlign: "left", border: "1px solid #ddd" }}>
-                  {item.colour}
-                </td>
-                <td style={{ padding: "12px", textAlign: "left", border: "1px solid #ddd" }}>
-                  <img
-                    src={`http://localhost:8000/image/${item.image}`}
-                    alt={item.name}
-                    style={{ width: "50px", height: "50px", borderRadius: "5px" }}
-                  />
-                </td>
-                <td style={{ padding: "12px", textAlign: "left", border: "1px solid #ddd" }}>
-                  <button
-                    style={{ 
-                      padding: "8px 16px", 
-                      fontSize: "1rem", 
-                      cursor: "pointer", 
-                      backgroundColor: "#dc3545", 
-                      color: "#fff", 
-                      border: "none", 
-                      borderRadius: "5px" 
-                    }}
-                    onClick={() => handleDelete(item._id)}
-                  >
-                    Remove
-                  </button>
-                </td>
+      <div id="pdf-report-content">
+        <h2 style={{ textAlign: "center", color: "#007bff" }}>Shopping Cart</h2>
+        {cartItems.length === 0 ? (
+          <p style={{ textAlign: "center", color: "#6c757d" }}>
+            No items in cart
+          </p>
+        ) : (
+          <table style={{ 
+            width: "100%", 
+            borderCollapse: "collapse", 
+            marginTop: "20px", 
+            backgroundColor: "#fff", 
+            borderRadius: "10px", 
+            boxShadow: "0 5px 15px rgba(0, 0, 0, 0.1)" 
+          }}>
+            <thead style={{ backgroundColor: "#007bff", color: "#fff" }}>
+              <tr>
+                <th style={{ padding: "12px", textAlign: "left", border: "1px solid #007bff" }}>
+                  Name
+                </th>
+                <th style={{ padding: "12px", textAlign: "left", border: "1px solid #007bff" }}>
+                  Item Code
+                </th>
+                <th style={{ padding: "12px", textAlign: "left", border: "1px solid #007bff" }}>
+                  Count
+                </th>
+                <th style={{ padding: "12px", textAlign: "left", border: "1px solid #007bff" }}>
+                  Price
+                </th>
+                <th style={{ padding: "12px", textAlign: "left", border: "1px solid #007bff" }}>
+                  Colour
+                </th>
+                <th style={{ padding: "12px", textAlign: "left", border: "1px solid #007bff" }}>
+                  Image
+                </th>
+                <th style={{ padding: "12px", textAlign: "left", border: "1px solid #007bff" }}>
+                  Actions
+                </th>
               </tr>
-            ))}
-            <tr>
-              <td 
-                colSpan="5" 
-                style={{ 
-                  padding: "12px", 
-                  textAlign: "left", 
-                  border: "1px solid #ddd" 
-                }}
-              >
-                {cartItems.map((item, index) => (
-                  <p key={index}>
-                    <strong>{item.name}:</strong> ${item.price} x {item.quantity} = ${item.price * item.quantity}
-                  </p>
-                ))}
-              </td>
-              <td 
-                colSpan="2" 
-                style={{ 
+            </thead>
+            <tbody>
+              {cartItems.map((item) => (
+                <tr key={item._id} style={{ backgroundColor: "#f8f9fa", border: "1px solid #ddd" }}>
+                  <td style={{ padding: "12px", textAlign: "left", border: "1px solid #ddd" }}>
+                    {item.name}
+                  </td>
+                  <td style={{ padding: "12px", textAlign: "left", border: "1px solid #ddd" }}>
+                    {item.itemcode}
+                  </td>
+                  <td style={{ padding: "12px", textAlign: "left", border: "1px solid #ddd" }}>
+                    {item.quantity}
+                  </td>
+                  <td style={{ padding: "12px", textAlign: "left", border: "1px solid #ddd" }}>
+                    ${item.price}
+                  </td>
+                  <td style={{ padding: "12px", textAlign: "left", border: "1px solid #ddd" }}>
+                    {item.colour}
+                  </td>
+                  <td style={{ padding: "12px", textAlign: "left", border: "1px solid #ddd" }}>
+                    <img
+                      src={`http://localhost:8000/image/${item.image}`}
+                      alt={item.name}
+                      style={{ width: "50px", height: "50px", borderRadius: "5px" }}
+                    />
+                  </td>
+                  <td style={{ padding: "12px", textAlign: "left", border: "1px solid #ddd" }}>
+                    <button
+                      style={{ 
+                        padding: "8px 16px", 
+                        fontSize: "1rem", 
+                        cursor: "pointer", 
+                        backgroundColor: "#dc3545", 
+                        color: "#fff", 
+                        border: "none", 
+                        borderRadius: "5px" 
+                      }}
+                      onClick={() => handleDelete(item._id)}
+                    >
+                      Remove
+                    </button>
+                  </td>
+                </tr>
+              ))}
+              <tr>
+                <td colSpan="5" style={{ padding: "12px", textAlign: "left", border: "1px solid #ddd" }}>
+                  {cartItems.map((item, index) => (
+                    <p key={index} style={{ 
+                      fontSize: "1rem", 
+                      color: "#333", 
+                      padding: "10px 0", 
+                      borderBottom: "1px solid #ddd",
+                      display: "flex", 
+                      justifyContent: "space-between", 
+                      alignItems: "center"
+                    }}>
+                      <span>
+                        <strong style={{ fontWeight: "bold", marginRight: "5px" }}>{item.name}:</strong> 
+                        ${item.price} x {item.quantity}
+                      </span>
+                      <span>= ${item.price * item.quantity}</span>
+                    </p>
+                  ))}
+                </td>
+                <td colSpan="2" style={{ 
                   padding: "12px", 
                   textAlign: "left", 
                   border: "1px solid #ddd", 
                   backgroundColor: "#f8f9fa" 
-                }}
-              >
-                <h5 style={{ margin: 0, color: "#007bff" }}>
-                  <strong>Total Price:</strong> ${totalPrice.toFixed(2)}
-                </h5>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      )}
+                }}>
+                  <h5 style={{ margin: 0, color: "#007bff" }}>
+                    <strong>Total Price:</strong> ${totalPrice.toFixed(2)}
+                  </h5>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        )}
+      </div>
   
       <div style={{ textAlign: "center", marginTop: "20px" }}>
         <button
@@ -270,7 +234,4 @@ export default function CartList() {
       </div>
     </div>
   );
-  
-  
-  
 }

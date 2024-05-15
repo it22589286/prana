@@ -104,6 +104,7 @@ export default function UserMain() {
       }}
     />
   </div>
+  
   <div className="col-auto" style={{ display: "flex", alignItems: "center" , marginRight:"-90px"}}>
     <button className="btn btn-primary" onClick={handleSearch} style={{ borderRadius: "0.5rem", fontSize: "1rem", padding: "0.5rem 1rem", marginRight: "-140px" }}>Search</button>
     <button className="btn btn-secondary" onClick={handleClearSearch} style={{ borderRadius: "0.5rem", fontSize: "1rem", padding: "0.5rem 1rem",marginRight: "470px" }}>Clear</button>
