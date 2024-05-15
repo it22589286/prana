@@ -6,14 +6,6 @@
   border-radius: 5px;
   margin-top: 10%;
 }
-.body-background {
-  margin: 0;
-  padding: 0;
-  background-image: url('666.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-}
 
 .order-update label {
   margin-bottom: 5px;

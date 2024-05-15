@@ -46,7 +46,7 @@ const SubscriptionDetails = () => {
 
     if (userData) {
       // User data exists, navigate to '/signin'
-      navigate('/payment');
+      navigate('/addpayment');
     } else {
       // No user data, navigate to '/payment'
       navigate('/signin');

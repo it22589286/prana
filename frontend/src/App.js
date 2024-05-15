@@ -37,6 +37,10 @@ import UpdateLeave from './components/Leave/UpdateLeave';
 import ApplyLeaveDashboard from './components/Dashboards/ApplyLeaveDashboard';
 import LeaveForm from './components/Leave/LeaveForm';
 
+import Addpromo from "./components/Packages/Addpromo";
+import Promopackages from "./components/Packages/Promopackages";
+import PromoDetail from "./components/Packages/PromoDetail";
+import Subscriptionpage from './components/SubscriptionPage'
 
 import Training from './components/Schedule/training';
 import TrainingDetails from './components/Schedule/trainingdetails';
@@ -93,17 +97,18 @@ function App() {
             <Route path="/leaveform" element={<LeaveForm />} />
 
 
-          
+            <Route path="/add" element={<Addpromo/>} exact />
+            <Route path="/packages/:id" element={<PromoDetail/>}  exact/> 
+            <Route path="/package" element={<Promopackages/>}  exact/>
+            <Route path="/subscription/:id" element={<Subscriptionpage />} />
 
 
             <Route path='/training' element={<Training/>}></Route>
-<Route path='/trainingdetails' element={<TrainingDetails/>}></Route>
-<Route path='/updatetraining/:id' element={<UpdateTraining/>}></Route>
-
-<Route path='/requestdetaisl' element={<TrainingReqDetails/>}></Route>
-
-<Route path='/addpayment' element={<AddPayment/>}></Route>
-<Route path='/paydetails' element={<PaymentDetails/>}></Route>
+            <Route path='/trainingdetails' element={<TrainingDetails/>}></Route>
+            <Route path='/updatetraining/:id' element={<UpdateTraining/>}></Route>
+            <Route path='/requestdetaisl' element={<TrainingReqDetails/>}></Route>
+            <Route path='/addpayment' element={<AddPayment/>}></Route>
+            <Route path='/paydetails' element={<PaymentDetails/>}></Route>
 
 
 

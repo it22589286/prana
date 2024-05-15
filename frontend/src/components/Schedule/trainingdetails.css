@@ -1,9 +1,4 @@
-.body-background {
-  
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+body {
   margin: 0;
   padding: 0;
   background-image: url('666.jpg');
@@ -11,7 +6,6 @@
   background-position: center;
   background-repeat: no-repeat;
 }
-
 
 .showorders table {
   width: 100%;
