@@ -112,7 +112,7 @@ const CustomerData = () => {
           fontStyle: "bold",
         }}
       >
-        Instructor Details
+        <b>Instructor Details</b>
       </p>
       <div style={{ padding: "10px 40px 10px 40px" }}>
         <FormControl
