@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { BiSolidImageAdd } from "react-icons/bi";
 import "./Background.css";
+import backgroundImage from 'C:/Users/Yasitha/Documents/GitHub/prana/frontend/src/components/image/dashboardd.jpg';
 
 export default function AddItem() {
   const [formData, setFormData] = useState({
@@ -65,7 +66,7 @@ export default function AddItem() {
   
 
   return (
-<section className="background" style={{ padding: "50px 0", textAlign: "center" }}>
+<section className="background" style={{ padding: "50px 0", textAlign: "center",backgroundImage: `url(${backgroundImage})` }}>
 <h1 className="text-center mb-4 animate-text" style={{ 
   color: '#333', 
   fontSize: '3.5em', 
@@ -123,10 +124,10 @@ export default function AddItem() {
 
 
   <div className="row justify-content-center">
-    <div className="col-md-6" style={{ boxShadow: "0px 0px 10px rgba(0,0,0,0.1)", borderRadius: "10px", padding: "30px", background: "#f9f9f9", animation: "fadeInUp 1s ease-in-out" }}>
+    <div className="col-md-6"style={{ width:"600px"}} >
       <form onSubmit={handleSubmit} className="mt-4">
         <div className="mb-3">
-          <label htmlFor="name" className="form-label" style={{ color: "#333", fontSize: "1.2rem" }}>Name</label>
+          <label htmlFor="name" className="form-label" style={{ color: "#333", fontSize: "1.2rem",  }}>Name</label>
           <input
             type="text"
             className="form-control"
@@ -223,7 +224,7 @@ export default function AddItem() {
     transition: "background 0.3s, transform 0.3s",
     boxShadow: "0px 4px 8px rgba(76, 175, 80, 0.2)",
     width:"250px",
-    marginLeft: "220px",
+    marginLeft: "180px",
      // Adding box shadow for depth
   }}
   onMouseEnter={(e) => e.target.style.transform = "scale(1.05)"} // Scale up on hover

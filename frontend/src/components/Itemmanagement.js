@@ -25,7 +25,7 @@ const buttonStyle = (backgroundColor) => ({
   margin: '20px auto',  // Centering buttons horizontally
   boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',
   transition: 'transform 0.2s ease, background-color 0.3s ease',
-  fontSize: '28px',
+  fontSize: '20px',
   fontWeight: 'bold',
   marginTop: '20px',
 });
@@ -58,22 +58,61 @@ const ItemManagement = () => {
       justifyContent: 'center',
       alignItems: 'center',
     }}>
-      <div style={{ maxWidth: '600px', width: '100%' }}>
+      <div style={{ maxWidth: '600px', width: '100%', }}>
 
-          <h1 className="text-center mb-4 animate-text" style={{ 
-            color: '#333', 
-            fontSize: '3.5em', 
-            fontWeight: 'bold', 
-            letterSpacing: '1px', 
-            textTransform: 'uppercase', 
-            marginTop: '-90px',
-            marginBottom: '90px',
-            animation: 'pulsate 2s infinite alternate',
-            backgroundImage: 'linear-gradient(135deg, #667eea, #764ba2)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            textShadow: '2px 2px 5px rgba(0, 0, 0, 0.3), -2px -2px 5px rgba(255, 255, 255, 0.2)'
-          }}>Manage Items</h1>
+      <h1 className="text-center mb-4 animate-text" style={{ 
+  color: '#333', 
+  fontSize: '3.5em', 
+  fontWeight: 'bold', 
+  letterSpacing: '1px', 
+  textTransform: 'uppercase', 
+  marginTop: '-200px',
+  marginBottom: '200px',
+  backgroundImage: 'linear-gradient(135deg, #667eea, #764ba2)',
+  WebkitBackgroundClip: 'text',
+  WebkitTextFillColor: 'transparent',
+  textShadow: '2px 2px 5px rgba(0, 0, 0, 0.3), -2px -2px 5px rgba(255, 255, 255, 0.2)',
+  animation: 'glow 2s infinite alternate, fade-in 1s ease-in-out, rotate 3s infinite linear, scale 2s infinite alternate', // Added scale animation
+}}>
+  Manage Items
+</h1>
+
+<style>
+  {`
+
+
+    @keyframes fade-in {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+
+    @keyframes rotate {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes scale {
+      0% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.05);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+  `}
+</style>
+          
 
           <Link to='/Additem' className="btn btn-primary" style={buttonStyle('#28a745')}>
             <i className="fas fa-plus-circle mr-2"></i>Add New Item

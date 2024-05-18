@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
+import backgroundImage from 'C:/Users/Yasitha/Documents/GitHub/prana/frontend/src/components/image/dashboardd.jpg';
 
 export default function ItemList() {
   const [itemList, setItemList] = useState([]);
@@ -117,8 +118,60 @@ export default function ItemList() {
   };
 
   return (
+    
     <div className="mt-5" style={{ maxWidth: "900px", margin: "0 auto" }}>
-      <h1 className="text-center mb-4">Item List</h1>
+            <h1 className="text-center mb-4 animate-text" style={{ 
+  color: '#333', 
+  fontSize: '3.5em', 
+  fontWeight: 'bold', 
+  letterSpacing: '1px', 
+  textTransform: 'uppercase', 
+  marginTop: '10px',
+  marginBottom: '200px',
+  backgroundImage: 'linear-gradient(135deg, #667eea, #764ba2)',
+  WebkitBackgroundClip: 'text',
+  WebkitTextFillColor: 'transparent',
+  textShadow: '2px 2px 5px rgba(0, 0, 0, 0.3), -2px -2px 5px rgba(255, 255, 255, 0.2)',
+  animation: 'glow 2s infinite alternate, fade-in 1s ease-in-out, rotate 3s infinite linear, scale 2s infinite alternate', // Added scale animation
+}}>
+  Manage Items
+</h1>
+
+<style>
+  {`
+
+
+    @keyframes fade-in {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+
+    @keyframes rotate {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes scale {
+      0% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.05);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+  `}
+</style>
 
       <div className="mb-4" style={{ display: "flex", justifyContent: "space-between" }}>
         <input
